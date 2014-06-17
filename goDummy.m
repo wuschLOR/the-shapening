@@ -208,8 +208,29 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
   blockInstructionTex = makeTex(windowPtr, blockInstructionInfo , 'tex instructions');
 
   stimulusTex =  makeTex(windowPtr , stimulusInfo , 'stimulus');
+  
 
+%% version a und b generieren
+%initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden 
+  quantity.tex= length(stimulusTex)
+  helparraynormal  = zeros (quantity.tex   , 1)+1;
+  helparrayscatter = zeros (quantity.tex   , 1)+1;
 
+    schinkenfix = round(quantity.tex/4);
+    schinken = schinkenfix;
+  do 
+  helparrayscatter(1:schinken)     = helparrayscatter(1:schinken)+1;
+    schinken = schinken + schinkenfix;
+  until schinken == schinkenfix*4
+
+  helparrayAB  = [helparraynormal ; helparrayscatter];
+  helparrayTex = [stimulusTex ; stimulusTex];
+
+  hartCol = [helparrayTex helparrayAB];
+
+  
+
+  
 %  --------------------------------------------------------------------------  %
 %% Blöcke Definieren
   blockDef(1).description = 'richtungsweisend';
@@ -225,28 +246,24 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
   blockDef(4).presentationTime = 0.25;
   blockDef(5).presentationTime = 0.25;
 
-  %paarungen definieren !!!!!!!!!!!!!muss rausgeworfen werden und die Funktion umgeschrieben oder verbessert werden !!!!!!!!!!!!!!!
-  blockDef(1).texColum = [stimulusTex stimulusTex];
-  blockDef(2).texColum = [stimulusTex stimulusTex];
-  blockDef(3).texColum = [stimulusTex stimulusTex];
-  blockDef(4).texColum = [stimulusTex stimulusTex];
-  blockDef(5).texColum = [stimulusTex stimulusTex];
   
-  howManyBlocks = length(blockDef);
+  quantity.blocks = length(blockDef);
 
-%  Stimuli randomisieren !!!!!!!!!!!!!!!!!! hier muss noch rein dass A und B richtig zugeordnet werden
-  for i=1:howManyBlocks
-    [blockDef(i).texColumRand , nextSeed ] = randomizeColMatrix( blockDef(i).texColum , nextSeed , 2 , false , false );
+
+  for i=1:quantity.blocks
+    [tempTex , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
+    blockDef(i).texStiRand = tempTex(:,1);
+    blockDef(i).texSimPos  = tempTex(:,2);
   endfor
 
 %  das entsprechende Rating zur Bedingung hinzufügen
-  for i=1:howManyBlocks
+  for i=1:quantity.blocks
       blockDef(i).texRating = blockRatingTex(i);
   endfor
 
 
 % instructions
-  for i=1:howManyBlocks
+  for i=1:quantity.blocks
       blockDef(i).texInstructions = blockInstructionTex(i);
   endfor
 
@@ -259,7 +276,7 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
   zeit.betweenpause =  500;  
 
 # für alle blöcke fix machen
-  for i=1:howManyBlocks
+  for i=1:quantity.blocks
       blockDef(i).timeFixcross     = zeit.fixcross     ;
       blockDef(i).timePrepause     = zeit.prepause     ;
       blockDef(i).timeStimuli      = zeit.stimuli      ;
@@ -272,7 +289,7 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
 % Blöcke insgesammt randomisieren
   rand('state' , nextSeed)
   newSequence = randperm( length(blockDef) );
-  for i=1:howManyBlocks
+  for i=1:quantity.blocks
       blockDefRand(:,:) = blockDef(newSequence);
   endfor
 
@@ -353,11 +370,70 @@ y.edgeBotEnd       = rect(4);
 
 y.center           = rect(4) / 2;
 
-% putting together die rects [ x y x y]
-rectImgLeft        = [x.imgLeftStart  y.imgTopStart    x.imgLeftEnd     y.imgBotEnd    ];
-rectImgRight       = [x.imgRightStart y.imgTopStart    x.imgRightEnd    y.imgBotEnd    ];
-rectImgInstruction = [x.edgeLeftEnd   y.edgeTopEnd     x.edgeRightStart y.edgeBotStart ];
-rectImgRating      = [x.edgeLeftEnd   y.imgRatingStart x.edgeRightStart y.imgRatingEnd ];
+%                 x                y            x                y
+rect.L1 = [ x.imgLeftStart  y.imgTopStart  x.imgLeftEnd  y.imgTopEnd ];
+rect.L2 = [ x.imgLeftStart  y.imgMidStart  x.imgLeftEnd  y.imgMidEnd ];
+rect.L3 = [ x.imgLeftStart  y.imgBotStart  x.imgLeftEnd  y.imgBotEnd ];
+rect.M1 = [ x.imgMidStart   y.imgTopStart  x.imgMidEnd   y.imgTopEnd ];
+rect.M2 = [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
+rect.M3 = [ x.imgMidStart   y.imgBotStart  x.imgMidEnd   y.imgBotEnd ];
+rect.R1 = [ x.imgRightStart y.imgTopStart  x.imgRightEnd y.imgTopEnd ];
+rect.R2 = [ x.imgRightStart y.imgMidStart  x.imgRightEnd y.imgMidEnd ];
+rect.R3 = [ x.imgRightStart y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
+
+positonArray(1) = {rect.M2};
+positonArray(2) = {rect.L1};
+positonArray(3) = {rect.L3};
+positonArray(4) = {rect.R1};
+positonArray(5) = {rect.R3};
+
+rect.instructions =  [ x.imgLeftStart y.imgTopStart x.imgRightEnd y.imgBotEnd];
+rect.rating       =  [ x.imgLeftStart y.imgBotStart x.imgRightEnd y.imgBotEnd];
+
+infotainment(windowPtr , 'testscreen upcomming')
+
+  Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
+  Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
+
+Screen('Flip', windowPtr)
+KbPressWait;
+  Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
+infotainment(windowPtr , 'rating testscreen')
+
+Screen('Flip', windowPtr)
+KbPressWait;
+  Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
+infotainment(windowPtr , 'instructions testscreen')
+
+Screen('Flip', windowPtr)
+KbPressWait;
+
+
+%  --------------------------------------------------------------------------  %
+%% berechnen der skalierten Bilder + Lokalisation
+
+o = length(blockDefRand)
+for j=1:o % für alle definierten Blöcke
+
+  m = length(blockDefRand(j).texStiRand);
+  for i = 1:m % für alle vorhandenen Elemente im texColumRand
+
+    %  herrausfinden wie groß die textur ist - anhand des tex pointers
+    texRect      = Screen('Rect' , blockDefRand(j).texStiRand(i) );
+    % verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
+    finRect  = putRectInRect( positonArray( blockDefRand(j).texSimPos(i) ){}  , texRect  );
+    % abspeichern
+    blockDefRand(j).finRect(i,1) = {finRect};
+  endfor
+
+endfor
 
 
 
@@ -369,7 +445,8 @@ rectImgRating      = [x.edgeLeftEnd   y.imgRatingStart x.edgeRightStart y.imgRat
 
 
 
-
+headings   = {'lala'};
+outputCell = {1337};
 
 
 
@@ -402,7 +479,6 @@ ListenChar(0)
 Screen('closeall')
 
 finalMsg = 'geschafft'
-
 
 endfunction
 
