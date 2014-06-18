@@ -1,6 +1,5 @@
 function [ finalMsg ] = goDummy ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
 
-% initialisieren der fehlenden Variablen
 if nargin <4
   if ~exist('vpNummer'      , 'var') ;  vpNummer      = []; endif
   if ~exist('outputFileStr' , 'var') ;  outputFileStr = []; endif
@@ -8,7 +7,6 @@ if nargin <4
   if ~exist('debugEnabled'  , 'var') ;  debugEnabled  = []; endif
 endif
 
-% default werte initialisieren
  if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
  if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
  if isempty(buttonBoxON)   ;  buttonBoxON   = false  ; endif
@@ -391,7 +389,6 @@ rect.instructions =  [ x.imgLeftStart y.imgTopStart x.imgRightEnd y.imgBotEnd];
 rect.rating       =  [ x.imgLeftStart y.imgBotStart x.imgRightEnd y.imgBotEnd];
 
 infotainment(windowPtr , 'testscreen upcomming')
-
   Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
   Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
   Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
@@ -403,17 +400,22 @@ infotainment(windowPtr , 'testscreen upcomming')
   Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
 
 Screen('Flip', windowPtr)
-KbPressWait;
-  Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
+  KbPressWait;
+Screen('Flip', windowPtr)
+
 infotainment(windowPtr , 'rating testscreen')
-
+  Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
+  
 Screen('Flip', windowPtr)
-KbPressWait;
-  Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
+  KbPressWait;
+Screen('Flip', windowPtr)
+
 infotainment(windowPtr , 'instructions testscreen')
+  Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
 
 Screen('Flip', windowPtr)
-KbPressWait;
+  KbPressWait;
+Screen('Flip', windowPtr)
 
 
 %  --------------------------------------------------------------------------  %
@@ -423,7 +425,7 @@ o = length(blockDefRand)
 for j=1:o % für alle definierten Blöcke
 
   m = length(blockDefRand(j).texStiRand);
-  for i = 1:m % für alle vorhandenen Elemente im texColumRand
+  for i = 1:m % für alle vorhandenen Elemente im texStiRand
 
     %  herrausfinden wie groß die textur ist - anhand des tex pointers
     texRect      = Screen('Rect' , blockDefRand(j).texStiRand(i) );
@@ -434,6 +436,151 @@ for j=1:o % für alle definierten Blöcke
   endfor
 
 endfor
+
+for j=1:o
+  texRating  = Screen('Rect' , blockRatingTex(j) );
+  finRectRating = putRectInRect (rect.rating , texRating);
+  blockDefRand(j).finRectRating = {finRectRating};
+endfor
+
+for j=1:o
+  texInstructions  = Screen('Rect' , blockDefRand(j).texInstructions );
+  finRectInstructions = putRectInRect (rect.instructions , texInstructions);
+  blockDefRand(j).finRectInstructions = {finRectInstructions};
+endfor
+
+%  --------------------------------------------------------------------------  %
+# MAINPART: THE MIGHTY EXPERIMENT
+%  --------------------------------------------------------------------------  %
+
+  o = length(blockDefRand);
+  for j=1:o  % für alle definierten Blöcke
+
+    Screen( 'DrawTexture' , windowPtr , blockDefRand(j).texInstructions , [] , blockDefRand(j).finRectInstructions{});
+    Screen('Flip', windowPtr);
+    KbPressWait;
+
+    m = length(blockDefRand(j).texStiRand);
+    [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
+
+    nextFlip = 0;
+    infotainment(windowPtr , 'preflip')
+    tic
+    toc
+    [empty,empty,lastFlip ]=Screen('Flip', windowPtr , nextFlip);
+    nextFlip = lastFlip + blockDefRand(j).timePrepause - flipSlack;
+    infotainment(windowPtr ,  'after flip')
+    datestr(lastFlip)
+    datestr(now)
+    datestr(nextFlip)
+    for i = 1:m
+        infotainment(windowPtr , 'inblock')
+      # PAUSE BETWEEN
+        Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+        #flip
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
+        nextFlip = lastFlip + blockDefRand(j).timePrepause - flipSlack;
+        infotainment(windowPtr , 'rum pause')'
+#       
+#       # FIXCROSS
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+#       drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+#         #flip
+#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+#         nextFlip = lastFlip + blockDefRand(j).timeFixcross - flipSlack;
+# 
+#        
+#       # PAUSE PRE
+#         #flip
+#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+#         nextFlip = lastFlip + blockDefRand(j).timePrepause - flipSlack;
+# 
+#       
+#       # STIMULUS
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+#         #flip
+#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+#         nextFlip = lastFlip + blockDefRand(j).timeStimuli - flipSlack;
+# 
+#       # PAUSE AFTER
+#         #flip
+#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+#         nextFlip = lastFlip + blockDefRand(j).timeAfterpause - flipSlack;
+# 
+#       # RATING
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+#         #flip
+#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+#         nextFlip = lastFlip + blockDefRand(j).timeRating - flipSlack;
+    endfor
+endfor
+
+       
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+# 
+#       Screen('DrawTexture', windowPtr, blockDefRand(j).texStiRand(i,1) , [] , blockDefRand(j).finRectLeft(i,1){} );
+#       Screen('DrawTexture', windowPtr, blockDefRand(j).texStiRand(i,2) , [] , blockDefRand(j).finRectRight(i,2){} );
+# 
+# 
+#       %  Fixationskreuz
+#       drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+# 
+#       [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+#       nextFlip = lastFlip + blockDefRand(j).presentationTime - flipSlack
+# 
+#     endfor
+# 
+#     [empty,empty,timeBlockEnd ]=Screen('Flip', windowPtr , nextFlip)
+#     timeBlockTicToc = toc
+# 
+#     %  Blende wieder zurückstellen
+#     Screen('BlendFunction', windowPtr, sourceFactorOld, destinationFactorOld)
+# 
+#     % Rating anzeigen
+#     switch buttonBoxON
+#       case false
+#         Screen( 'DrawTexture' , windowPtr , blockDefRand(j).texRating , [] , blockDefRand(j).finRectRating{})
+#         Screen('Flip', windowPtr)
+# 
+#         % reaktionszeit abgreifen
+#         [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating
+# 
+#         timeReactionSinceBlockBegin = pressedButtonTime - timeBlockBegin
+#         timeReactionSinceBlockEnd   = pressedButtonTime - timeBlockEnd
+#       case true
+#         % i should think about something
+#       otherwise
+#         % critical error - this should not happen
+#     endswitch
+# 
+#   %    dem outputfile werte zuweisen
+#     headings        = { ...
+#       'vpNummer' , ...
+#       'BunusString' , ...
+#       'Index' , ...
+#       'Block' , ...
+#       'KeyString' , ...
+#       'KeyValue'  , ...
+#       'ReaktionszeitBlockStart' , ...
+#       'ReaktionszeitBlockEnd' , ...
+#       'tic toc (sec)'   }
+# 
+#     outputCell(j,:) = {...
+#       vpNummer  ,...
+#       outputFileStr , ...
+#       num2str(j),...
+#       blockDefRand(j).description ,...
+#       pressedButtonStr ,...
+#       pressedButtonValue , ...
+#       timeReactionSinceBlockBegin , ...
+#       timeReactionSinceBlockEnd , ...
+#       timeBlockTicToc  }
+#     % attatch names to the outputCell
+#     outputCellFin= [headings ; outputCell]
+#     %  speicherndes output files
+#     cell2csv ( fileNameOutput , outputCellFin, ';')
+#     
+#   endfor
 
 
 
