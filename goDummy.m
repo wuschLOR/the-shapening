@@ -266,12 +266,13 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
   endfor
 
 % Zeiten festmachen in ms
-  zeit.fixcross     =   80;
-  zeit.prepause     =   80; 
-  zeit.stimuli      =  160;
-  zeit.afterpause   =  500;
-  zeit.rating       = 2450;
-  zeit.betweenpause =  500;  
+% 5 ms = 0.005 seconds
+  zeit.fixcross     =   80 / 1000;
+  zeit.prepause     =   80 / 1000; 
+  zeit.stimuli      =  160 / 1000;
+  zeit.afterpause   =  500 / 1000;
+  zeit.rating       = 2450 / 1000;
+  zeit.betweenpause =  500 / 1000;  
 
 # für alle blöcke fix machen
   for i=1:quantity.blocks
@@ -452,151 +453,110 @@ endfor
 %  --------------------------------------------------------------------------  %
 # MAINPART: THE MIGHTY EXPERIMENT
 %  --------------------------------------------------------------------------  %
-
+  superIndex = 0; % index über alle durchläufe hinweg
   o = length(blockDefRand);
-  for j=1:o  % für alle definierten Blöcke
+  for WHATBL=1:o  % für alle definierten Blöcke
 
-    Screen( 'DrawTexture' , windowPtr , blockDefRand(j).texInstructions , [] , blockDefRand(j).finRectInstructions{});
+    Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texInstructions , [] , blockDefRand(WHATBL).finRectInstructions{});
     Screen('Flip', windowPtr);
     KbPressWait;
 
-    m = length(blockDefRand(j).texStiRand);
+    m = length(blockDefRand(WHATBL).texStiRand);
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
 
     nextFlip = 0;
-    infotainment(windowPtr , 'preflip')
+
     tic
-    toc
+
     [empty,empty,lastFlip ]=Screen('Flip', windowPtr , nextFlip);
-    nextFlip = lastFlip + blockDefRand(j).timePrepause - flipSlack;
-    infotainment(windowPtr ,  'after flip')
-    datestr(lastFlip)
-    datestr(now)
-    datestr(nextFlip)
-    for i = 1:m
-        infotainment(windowPtr , 'inblock')
+    nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
+
+    for INBL = 1:m
+      superIndex = superIndex +1;
       # PAUSE BETWEEN
-        Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
-        nextFlip = lastFlip + blockDefRand(j).timePrepause - flipSlack;
-        infotainment(windowPtr , 'rum pause')'
-#       
-#       # FIXCROSS
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
-#       drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
-#         #flip
-#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-#         nextFlip = lastFlip + blockDefRand(j).timeFixcross - flipSlack;
-# 
-#        
-#       # PAUSE PRE
-#         #flip
-#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-#         nextFlip = lastFlip + blockDefRand(j).timePrepause - flipSlack;
-# 
-#       
-#       # STIMULUS
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
-#         #flip
-#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-#         nextFlip = lastFlip + blockDefRand(j).timeStimuli - flipSlack;
-# 
-#       # PAUSE AFTER
-#         #flip
-#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
-#         nextFlip = lastFlip + blockDefRand(j).timeAfterpause - flipSlack;
-# 
-#       # RATING
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
-#         #flip
-#         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
-#         nextFlip = lastFlip + blockDefRand(j).timeRating - flipSlack;
+        nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
+      
+      # FIXCROSS
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.L2  );
+      drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+        #flip
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFlip + blockDefRand(WHATBL).timeFixcross - flipSlack;
+
+
+      # PAUSE PRE
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
+      #flip
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
+
+      
+      # STIMULUS
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
+      Screen('DrawTexture', windowPtr, blockDefRand(WHATBL).texStiRand(INBL,1) , [] , blockDefRand(WHATBL).finRect(INBL,1){} );
+        #flip
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFlip + blockDefRand(WHATBL).timeStimuli - flipSlack;
+
+      # PAUSE AFTER
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
+        #flip
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+        nextFlip = lastFlip + blockDefRand(WHATBL).timeAfterpause - flipSlack;
+
+      # RATING
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
+      Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texRating , [] , blockDefRand(WHATBL).finRectRating{})
+
+        #flip
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+        nextFlip = lastFlip + blockDefRand(WHATBL).timeRating - flipSlack;
+        #flipend
+        
+      switch buttonBoxON
+        case false
+        % reaktionszeit abgreifen
+        [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating
+        case true
+          % i should think about something
+        otherwise
+          % critical error - this should not happen
+      endswitch
+        reactiontime = pressedButtonTime - lastFlip
+
+      %    dem outputfile werte zuweisen
+      headings        =      { ...
+        'vpNummer'           , ...
+        'BunusString'        , ...
+        'Index'              , ...
+        'BlockIndex'         , ...
+        'BlockBeschreibung'  , ...
+        'Stimulus'           , ...
+        'KeyString'          , ...
+        'KeyValue'           , ...
+        'Reaktiosnzeit'      }
+
+      outputCell(superIndex,:) =         { ...
+        vpNummer                         , ...
+        outputFileStr                    , ...
+        num2str(superIndex)              , ...
+        num2str(INBL)                    , ...
+        blockDefRand(WHATBL).description , ...
+        'pic.jpg'                        , ...
+        pressedButtonStr                 , ...
+        pressedButtonValue               , ...
+        reactiontime                     }
+
+      % attatch names to the outputCell
+      outputCellFin= [headings ; outputCell]
+      %  speicherndes output files
+      cell2csv ( fileNameOutput , outputCellFin, ';')
+      
     endfor
 endfor
-
-       
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
-# 
-#       Screen('DrawTexture', windowPtr, blockDefRand(j).texStiRand(i,1) , [] , blockDefRand(j).finRectLeft(i,1){} );
-#       Screen('DrawTexture', windowPtr, blockDefRand(j).texStiRand(i,2) , [] , blockDefRand(j).finRectRight(i,2){} );
-# 
-# 
-#       %  Fixationskreuz
-#       drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
-# 
-#       [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
-#       nextFlip = lastFlip + blockDefRand(j).presentationTime - flipSlack
-# 
-#     endfor
-# 
-#     [empty,empty,timeBlockEnd ]=Screen('Flip', windowPtr , nextFlip)
-#     timeBlockTicToc = toc
-# 
-#     %  Blende wieder zurückstellen
-#     Screen('BlendFunction', windowPtr, sourceFactorOld, destinationFactorOld)
-# 
-#     % Rating anzeigen
-#     switch buttonBoxON
-#       case false
-#         Screen( 'DrawTexture' , windowPtr , blockDefRand(j).texRating , [] , blockDefRand(j).finRectRating{})
-#         Screen('Flip', windowPtr)
-# 
-#         % reaktionszeit abgreifen
-#         [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating
-# 
-#         timeReactionSinceBlockBegin = pressedButtonTime - timeBlockBegin
-#         timeReactionSinceBlockEnd   = pressedButtonTime - timeBlockEnd
-#       case true
-#         % i should think about something
-#       otherwise
-#         % critical error - this should not happen
-#     endswitch
-# 
-#   %    dem outputfile werte zuweisen
-#     headings        = { ...
-#       'vpNummer' , ...
-#       'BunusString' , ...
-#       'Index' , ...
-#       'Block' , ...
-#       'KeyString' , ...
-#       'KeyValue'  , ...
-#       'ReaktionszeitBlockStart' , ...
-#       'ReaktionszeitBlockEnd' , ...
-#       'tic toc (sec)'   }
-# 
-#     outputCell(j,:) = {...
-#       vpNummer  ,...
-#       outputFileStr , ...
-#       num2str(j),...
-#       blockDefRand(j).description ,...
-#       pressedButtonStr ,...
-#       pressedButtonValue , ...
-#       timeReactionSinceBlockBegin , ...
-#       timeReactionSinceBlockEnd , ...
-#       timeBlockTicToc  }
-#     % attatch names to the outputCell
-#     outputCellFin= [headings ; outputCell]
-#     %  speicherndes output files
-#     cell2csv ( fileNameOutput , outputCellFin, ';')
-#     
-#   endfor
-
-
-
-
-
-
-
-
-
-
-
-headings   = {'lala'};
-outputCell = {1337};
-
-
-
 
 
 %  und hier ist es vorbei
