@@ -453,7 +453,8 @@ endfor
 %  --------------------------------------------------------------------------  %
 # MAINPART: THE MIGHTY EXPERIMENT
 %  --------------------------------------------------------------------------  %
-  superIndex = 0; % index über alle durchläufe hinweg
+  superIndex = 0; % index über alle Durchläufe hinweg
+  
   o = length(blockDefRand);
   for WHATBL=1:o  % für alle definierten Blöcke
 
@@ -473,11 +474,13 @@ endfor
 
     for INBL = 1:m
       superIndex = superIndex +1;
+      
       # PAUSE BETWEEN
       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
+        nextFlip = lastFlip + blockDefRand(WHATBL).timeBetweenpause - flipSlack;
+        out.flipBetween = lastFlip
       
       # FIXCROSS
       Screen('FrameRect', windowPtr , [255 20 147] , rect.L2  );
@@ -485,6 +488,7 @@ endfor
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeFixcross - flipSlack;
+        out.flipFix = lastFlip - out.flipBetween
 
 
       # PAUSE PRE
@@ -492,7 +496,7 @@ endfor
       #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
-
+        out.flipPre = lastFlip - out.flipBetween
       
       # STIMULUS
       Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
@@ -500,32 +504,35 @@ endfor
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeStimuli - flipSlack;
-
+        out.flipStim = lastFlip - out.flipBetween
+ 
       # PAUSE AFTER
       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
         nextFlip = lastFlip + blockDefRand(WHATBL).timeAfterpause - flipSlack;
+        out.flipAfter = lastFlip - out.flipBetween
 
       # RATING
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
+      Screen('FrameRect', windowPtr , [255 20 147] , rect.R3  );
       Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texRating , [] , blockDefRand(WHATBL).finRectRating{})
 
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
         nextFlip = lastFlip + blockDefRand(WHATBL).timeRating - flipSlack;
+        out.flipRating = lastFlip - out.flipBetween
         #flipend
         
       switch buttonBoxON
         case false
         % reaktionszeit abgreifen
-        [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating
+        [out.pressedButtonTime , out.pressedButtonValue , out.pressedButtonStr , out.pressedButtonCode] = getRating
         case true
           % i should think about something
         otherwise
           % critical error - this should not happen
       endswitch
-        reactiontime = pressedButtonTime - lastFlip
+        out.reactionTime = out.pressedButtonTime - lastFlip
 
       %    dem outputfile werte zuweisen
       headings        =      { ...
@@ -537,7 +544,12 @@ endfor
         'Stimulus'           , ...
         'KeyString'          , ...
         'KeyValue'           , ...
-        'Reaktiosnzeit'      }
+        'Reaktiosnzeit'      , ...
+        'TTflipFix'         , ...
+        'TTflipPre'          , ...
+        'TTflipStim'         , ...
+        'TTflipAfter'        , ...
+        'TTflipRating'       }
 
       outputCell(superIndex,:) =         { ...
         vpNummer                         , ...
@@ -546,9 +558,14 @@ endfor
         num2str(INBL)                    , ...
         blockDefRand(WHATBL).description , ...
         'pic.jpg'                        , ...
-        pressedButtonStr                 , ...
-        pressedButtonValue               , ...
-        reactiontime                     }
+        out.pressedButtonStr             , ...
+        out.pressedButtonValue           , ...
+        out.reactionTime                 , ...
+        out.flipFix                      , ...
+        out.flipPre                      , ...
+        out.flipStim                     , ...
+        out.flipAfter                    , ...
+        out.flipRating                   }
 
       % attatch names to the outputCell
       outputCellFin= [headings ; outputCell]
