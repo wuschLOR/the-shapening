@@ -469,8 +469,8 @@ endfor
 
     tic
 
-    [empty,empty,lastFlip ]=Screen('Flip', windowPtr , nextFlip);
-    nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
+#     [empty,empty,lastFlip ]=Screen('Flip', windowPtr , nextFlip);
+#     nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
 
     for INBL = 1:m
       superIndex = superIndex +1;
@@ -526,13 +526,14 @@ endfor
       switch buttonBoxON
         case false
         % reaktionszeit abgreifen
-        [out.pressedButtonTime , out.pressedButtonValue , out.pressedButtonStr , out.pressedButtonCode] = getRating
+        [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating (nextFlip)
         case true
           % i should think about something
         otherwise
           % critical error - this should not happen
       endswitch
-        out.reactionTime = out.pressedButtonTime - lastFlip
+        out.reactionTime = pressedButtonTime - lastFlip
+        Screen('Flip', windowPtr)
 
       %    dem outputfile werte zuweisen
       headings        =      { ...
@@ -558,8 +559,8 @@ endfor
         num2str(INBL)                    , ...
         blockDefRand(WHATBL).description , ...
         'pic.jpg'                        , ...
-        out.pressedButtonStr             , ...
-        out.pressedButtonValue           , ...
+        pressedButtonStr             , ...
+        pressedButtonValue           , ...
         out.reactionTime                 , ...
         out.flipFix                      , ...
         out.flipPre                      , ...
