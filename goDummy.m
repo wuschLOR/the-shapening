@@ -166,10 +166,10 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 %  rect hat wenn es ohne attribute initiert wird die größe des Bildschirms
 %  also: von 0,0 oben links zu 1600, 900 unten rechts
 
-  [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [50 50 650 650]);
-%  [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1280 800]);
-%   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [1 1 1279 799]);
-%  [windowPtr,rect] = Screen('OpenWindow', screenID );
+#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [50 50 650 650]);
+#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1280 800]);
+  [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [1 1 1279 799]);
+#   [windowPtr,rect] = Screen('OpenWindow', screenID );
 
 % Screen('BlendFunction', windowPtr, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); original
 % Screen('BlendFunction', windowPtr, GL_ONE_MINUS_SRC_ALPHA, GL_SRC_ALPHA);
@@ -270,8 +270,8 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
   zeit.fixcross     =   80 / 1000;
   zeit.prepause     =   80 / 1000; 
   zeit.stimuli      =  160 / 1000;
-  zeit.afterpause   =  500 / 1000;
-  zeit.rating       = 2450 / 1000;
+  zeit.afterpause   =  800 / 1000;
+  zeit.rating       = 2500 / 1000;
   zeit.betweenpause =  500 / 1000;  
 
 # für alle blöcke fix machen
@@ -467,73 +467,69 @@ endfor
 
     nextFlip = 0;
 
-    tic
-
-#     [empty,empty,lastFlip ]=Screen('Flip', windowPtr , nextFlip);
-#     nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
-
     for INBL = 1:m
       superIndex = superIndex +1;
       
       # PAUSE BETWEEN
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeBetweenpause - flipSlack;
-        out.flipBetween = lastFlip
+        out.flipBetween = lastFlip;
       
       # FIXCROSS
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.L2  );
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L2  );
       drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeFixcross - flipSlack;
-        out.flipFix = lastFlip - out.flipBetween
+        out.flipFix = lastFlip - out.flipBetween;
 
 
       # PAUSE PRE
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
       #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
-        out.flipPre = lastFlip - out.flipBetween
+        out.flipPre = lastFlip - out.flipBetween;
       
       # STIMULUS
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
       Screen('DrawTexture', windowPtr, blockDefRand(WHATBL).texStiRand(INBL,1) , [] , blockDefRand(WHATBL).finRect(INBL,1){} );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeStimuli - flipSlack;
-        out.flipStim = lastFlip - out.flipBetween
+        out.flipStim = lastFlip - out.flipBetween;
  
       # PAUSE AFTER
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeAfterpause - flipSlack;
-        out.flipAfter = lastFlip - out.flipBetween
+        out.flipAfter = lastFlip - out.flipBetween;
 
       # RATING
-      Screen('FrameRect', windowPtr , [255 20 147] , rect.R3  );
-      Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texRating , [] , blockDefRand(WHATBL).finRectRating{})
+#       Screen('FrameRect', windowPtr , [255 20 147] , rect.R3  );
+      Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texRating , [] , blockDefRand(WHATBL).finRectRating{});
 
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip)
+        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFlip + blockDefRand(WHATBL).timeRating - flipSlack;
-        out.flipRating = lastFlip - out.flipBetween
+        out.flipRating = lastFlip - out.flipBetween;
         #flipend
         
       switch buttonBoxON
         case false
         % reaktionszeit abgreifen
-        [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating (nextFlip)
+        [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating (nextFlip);
         case true
           % i should think about something
         otherwise
           % critical error - this should not happen
       endswitch
-        out.reactionTime = pressedButtonTime - lastFlip
-        Screen('Flip', windowPtr)
+        out.reactionTime = pressedButtonTime - lastFlip;
+        out.flipRatingOFF = lastFlip - pressedButtonTime;
+        Screen('Flip', windowPtr);
 
       %    dem outputfile werte zuweisen
       headings        =      { ...
@@ -546,11 +542,12 @@ endfor
         'KeyString'          , ...
         'KeyValue'           , ...
         'Reaktiosnzeit'      , ...
-        'TTflipFix'         , ...
+        'TTflipFix'          , ...
         'TTflipPre'          , ...
         'TTflipStim'         , ...
         'TTflipAfter'        , ...
-        'TTflipRating'       }
+        'TTflipRating'       , ...
+        'TflipRatingOFF'     };
 
       outputCell(superIndex,:) =         { ...
         vpNummer                         , ...
@@ -559,19 +556,20 @@ endfor
         num2str(INBL)                    , ...
         blockDefRand(WHATBL).description , ...
         'pic.jpg'                        , ...
-        pressedButtonStr             , ...
-        pressedButtonValue           , ...
+        pressedButtonStr                 , ...
+        pressedButtonValue               , ...
         out.reactionTime                 , ...
         out.flipFix                      , ...
         out.flipPre                      , ...
         out.flipStim                     , ...
         out.flipAfter                    , ...
-        out.flipRating                   }
+        out.flipRating                   , ...
+        out.flipRatingOFF                };
 
       % attatch names to the outputCell
-      outputCellFin= [headings ; outputCell]
+      outputCellFin= [headings ; outputCell];
       %  speicherndes output files
-      cell2csv ( fileNameOutput , outputCellFin, ';')
+      cell2csv ( fileNameOutput , outputCellFin, ';');
       
     endfor
 endfor
