@@ -192,8 +192,8 @@ oldTextColor = Screen('TextColor' , windowPtr , newTextColor);
 
 logoImg   = getImgFolder( 'startup' , 'png' );
 
-blockRatingInfo       = getImgFolder( 'tex rating'       , 'png' );
-blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
+blockRatingInfo       = getImgFolder( 'rating'       , 'png' );
+blockInstructionInfo  = getImgFolder( 'instructions' , 'png' );
 
   stimImgType ='png'
   stimulusInfo = getImgFolder( 'stimulus' , stimImgType );
@@ -202,8 +202,8 @@ blockInstructionInfo  = getImgFolder( 'tex instructions' , 'png' );
 %  --------------------------------------------------------------------------  %
 %% bilder einlesen
 
-  blockRatingTex      = makeTex(windowPtr, blockRatingInfo      , 'tex rating');
-  blockInstructionTex = makeTex(windowPtr, blockInstructionInfo , 'tex instructions');
+  blockRatingTex      = makeTex(windowPtr, blockRatingInfo      , 'rating');
+  blockInstructionTex = makeTex(windowPtr, blockInstructionInfo , 'instructions');
 
   stimulusTex =  makeTex(windowPtr , stimulusInfo , 'stimulus');
   
