@@ -13,8 +13,8 @@ endif
  if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
 
 
- %% [ finalMsg ] = goDummy ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
- %  ----------------------------------------------------------------------------
+%% [ finalMsg ] = goDummy ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
+%  ----------------------------------------------------------------------------
 %  Input:
 %
 %    vpNummer      = 001 (default)
@@ -30,8 +30,9 @@ endif
 %        true  == use a buttonbox
 %
 %    debugEnabled  = false (default)
-%        false ==
-%        true  ==
+%        false == all error messages are suppressed
+%        true  == error messages are poping up and the paths for the output is
+%                 changed to hold the timestamp for maximum output ;)
 %
 %  ----------------------------------------------------------------------------
 %  Output:
@@ -60,71 +61,62 @@ endif
 %  issue an error message if someone tries to execute this script on a computer
 %  without an OpenGL Psychtoolbox
 
-AssertOpenGL;
+    AssertOpenGL;
 
 %  --------------------------------------------------------------------------  %
-%% debug
-%  generell ist der default dass debug aus ist. sobald irgendetwas als die debuginformation angegeben wird wir debug angeworfen
-%  Zur Zeit beeinflusst debug das Ausgabelevel der Warnungen und überspringt die VP Dateneingabe
+%% change error levels of the PTB
 
-switch debugEnabled
-  case true
-    debugLvl = 'dangerzone' % debug is turned on
+  switch debugEnabled
+    case false
 
-  case false
-    debugLvl = 'butter' % debug is false
-endswitch
+      %  http://psychtoolbox.org/faqwarningprefs
+      newEnableFlag = 1;
+      oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', newEnableFlag);
+      %  enableFlag can be:
+      %  0  normal settingsnewEnableFlag
+      %  1  suppresses the printout of warnings
 
-switch debugLvl
-  case 'butter'
+      newLevelVerbosity = 1
+      oldLevelVerbosity = Screen('Preference', 'Verbosity', newLevelVerbosity);
+      %  newLevelVerbosity can be any of:
+      %  ~0) Disable all output - Same as using the 'SuppressAllWarnings' flag.
+      %  ~1) Only output critical errors.
+      %  ~2) Output warnings as well.
+      %  ~3) Output startup information and a bit of additional information. This is the default.
+      %  ~4) Be pretty verbose about information and hints to optimize your code and system.
+      %  ~5) Levels 5 and higher enable very verbose debugging output, mostly useful for debugging PTB itself, not generally useful for end-users.
+      vpNummerStr= num2str(vpNummer);
 
-    %  http://psychtoolbox.org/faqwarningprefs
-    newEnableFlag = 1;
-    oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', newEnableFlag);
-    %  enableFlag can be:
-    %  0  normal settingsnewEnableFlag
-    %  1  suppresses the printout of warnings
+    case true
 
-    newLevelVerbosity = 1
-    oldLevelVerbosity = Screen('Preference', 'Verbosity', newLevelVerbosity);
-    %  newLevelVerbosity can be any of:
-    %  ~0) Disable all output - Same as using the 'SuppressAllWarnings' flag.
-    %  ~1) Only output critical errors.
-    %  ~2) Output warnings as well.
-    %  ~3) Output startup information and a bit of additional information. This is the default.
-    %  ~4) Be pretty verbose about information and hints to optimize your code and system.
-    %  ~5) Levels 5 and higher enable very verbose debugging output, mostly useful for debugging PTB itself, not generally useful for end-users.
-    vpNummerStr= num2str(vpNummer);
+      newEnableFlag = 0;
+      oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', newEnableFlag);
 
-  case 'dangerzone'
-    newEnableFlag = 0;
-    oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', newEnableFlag);
+      newLevelVerbosity = 4
+      oldLevelVerbosity = Screen('Preference', 'Verbosity', newLevelVerbosity);
+      versionptb=Screen('Version') %% das als txt irgendwo ausgeben
 
-    newLevelVerbosity = 3
-    oldLevelVerbosity = Screen('Preference', 'Verbosity', newLevelVerbosity);
-    versionptb=Screen('Version') %% das als txt irgendwo ausgeben
+      vpNummerStr = num2str( strftime( '%Y%m%d%H%M%S' ,localtime (time () ) ) );
 
-    vpNummerStr = num2str( strftime( '%Y%m%d%H%M%S' ,localtime (time () ) ) );
-
-endswitch
+  endswitch
 
 %% Generating the outputpaths
-resultsFolder    = ['.' filesep 'results' filesep]
-resultsFolderStr = [resultsFolder vpNummerStr '_' outputFileStr]
+  resultsFolder    = ['.' filesep 'results' filesep]
+  resultsFolderStr = [resultsFolder vpNummerStr '_' outputFileStr]
 
-fileNameDiary           = [resultsFolderStr '_diary.mat']
-fileNameBackupWorkspace = [resultsFolderStr '_backupWS.mat']
-fileNameOutput          = [resultsFolderStr '_output.csv']
+  fileNameDiary           = [resultsFolderStr '_diary.mat']
+  fileNameBackupWorkspace = [resultsFolderStr '_backupWS.mat']
+  fileNameOutput          = [resultsFolderStr '_output.csv']
 
-diary (fileNameDiary)
+  diary (fileNameDiary)
 
 
-nextSeed = vpNummer % nextSeed wird für für alle random funktionen benutzt
+  nextSeed = vpNummer % nextSeed wird für für alle random funktionen benutzt
 
 %  --------------------------------------------------------------------------  %
 %%  disable random input tothe console
 
-ListenChar(2)
+  ListenChar(2)
 
 %  Keys pressed by the subject often show up in the Matlab command window as
 %  well, cluttering that window with useless character junk. You can prevent
@@ -136,26 +128,16 @@ ListenChar(2)
 %  ListenChar(0). See 'help ListenChar' for more info.
 
 
-
 %  --------------------------------------------------------------------------  %
 %% Tasten festlegen
 
 KbName('UnifyKeyNames'); %keine ahnung warum oder was das macht aber
 
 keyEscape = KbName('escape');
-
 keyConfirm = KbName ('Return');
 
-
 %  --------------------------------------------------------------------------  %
-%%  textstyles
-
-newTextFont = 'Courier New';
-newTextSize = 20;
-newTextColor= [00 00 00];
-
-%  --------------------------------------------------------------------------  %
-%%  screen innizialisieren
+%%  init screen
 
 screenNumbers=Screen('Screens');
 screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
@@ -176,32 +158,53 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1920 1080]);  #  16:9  testrechner
 
 #  Windowed
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
+  [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-  [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+
+  HideCursor(screenID)
+
+%  --------------------------------------------------------------------------  %
+%%  init buttonbox
+
+if buttonBoxON == true
+  [handle , BBworking ] = initCedrusUSBLinux
+  buttonBoxON = BBworking % change the state of buttonBoxON to true or false depending on if the init was sucessfull
+endif
+
+%  --------------------------------------------------------------------------  %
+%%  play around with the flip interval
+
+  flipSlack =Screen('GetFlipInterval', windowPtr)
+  %  flipSlack =0
+  flipSlack = flipSlack/2 % das verhindert das das ganze kürzer wird hier noch etwas rumspielen - da es so manchmal zu kurze anzeigezeiten kommen kann
+
+%  --------------------------------------------------------------------------  %
+%%  textstyles
+
+  newTextFont = 'Courier New';
+  newTextSize = 20;
+  newTextColor= [00 00 00];
+
+  oldTextFont  = Screen('TextFont'  , windowPtr , newTextFont );
+  oldTextSize  = Screen('TextSize'  , windowPtr , newTextSize );
+  oldTextColor = Screen('TextColor' , windowPtr , newTextColor);
+
+%  --------------------------------------------------------------------------  %
+%%  settings einlesen
+  rawCell = csv2cell( 'settings.csv' , ';');
+
+  head     = rawCell(1     , :); #zerlegten der Settings in den header
+  body     = rawCell(2:end , :); # und dem inhaltlichen body
 
 
+  def = cell2struct (body, head ,2); # konvertieren zum struct
 
-# % Screen('BlendFunction', windowPtr, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); original
-# % Screen('BlendFunction', windowPtr, GL_ONE_MINUS_SRC_ALPHA, GL_SRC_ALPHA);
-# %  das hatte was mit dem transparenten hintergund zu tun - keine ahnung was das wirklich macht
-# [sourceFactorOld, destinationFactorOld]=Screen('BlendFunction', windowPtr, GL_ONE_MINUS_SRC_ALPHA, GL_SRC_ALPHA);
-# Screen('BlendFunction', windowPtr, sourceFactorOld, destinationFactorOld)
-
-HideCursor(screenID)
-flipSlack =Screen('GetFlipInterval', windowPtr)
-%  flipSlack =0
-flipSlack = flipSlack/2 % das verhindert das das ganze kürzer wird hier noch etwas rumspielen - da es so manchmal zu kurze anzeigezeiten kommen kann 
-
-
-oldTextFont  = Screen('TextFont'  , windowPtr , newTextFont );
-oldTextSize  = Screen('TextSize'  , windowPtr , newTextSize );
-oldTextColor = Screen('TextColor' , windowPtr , newTextColor);
 
 %  --------------------------------------------------------------------------  %
 %%  einlesen der Ordner:
 
-logoImg   = getImgFolder( 'startup' , 'png' );
+  logoImgInfo   = getFileInfo( 'startup' , 'startupscreen.png' );
 
 blockRatingInfo       = getImgFolder( 'rating'       , 'png' );
 blockInstructionInfo  = getImgFolder( 'instructions' , 'png' );
@@ -248,12 +251,6 @@ blockInstructionInfo  = getImgFolder( 'instructions' , 'png' );
   blockDef(4).description = 'kurfig';
   blockDef(5).description = 'gefallen';
 
-# %  präsentationszeit definieren
-#   blockDef(1).presentationTime = 0.25;
-#   blockDef(2).presentationTime = 0.25;
-#   blockDef(3).presentationTime = 0.25;
-#   blockDef(4).presentationTime = 0.25;
-#   blockDef(5).presentationTime = 0.25;
 
   
   quantity.blocks = length(blockDef);
@@ -321,145 +318,152 @@ blockInstructionInfo  = getImgFolder( 'instructions' , 'png' );
 %  die präsentationsfelder müssen alle gleich groß sein 
 % x values for all locations
 
-x.edgeLeftStart    = rect(1);
-x.edgeLeftEnd      = rect(3) / 100 *  2.34375;
+  x.edgeLeftStart    = rect(1);
+  x.edgeLeftEnd      = rect(3) / 100 *  2.34375;
 
-    x.edgeMidLeftStart     = rect(3) / 100 * 17.96875;
-    x.edgeMidLeftEnd       = rect(3) / 100 * 42.1875;
+      x.edgeMidLeftStart     = rect(3) / 100 * 17.96875;
+      x.edgeMidLeftEnd       = rect(3) / 100 * 42.1875;
 
-    x.edgeMidRightStart    = rect(3) / 100 * 57.8125;
-    x.edgeMidRightEnd      = rect(3) / 100 * 82.03125;
+      x.edgeMidRightStart    = rect(3) / 100 * 57.8125;
+      x.edgeMidRightEnd      = rect(3) / 100 * 82.03125;
 
-x.edgeRightStart   = rect(3) / 100 * 97.65625;
-x.edgeRightEnd     = rect(3);
+  x.edgeRightStart   = rect(3) / 100 * 97.65625;
+  x.edgeRightEnd     = rect(3);
 
-% x IMAGE LEFT
-  x.imgLeftStart     = x.edgeLeftEnd      ;
-  x.imgLeftEnd       = x.edgeMidLeftStart ;
-    x.imgLeftCenter  = x.imgLeftStart + (x.imgLeftEnd - x.imgLeftStart)/2;
+  % x IMAGE LEFT
+    x.imgLeftStart     = x.edgeLeftEnd      ;
+    x.imgLeftEnd       = x.edgeMidLeftStart ;
+      x.imgLeftCenter  = x.imgLeftStart + (x.imgLeftEnd - x.imgLeftStart)/2;
 
-% x IMAGE MID
-  x.imgMidStart      = x.edgeMidLeftEnd    ;
-  x.imgMidEnd        = x.edgeMidRightStart ;
-    x.imgMidCenter   = x.imgMidStart + (x.imgMidEnd -x.imgMidStart)/2;
+  % x IMAGE MID
+    x.imgMidStart      = x.edgeMidLeftEnd    ;
+    x.imgMidEnd        = x.edgeMidRightStart ;
+      x.imgMidCenter   = x.imgMidStart + (x.imgMidEnd -x.imgMidStart)/2;
 
-% x IMAGE RIGTHT
-  x.imgRightStart    = x.edgeMidRightEnd ;
-  x.imgRightEnd      = x.edgeRightStart  ;
-    x.imgRightCenter = x.imgRightStart + (x.imgRightEnd - x.imgRightStart)/2;
+  % x IMAGE RIGTHT
+    x.imgRightStart    = x.edgeMidRightEnd ;
+    x.imgRightEnd      = x.edgeRightStart  ;
+      x.imgRightCenter = x.imgRightStart + (x.imgRightEnd - x.imgRightStart)/2;
 
-x.center           = rect(3) / 2;
+  x.center           = rect(3) / 2;
 
-% y values for all locations
+  % y values for all locations
 
-y.edgeTopStart     = rect(2);
-y.edgeTopEnd       = rect(4) / 100 *  4.1666666667;
+  y.edgeTopStart     = rect(2);
+  y.edgeTopEnd       = rect(4) / 100 *  4.1666666667;
 
-  y.edgeMidTopStart     = rect(4) / 100 * 31.9444444444;
-  y.edgeMidTopEnd       = rect(4) / 100 * 36.1111111111;
+    y.edgeMidTopStart     = rect(4) / 100 * 31.9444444444;
+    y.edgeMidTopEnd       = rect(4) / 100 * 36.1111111111;
 
-  y.edgeMidBotStart     = rect(4) / 100 * 63.8888888889;
-  y.edgeMidBotEnd       = rect(4) / 100 * 68.0555555556;
+    y.edgeMidBotStart     = rect(4) / 100 * 63.8888888889;
+    y.edgeMidBotEnd       = rect(4) / 100 * 68.0555555556;
 
-y.edgeBotStart     = rect(4) / 100 * 95.8333333333;
-y.edgeBotEnd       = rect(4);
+  y.edgeBotStart     = rect(4) / 100 * 95.8333333333;
+  y.edgeBotEnd       = rect(4);
 
 
 
-  y.imgTopStart    = y.edgeTopEnd;
-  y.imgTopEnd      = y.edgeMidTopStart;
-    y.imgTopCenter   = y.imgTopStart + (y.imgTopEnd - y.imgTopStart)/2;
+    y.imgTopStart    = y.edgeTopEnd;
+    y.imgTopEnd      = y.edgeMidTopStart;
+      y.imgTopCenter   = y.imgTopStart + (y.imgTopEnd - y.imgTopStart)/2;
 
-  y.imgMidStart    = y.edgeMidTopEnd;
-  y.imgMidEnd      = y.edgeMidBotStart; 
-    y.imgMidCenter   = y.imgMidStart + (y.imgMidEnd - y.imgMidStart)/2;
+    y.imgMidStart    = y.edgeMidTopEnd;
+    y.imgMidEnd      = y.edgeMidBotStart;
+      y.imgMidCenter   = y.imgMidStart + (y.imgMidEnd - y.imgMidStart)/2;
 
-  y.imgBotStart    = y.edgeMidBotEnd;
-  y.imgBotEnd      = y.edgeBotStart;
-    y.imgBotCenter   = y.imgBotStart + (y.imgBotEnd - y.imgBotStart)/2;
+    y.imgBotStart    = y.edgeMidBotEnd;
+    y.imgBotEnd      = y.edgeBotStart;
+      y.imgBotCenter   = y.imgBotStart + (y.imgBotEnd - y.imgBotStart)/2;
 
-y.center           = rect(4) / 2;
+  y.center           = rect(4) / 2;
 
-%                 x                y            x                y
-rect.L1 = [ x.imgLeftStart  y.imgTopStart  x.imgLeftEnd  y.imgTopEnd ];
-rect.L2 = [ x.imgLeftStart  y.imgMidStart  x.imgLeftEnd  y.imgMidEnd ];
-rect.L3 = [ x.imgLeftStart  y.imgBotStart  x.imgLeftEnd  y.imgBotEnd ];
-rect.M1 = [ x.imgMidStart   y.imgTopStart  x.imgMidEnd   y.imgTopEnd ];
-rect.M2 = [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
-rect.M3 = [ x.imgMidStart   y.imgBotStart  x.imgMidEnd   y.imgBotEnd ];
-rect.R1 = [ x.imgRightStart y.imgTopStart  x.imgRightEnd y.imgTopEnd ];
-rect.R2 = [ x.imgRightStart y.imgMidStart  x.imgRightEnd y.imgMidEnd ];
-rect.R3 = [ x.imgRightStart y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
+  %                 x                y            x                y
+  rect.L1 = [ x.imgLeftStart  y.imgTopStart  x.imgLeftEnd  y.imgTopEnd ];
+  rect.L2 = [ x.imgLeftStart  y.imgMidStart  x.imgLeftEnd  y.imgMidEnd ];
+  rect.L3 = [ x.imgLeftStart  y.imgBotStart  x.imgLeftEnd  y.imgBotEnd ];
+  rect.M1 = [ x.imgMidStart   y.imgTopStart  x.imgMidEnd   y.imgTopEnd ];
+  rect.M2 = [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
+  rect.M3 = [ x.imgMidStart   y.imgBotStart  x.imgMidEnd   y.imgBotEnd ];
+  rect.R1 = [ x.imgRightStart y.imgTopStart  x.imgRightEnd y.imgTopEnd ];
+  rect.R2 = [ x.imgRightStart y.imgMidStart  x.imgRightEnd y.imgMidEnd ];
+  rect.R3 = [ x.imgRightStart y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
 
-positonArray(1) = {rect.M2};
-positonArray(2) = {rect.L1};
-positonArray(3) = {rect.L3};
-positonArray(4) = {rect.R1};
-positonArray(5) = {rect.R3};
+  positonArray(1) = {rect.M2};
+  positonArray(2) = {rect.L1};
+  positonArray(3) = {rect.L3};
+  positonArray(4) = {rect.R1};
+  positonArray(5) = {rect.R3};
 
-rect.instructions =  [ x.imgLeftStart y.imgTopStart x.imgRightEnd y.imgBotEnd];
-rect.rating       =  [ x.imgLeftStart y.imgBotStart x.imgRightEnd y.imgBotEnd];
+  rect.instructions =  [ x.imgLeftStart y.imgTopStart x.imgRightEnd y.imgBotEnd];
+  rect.rating       =  [ x.imgLeftStart y.imgBotStart x.imgRightEnd y.imgBotEnd];
 
-infotainment(windowPtr , 'testscreen upcomming')
-  Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
-  Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
+%  --------------------------------------------------------------------------  %
+%% render testscreens
+switch debugEnabled
+  case true
 
-Screen('Flip', windowPtr)
-  KbPressWait;
-Screen('Flip', windowPtr)
+   infotainment(windowPtr , 'testscreen upcomming')
+      Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
+      Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
 
-infotainment(windowPtr , 'rating testscreen')
-  Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
-  
-Screen('Flip', windowPtr)
-  KbPressWait;
-Screen('Flip', windowPtr)
+    Screen('Flip', windowPtr)
+      KbPressWait;
+    Screen('Flip', windowPtr)
 
-infotainment(windowPtr , 'instructions testscreen')
-  Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
+    infotainment(windowPtr , 'rating testscreen')
+      Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
 
-Screen('Flip', windowPtr)
-  KbPressWait;
-Screen('Flip', windowPtr)
+    Screen('Flip', windowPtr)
+      KbPressWait;
+    Screen('Flip', windowPtr)
+
+    infotainment(windowPtr , 'instructions testscreen')
+      Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
+
+    Screen('Flip', windowPtr)
+      KbPressWait;
+    Screen('Flip', windowPtr)
+
+endswitch
 
 
 %  --------------------------------------------------------------------------  %
 %% berechnen der skalierten Bilder + Lokalisation
 
-o = length(blockDefRand)
-for j=1:o % für alle definierten Blöcke
+  o = length(blockDefRand)
+  for j=1:o % für alle definierten Blöcke
 
-  m = length(blockDefRand(j).texStiRand);
-  for i = 1:m % für alle vorhandenen Elemente im texStiRand
+    m = length(blockDefRand(j).texStiRand);
+    for i = 1:m % für alle vorhandenen Elemente im texStiRand
 
-    %  herrausfinden wie groß die textur ist - anhand des tex pointers
-    texRect      = Screen('Rect' , blockDefRand(j).texStiRand(i) );
-    % verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
-    finRect  = putRectInRect( positonArray( blockDefRand(j).texSimPos(i) ){}  , texRect  );
-    % abspeichern
-    blockDefRand(j).finRect(i,1) = {finRect};
+      %  herrausfinden wie groß die textur ist - anhand des tex pointers
+      texRect      = Screen('Rect' , blockDefRand(j).texStiRand(i) );
+      % verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
+      finRect  = putRectInRect( positonArray( blockDefRand(j).texSimPos(i) ){}  , texRect  );
+      % abspeichern
+      blockDefRand(j).finRect(i,1) = {finRect};
+    endfor
+
   endfor
 
-endfor
+  for j=1:o
+    texRating  = Screen('Rect' , blockRatingTex(j) );
+    finRectRating = putRectInRect (rect.rating , texRating);
+    blockDefRand(j).finRectRating = {finRectRating};
+  endfor
 
-for j=1:o
-  texRating  = Screen('Rect' , blockRatingTex(j) );
-  finRectRating = putRectInRect (rect.rating , texRating);
-  blockDefRand(j).finRectRating = {finRectRating};
-endfor
-
-for j=1:o
-  texInstructions  = Screen('Rect' , blockDefRand(j).texInstructions );
-  finRectInstructions = putRectInRect (rect.instructions , texInstructions);
-  blockDefRand(j).finRectInstructions = {finRectInstructions};
-endfor
+  for j=1:o
+    texInstructions  = Screen('Rect' , blockDefRand(j).texInstructions );
+    finRectInstructions = putRectInRect (rect.instructions , texInstructions);
+    blockDefRand(j).finRectInstructions = {finRectInstructions};
+  endfor
 
 %  --------------------------------------------------------------------------  %
 # MAINPART: THE MIGHTY EXPERIMENT
@@ -591,28 +595,32 @@ endfor
 %  --------------------------------------------------------------------------  %
 %%  Data saving
 
-infotainment(windowPtr , 'saving your data')
+  infotainment(windowPtr , 'saving your data')
 
-%  den workspace sichern (zur fehlersuche usw)
-save (fileNameBackupWorkspace)
+  %  den workspace sichern (zur fehlersuche usw)
+  save (fileNameBackupWorkspace)
 
-% attatch names to the outputCell
-outputCellFin= [headings ; outputCell]
+  % attatch names to the outputCell
+  outputCellFin= [headings ; outputCell]
 
-%  speicherndes output files
-cell2csv ( fileNameOutput , outputCellFin, ';')
+  %  speicherndes output files
+  cell2csv ( fileNameOutput , outputCellFin, ';')
 
 
-diary off
+  diary off
 
 %  --------------------------------------------------------------------------  %
 %%  end all processes
-infotainment(windowPtr , 'target aquired for termination')
+  infotainment(windowPtr , 'target aquired for termination')
 
-ListenChar(0)
-Screen('closeall')
+  ListenChar(0)
+  Screen('closeall')
 
-finalMsg = 'geschafft'
+  try
+  CedrusResponseBox('CloseAll');
+  end
+
+  finalMsg = 'geschafft'
 
 endfunction
 
