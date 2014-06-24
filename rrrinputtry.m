@@ -24,16 +24,26 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
 
+  nextSeed=22;
 %  --------------------------------------------------------------------------  %
 %%  settings einlesen
-rawCell = csv2cell( 'settings.csv' , ';');
+  rawCell = csv2cell( 'settings.csv' , ';');
 
-head     = rawCell(1     , :); #  zerlegten der Settings in den header
-body     = rawCell(2:end , :); #  und dem inhaltlichen body
+  head     = rawCell(1     , :); #  zerlegten der Settings in den header
+  body     = rawCell(2:end , :); #  und dem inhaltlichen body
 
+%% konvertieren 
+  def = cell2struct (body, head ,2); #  konvertieren zum struct
+  def = orderfields(def) #  und sortieren um ihn lesbar zu machen zu machen
 
-def = cell2struct (body, head ,2); #  konvertieren zum struct
-def = orderfields(def) #  und sortieren um ihn lesbar zu machen zu machen
+  BLOCKS = length(def)
+  
+% Blöcke randomisieren
+  rand('state' , nextSeed)
+  newSequence = randperm( length(def) );
+  for i=1:BLOCKS
+      def(:,:) = def(newSequence);
+  endfor
 
 # def =
 # {
@@ -56,14 +66,42 @@ def = orderfields(def) #  und sortieren um ihn lesbar zu machen zu machen
 # }
 
 %%  Settings verarbeiten
-for BQA=1:length(def) #  BQA == blockquantity
-  def(BQA).stimImgInfo      = getFilesInFolderInfo (def(BQA).stimImgFolder     , def(BQA).stimImgType    ); #  stimulus Info holen
-  def(BQA).ratingInfo       = getFileInfo          (def(BQA).ratingFolder      , def(BQA).ratingFile     ); #  rating Infos holen
-  def(BQA).instructionInfo  = getFileInfo          (def(BQA).instructionFolder , def(BQA).instructionFile); #  instuctions info holen
-  def(BQA).stimImgTex     = makeTexFromInfo (windowPtr , def(BQA).stimImgInfo    )
-  def(BQA).stimratingTex  = makeTexFromInfo (windowPtr , def(BQA).ratingInfo     )
-  def(BQA).instructionTex = makeTexFromInfo (windowPtr , def(BQA).instructionInfo)
-endfor
+  for BQA=1:length(def) #  BQA == blockquantity
+    def(BQA).stimImgInfo      = getFilesInFolderInfo (def(BQA).stimImgFolder     , def(BQA).stimImgType    ); #  stimulus Info holen
+    def(BQA).ratingInfo       = getFileInfo          (def(BQA).ratingFolder      , def(BQA).ratingFile     ); #  rating Infos holen
+    def(BQA).instructionInfo  = getFileInfo          (def(BQA).instructionFolder , def(BQA).instructionFile); #  instuctions info holen
+    def(BQA).stimImgInfo       = makeTexFromInfo (windowPtr , def(BQA).stimImgInfo    );
+    def(BQA).ratingInfo        = makeTexFromInfo (windowPtr , def(BQA).ratingInfo     );
+    def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
+
+    STIMQA= length(def(BQA).stimImgInfo); % wie viele Spalten hat stimImgInfo (so viele wie es stimulus im ordner gibt)
+    helpNORMAL  =  zeros (STIMQA , 1)+1;
+    helpSCATTER =  zeros (STIMQA , 1)+1;
+
+      schinkenfix = round(STIMQA/4);
+      schinken = schinkenfix;
+    do
+      helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
+      schinken = schinken + schinkenfix;
+    until schinken >= schinkenfix*4
+
+    positionCol  = [helpNORMAL ; helpSCATTER];
+    textureCol = [ (1:STIMQA)' ; (1:STIMQA)' ];
+
+    hartCol = [textureCol positionCol];
+    [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
+    def(BQA).randColTex = tempCol(:,1);
+    def(BQA).randColPos = tempCol(:,2);
+     
+    for TTT=1:length(def(BQA).randColTex)
+      def(BQA).RstimImgInfo(TTT) = def(BQA).stimImgInfo( def(BQA).randColTex(TTT,:) );
+    endfor
+
+  endfor
+
+
+  Screen('closeall')
+
 
 
 

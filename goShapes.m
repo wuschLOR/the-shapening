@@ -1,4 +1,4 @@
-function [ finalMsg ] = goDummy ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
+function [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
 
 if nargin <4
   if ~exist('vpNummer'      , 'var') ;  vpNummer      = []; endif
@@ -116,7 +116,7 @@ endif
 %  --------------------------------------------------------------------------  %
 %%  disable random input tothe console
 
-  ListenChar(2)
+#   ListenChar(2)
 
 %  Keys pressed by the subject often show up in the Matlab command window as
 %  well, cluttering that window with useless character junk. You can prevent
@@ -194,111 +194,95 @@ endif
 %%  settings einlesen
   rawCell = csv2cell( 'settings.csv' , ';');
 
-  head     = rawCell(1     , :); #zerlegten der Settings in den header
-  body     = rawCell(2:end , :); # und dem inhaltlichen body
+  head     = rawCell(1     , :); #  zerlegten der Settings in den header
+  body     = rawCell(2:end , :); #  und dem inhaltlichen body
 
+%% konvertieren
+  def = cell2struct (body, head ,2); #  konvertieren zum struct
+  def = orderfields(def) #  und sortieren um ihn lesbar zu machen zu machen
 
-  def = cell2struct (body, head ,2); # konvertieren zum struct
+  BLOCKS = length(def)
 
+% Blöcke randomisieren
+  rand('state' , nextSeed)
+  newSequence = randperm( length(def) );
+  for i=1:BLOCKS
+      def(:,:) = def(newSequence);
+  endfor
 
-%  --------------------------------------------------------------------------  %
-%%  einlesen der Ordner:
+# def =
+# {
+#   5x1 struct array containing the fields:
+#
+#     blockName
+#     blockNumber
+#     instructionFile
+#     instructionFolder
+#     ratingFile
+#     ratingFolder
+#     stimImgFolder
+#     stimImgType
+#     zeitAfterpause
+#     zeitBetweenpause
+#     zeitFixcross
+#     zeitPrepause
+#     zeitRating
+#     zeitStimuli
+# }
 
-  logoImgInfo   = getFileInfo( 'startup' , 'startupscreen.png' );
-
-blockRatingInfo       = getImgFolder( 'rating'       , 'png' );
-blockInstructionInfo  = getImgFolder( 'instructions' , 'png' );
-
-  stimImgType ='png'
-  stimulusInfo = getImgFolder( 'stimulus' , stimImgType );
-
-
-%  --------------------------------------------------------------------------  %
-%% bilder einlesen
-
-  blockRatingTex      = makeTex(windowPtr, blockRatingInfo      , 'rating');
-  blockInstructionTex = makeTex(windowPtr, blockInstructionInfo , 'instructions');
-
-  stimulusTex =  makeTex(windowPtr , stimulusInfo , 'stimulus');
-  
+%%  Settings verarbeiten
+  for BQA=1:length(def) #  BQA == blockquantity
+    # convert times to real ms
+    def(BQA).zeitAfterpause   = def(BQA).zeitAfterpause    /1000;
+    def(BQA).zeitBetweenpause = def(BQA).zeitBetweenpause  /1000;
+    def(BQA).zeitFixcross     = def(BQA).zeitFixcross      /1000;
+    def(BQA).zeitPrepause     = def(BQA).zeitPrepause      /1000;
+    def(BQA).zeitRating       = def(BQA).zeitRating        /1000;
+    def(BQA).zeitStimuli      = def(BQA).zeitStimuli       /1000;
+    # loding Info about pictures
+    def(BQA).stimImgInfo      = getFilesInFolderInfo (def(BQA).stimImgFolder     , def(BQA).stimImgType    ); #  stimulus Info holen
+    def(BQA).ratingInfo       = getFileInfo          (def(BQA).ratingFolder      , def(BQA).ratingFile     ); #  rating Infos holen
+    def(BQA).instructionInfo  = getFileInfo          (def(BQA).instructionFolder , def(BQA).instructionFile); #  instuctions info holen
+    # make the textures
+    def(BQA).stimImgInfo       = makeTexFromInfo (windowPtr , def(BQA).stimImgInfo    );
+    def(BQA).ratingInfo        = makeTexFromInfo (windowPtr , def(BQA).ratingInfo     );
+    def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
 
 %% version a und b generieren
-%initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden 
-  quantity.tex= length(stimulusTex)
-  helparraynormal  = zeros (quantity.tex   , 1)+1;
-  helparrayscatter = zeros (quantity.tex   , 1)+1;
+%initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
+    STIMQA= length(def(BQA).stimImgInfo); % wie viele Spalten hat stimImgInfo (so viele wie es stimulus im ordner gibt)
+    helpNORMAL  =  zeros (STIMQA , 1)+1;
+    helpSCATTER =  zeros (STIMQA , 1)+1;
 
-    schinkenfix = round(quantity.tex/4);
-    schinken = schinkenfix;
-  do 
-  helparrayscatter(1:schinken)     = helparrayscatter(1:schinken)+1;
-    schinken = schinken + schinkenfix;
-  until schinken == schinkenfix*4
+      schinkenfix = round(STIMQA/4);
+      schinken = schinkenfix;
+    do
+      helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
+      schinken = schinken + schinkenfix;
+    until schinken >= schinkenfix*4
 
-  helparrayAB  = [helparraynormal ; helparrayscatter];
-  helparrayTex = [stimulusTex ; stimulusTex];
+    positionCol  = [helpNORMAL ; helpSCATTER];
+    textureCol = [ (1:STIMQA)' ; (1:STIMQA)' ];
 
-  hartCol = [helparrayTex helparrayAB];
+    hartCol = [textureCol positionCol];
+    [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
+    def(BQA).randColTex = tempCol(:,1);
+    def(BQA).randColPos = tempCol(:,2);
+    # neuen stimImgInfo generieren der die "richtige" Reihenfolge hat
+    for TTT=1:length(def(BQA).randColTex)
+      def(BQA).RstimImgInfo(TTT) = def(BQA).stimImgInfo( def(BQA).randColTex(TTT,:) );
+    endfor
 
-  
-
-  
-%  --------------------------------------------------------------------------  %
-%% Blöcke Definieren
-  blockDef(1).description = 'richtungsweisend';
-  blockDef(2).description = 'rund';
-  blockDef(3).description = 'eckig';
-  blockDef(4).description = 'kurfig';
-  blockDef(5).description = 'gefallen';
-
-
-  
-  BLOCKS = length(blockDef);
-
-
-  for i=1:BLOCKS
-    [tempTex , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
-    blockDef(i).texStiRand = tempTex(:,1);
-    blockDef(i).texSimPos  = tempTex(:,2);
-  endfor
-
-%  das entsprechende Rating zur Bedingung hinzufügen
-  for i=1:BLOCKS
-      blockDef(i).texRating = blockRatingTex(i);
+    
   endfor
 
 
-% instructions
-  for i=1:BLOCKS
-      blockDef(i).texInstructions = blockInstructionTex(i);
-  endfor
-
-% Zeiten festmachen in ms
-% 5 ms = 0.005 seconds
-  zeit.fixcross     =   80 / 1000;
-  zeit.prepause     =   80 / 1000; 
-  zeit.stimuli      =  160 / 1000;
-  zeit.afterpause   =  800 / 1000;
-  zeit.rating       = 2500 / 1000;
-  zeit.betweenpause =  500 / 1000;  
-
-# für alle blöcke fix machen
-  for i=1:BLOCKS
-      blockDef(i).timeFixcross     = zeit.fixcross     ;
-      blockDef(i).timePrepause     = zeit.prepause     ;
-      blockDef(i).timeStimuli      = zeit.stimuli      ;
-      blockDef(i).timeAfterpause   = zeit.afterpause   ;
-      blockDef(i).timeRating       = zeit.rating       ;
-      blockDef(i).timeBetweenpause = zeit.betweenpause ;
-  endfor
-
-
-% Blöcke insgesammt randomisieren
-  rand('state' , nextSeed)
-  newSequence = randperm( length(blockDef) );
-  for i=1:BLOCKS
-      blockDefRand(:,:) = blockDef(newSequence);
-  endfor
+# 
+# %  --------------------------------------------------------------------------  %
+# %%  einlesen der Ordner:
+# 
+#   logoImgInfo   = getFileInfo( 'startup' , 'startupscreen.png' );
+# 
 
 %  --------------------------------------------------------------------------  %
 %% Positionen für 16 :9 Auflösung (300 px felder für )
@@ -437,32 +421,31 @@ endswitch
 %  --------------------------------------------------------------------------  %
 %% berechnen der skalierten Bilder + Lokalisation
 
-  o = length(blockDefRand)
-  for j=1:o % für alle definierten Blöcke
+  for j=1:BLOCKS % für alle definierten Blöcke
 
-    m = length(blockDefRand(j).texStiRand);
-    for i = 1:m % für alle vorhandenen Elemente im texStiRand
+    m = length(def(j).RstimImgInfo);
+    for i = 1:m % für alle vorhandenen Elemente im RstimImgInfo
 
       %  herrausfinden wie groß die textur ist - anhand des tex pointers
-      texRect      = Screen('Rect' , blockDefRand(j).texStiRand(i) );
+      texRect      = Screen('Rect' , def(j).RstimImgInfo(i).texture );
       % verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
-      finRect  = putRectInRect( positonArray( blockDefRand(j).texSimPos(i) ){}  , texRect  );
+      finRect  = putRectInRect( positonArray( def(j).randColPos(i) ){}  , texRect  );
       % abspeichern
-      blockDefRand(j).finRect(i,1) = {finRect};
+      def(j).finRect(i,1) = {finRect};
     endfor
 
   endfor
 
-  for j=1:o
-    texRating  = Screen('Rect' , blockRatingTex(j) );
-    finRectRating = putRectInRect (rect.rating , texRating);
-    blockDefRand(j).finRectRating = {finRectRating};
+  for j=1:BLOCKS
+    tempTex  = Screen('Rect' , def(j).ratingInfo.texture );
+    finRectRating = putRectInRect (rect.rating , tempTex);
+    def(j).finRectRating = {finRectRating};
   endfor
 
-  for j=1:o
-    texInstructions  = Screen('Rect' , blockDefRand(j).texInstructions );
-    finRectInstructions = putRectInRect (rect.instructions , texInstructions);
-    blockDefRand(j).finRectInstructions = {finRectInstructions};
+  for j=1:BLOCKS
+    tempTex  = Screen('Rect' , def(j).instructionInfo.texture );
+    finRectInstructions = putRectInRect (rect.instructions , tempTex);
+    def(j).finRectInstructions = {finRectInstructions};
   endfor
 
 %  --------------------------------------------------------------------------  %
@@ -470,26 +453,25 @@ endswitch
 %  --------------------------------------------------------------------------  %
   superIndex = 0; % index über alle Durchläufe hinweg
   
-  o = length(blockDefRand);
-  for WHATBL=1:o  % für alle definierten Blöcke
+  for WHATBL=1:BLOCKS  % für alle definierten Blöcke
 
-    Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texInstructions , [] , blockDefRand(WHATBL).finRectInstructions{});
+    Screen( 'DrawTexture' , windowPtr , def(WHATBL).instructionInfo.texture , [] , def(WHATBL).finRectInstructions{});
     Screen('Flip', windowPtr);
     KbPressWait;
 
-    m = length(blockDefRand(WHATBL).texStiRand);
+    m = length(def(WHATBL).RstimImgInfo);
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
 
     nextFlip = 0;
 
     for INBL = 1:m
-      superIndex = superIndex +1;
+      ++superIndex;
       
       # PAUSE BETWEEN
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timeBetweenpause - flipSlack;
+        nextFlip = lastFlip + def(WHATBL).zeitBetweenpause - flipSlack;
         out.flipBetween = lastFlip;
       
       # FIXCROSS
@@ -497,7 +479,7 @@ endswitch
       drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timeFixcross - flipSlack;
+        nextFlip = lastFlip + def(WHATBL).zeitFixcross - flipSlack;
         out.flipFix = lastFlip - out.flipBetween;
 
 
@@ -505,31 +487,31 @@ endswitch
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
       #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timePrepause - flipSlack;
+        nextFlip = lastFlip + def(WHATBL).zeitPrepause - flipSlack;
         out.flipPre = lastFlip - out.flipBetween;
       
       # STIMULUS
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
-      Screen('DrawTexture', windowPtr, blockDefRand(WHATBL).texStiRand(INBL,1) , [] , blockDefRand(WHATBL).finRect(INBL,1){} );
+      Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL,1) , [] , def(WHATBL).finRect(INBL,1){} );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timeStimuli - flipSlack;
+        nextFlip = lastFlip + def(WHATBL).zeitStimuli - flipSlack;
         out.flipStim = lastFlip - out.flipBetween;
  
       # PAUSE AFTER
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timeAfterpause - flipSlack;
+        nextFlip = lastFlip + def(WHATBL).zeitAfterpause - flipSlack;
         out.flipAfter = lastFlip - out.flipBetween;
 
       # RATING
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R3  );
-      Screen( 'DrawTexture' , windowPtr , blockDefRand(WHATBL).texRating , [] , blockDefRand(WHATBL).finRectRating{});
+      Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{});
 
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + blockDefRand(WHATBL).timeRating - flipSlack;
+        nextFlip = lastFlip + def(WHATBL).zeitRating - flipSlack;
         out.flipRating = lastFlip - out.flipBetween;
         #flipend
         
@@ -569,8 +551,8 @@ endswitch
         outputFileStr                    , ...
         num2str(superIndex)              , ...
         num2str(INBL)                    , ...
-        blockDefRand(WHATBL).description , ...
-        'pic.jpg'                        , ...
+        def(WHATBL).blockName            , ...
+        'pic'                       , ...
         pressedButtonStr                 , ...
         pressedButtonValue               , ...
         out.reactionTime                 , ...
