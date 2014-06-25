@@ -153,9 +153,9 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #   [windowPtr,rect] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1280  800]);  #  16:10 wu Laptop
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1680 1050]);  #  16:10 wu pc
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1920 1080]);  #  16:9  testrechner
+#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
+#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1679 1050]);  #  16:10 wu pc
+#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
 
 #  Windowed
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
@@ -272,7 +272,6 @@ endif
     for TTT=1:length(def(BQA).randColTex)
       def(BQA).RstimImgInfo(TTT) = def(BQA).stimImgInfo( def(BQA).randColTex(TTT,:) );
     endfor
-
     
   endfor
 
@@ -378,7 +377,7 @@ endif
   positonArray(4) = {rect.R1};
   positonArray(5) = {rect.R3};
 
-  rect.instructions =  [ x.imgLeftStart y.imgTopStart x.imgRightEnd y.imgBotEnd];
+  rect.instructions =  [ x.imgLeftStart y.imgTopStart x.imgRightEnd y.imgMidEnd];
   rect.rating       =  [ x.imgLeftStart y.imgBotStart x.imgRightEnd y.imgBotEnd];
 
 %  --------------------------------------------------------------------------  %
@@ -518,9 +517,10 @@ endswitch
       switch buttonBoxON
         case false
         % reaktionszeit abgreifen
-        [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating (nextFlip);
+          [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating (nextFlip);
         case true
           % i should think about something
+          evt = CedrusResponseBox('WaitButtonPress', handle);
         otherwise
           % critical error - this should not happen
       endswitch
