@@ -160,7 +160,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #  Windowed
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-  [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+  [windowPtr,rect] = Screen('OpenWindow', screenID ,[242 242 242], [20 20 600 337]); # 16:9
 
   HideCursor(screenID)
 
