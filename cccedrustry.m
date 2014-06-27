@@ -30,6 +30,7 @@ fprintf('initCedrusUSBLinux \n')
 
 fprintf('ready press pls\n')
 
+eee = CedrusResponseBox('GetBaseTimer', handle)
 
 for i=1:10
   Screen('FrameRect', windowPtr , [255 20 147] );
@@ -46,6 +47,7 @@ for i=1:10
   end
 
 endfor
+
 
 try
   CedrusResponseBox('CloseAll');

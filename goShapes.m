@@ -116,7 +116,7 @@ endif
 %  --------------------------------------------------------------------------  %
 %%  disable random input tothe console
 
-  ListenChar(2)
+%    ListenChar(2)
 
 %  Keys pressed by the subject often show up in the Matlab command window as
 %  well, cluttering that window with useless character junk. You can prevent
@@ -145,22 +145,23 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 %  öffnet den Screen
 %  windowPtr = spezifikation des Screens die später zum ansteueren verwendet wird
-%  rect hat wenn es ohne attribute initiert wird die größe des Bildschirms
+%  rect.root hat wenn es ohne attribute initiert wird die größe des Bildschirms
 %  also: von 0,0 oben links zu 1600, 900 unten rechts
 
 # Auflösungen:
 #  Vanilla
-#   [windowPtr,rect] = Screen('OpenWindow', screenID );
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1679 1050]);  #  16:10 wu pc
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1679 1050]);  #  16:10 wu pc
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
 
 #  Windowed
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
   [windowPtr,rect] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
+
 
   HideCursor(screenID)
 
@@ -301,17 +302,17 @@ endif
 %  die präsentationsfelder müssen alle gleich groß sein 
 % x values for all locations
 
-  x.edgeLeftStart    = rect(1);
-  x.edgeLeftEnd      = rect(3) / 100 *  2.34375;
+  x.edgeLeftStart    = rect.root(1);
+  x.edgeLeftEnd      = rect.root(3) / 100 *  2.34375;
 
-      x.edgeMidLeftStart     = rect(3) / 100 * 17.96875;
-      x.edgeMidLeftEnd       = rect(3) / 100 * 42.1875;
+      x.edgeMidLeftStart     = rect.root(3) / 100 * 17.96875;
+      x.edgeMidLeftEnd       = rect.root(3) / 100 * 42.1875;
 
-      x.edgeMidRightStart    = rect(3) / 100 * 57.8125;
-      x.edgeMidRightEnd      = rect(3) / 100 * 82.03125;
+      x.edgeMidRightStart    = rect.root(3) / 100 * 57.8125;
+      x.edgeMidRightEnd      = rect.root(3) / 100 * 82.03125;
 
-  x.edgeRightStart   = rect(3) / 100 * 97.65625;
-  x.edgeRightEnd     = rect(3);
+  x.edgeRightStart   = rect.root(3) / 100 * 97.65625;
+  x.edgeRightEnd     = rect.root(3);
 
   % x IMAGE LEFT
     x.imgLeftStart     = x.edgeLeftEnd      ;
@@ -328,21 +329,21 @@ endif
     x.imgRightEnd      = x.edgeRightStart  ;
       x.imgRightCenter = x.imgRightStart + (x.imgRightEnd - x.imgRightStart)/2;
 
-  x.center           = rect(3) / 2;
+  x.center           = rect.root(3) / 2;
 
   % y values for all locations
 
-  y.edgeTopStart     = rect(2);
-  y.edgeTopEnd       = rect(4) / 100 *  4.1666666667;
+  y.edgeTopStart     = rect.root(2);
+  y.edgeTopEnd       = rect.root(4) / 100 *  4.1666666667;
 
-    y.edgeMidTopStart     = rect(4) / 100 * 31.9444444444;
-    y.edgeMidTopEnd       = rect(4) / 100 * 36.1111111111;
+    y.edgeMidTopStart     = rect.root(4) / 100 * 31.9444444444;
+    y.edgeMidTopEnd       = rect.root(4) / 100 * 36.1111111111;
 
-    y.edgeMidBotStart     = rect(4) / 100 * 63.8888888889;
-    y.edgeMidBotEnd       = rect(4) / 100 * 68.0555555556;
+    y.edgeMidBotStart     = rect.root(4) / 100 * 63.8888888889;
+    y.edgeMidBotEnd       = rect.root(4) / 100 * 68.0555555556;
 
-  y.edgeBotStart     = rect(4) / 100 * 95.8333333333;
-  y.edgeBotEnd       = rect(4);
+  y.edgeBotStart     = rect.root(4) / 100 * 95.8333333333;
+  y.edgeBotEnd       = rect.root(4);
 
 
 
@@ -358,7 +359,7 @@ endif
     y.imgBotEnd      = y.edgeBotStart;
       y.imgBotCenter   = y.imgBotStart + (y.imgBotEnd - y.imgBotStart)/2;
 
-  y.center           = rect(4) / 2;
+  y.center           = rect.root(4) / 2;
 
   %                 x                y            x                y
   rect.L1 = [ x.imgLeftStart  y.imgTopStart  x.imgLeftEnd  y.imgTopEnd ];
