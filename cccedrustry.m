@@ -39,8 +39,13 @@ for i=1:10
   until ~isempty(evt)
   aaa(i)=evt;
   infotainment(windowPtr , 'lalala')
-  CedrusResponseBox('FlushEvents', handle);
-endif
+
+  buttons = 1;
+  while any(buttons(1,:))
+    buttons = CedrusResponseBox('FlushEvents', handle);
+  end
+
+endfor
 
 try
   CedrusResponseBox('CloseAll');

@@ -9,7 +9,7 @@ endif
 
  if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
  if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
- if isempty(buttonBoxON)   ;  buttonBoxON   = false  ; endif
+ if isempty(buttonBoxON)   ;  buttonBoxON   = true  ; endif
  if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
 
 
@@ -160,7 +160,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #  Windowed
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-  [windowPtr,rect] = Screen('OpenWindow', screenID ,[242 242 242], [20 20 600 337]); # 16:9
+  [windowPtr,rect] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
 
   HideCursor(screenID)
 
@@ -252,9 +252,9 @@ endif
 %initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
     STIMQA= length(def(BQA).stimImgInfo); % wie viele Spalten hat stimImgInfo (so viele wie es stimulus im ordner gibt)
     helpNORMAL  =  zeros (STIMQA , 1)+1;
-    helpSCATTER =  zeros (STIMQA , 1)+1;
+    helpSCATTER =  zeros (STIMQA , 1)+2;
 
-      schinkenfix = round(STIMQA/4);
+      schinkenfix = floor(STIMQA/4);
       schinken = schinkenfix;
     do
       helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
@@ -513,14 +513,17 @@ endswitch
         nextFlip = lastFlip + def(WHATBL).zeitRating - flipSlack;
         out.flipRating = lastFlip - out.flipBetween;
         #flipend
-        
+
+      % reaktionszeit abgreifen
       switch buttonBoxON
-        case false
-        % reaktionszeit abgreifen
-          [pressedButtonTime , pressedButtonValue , pressedButtonStr , pressedButtonCode] = getRating (nextFlip);
-        case true
-          % i should think about something
-          evt = CedrusResponseBox('WaitButtonPress', handle);
+        case false #tastatur
+
+          [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRating (nextFlip);
+          
+        case true #buttonbox
+
+          [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRatingCedrus (handle , nextFlip);
+          
         otherwise
           % critical error - this should not happen
       endswitch
