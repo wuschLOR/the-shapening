@@ -23,34 +23,31 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
 #   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
-fprintf('initCedrusUSBLinux \n')
+
 
 [handle , BBworking ] = initCedrusUSBLinux
 
 
-fprintf('ready press pls\n')
-
-eee = CedrusResponseBox('GetBaseTimer', handle)
-
 for i=1:10
-  Screen('FrameRect', windowPtr , [255 20 147] );
+  Screen('FillRect', windowPtr , [255 0 0] );
     [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
   do
     evt = CedrusResponseBox('GetButtons', handle);
   until ~isempty(evt)
+
+ 
   aaa(i)=evt;
-  infotainment(windowPtr , 'lalala')
 
   buttons = 1;
   while any(buttons(1,:))
     buttons = CedrusResponseBox('FlushEvents', handle);
   end
-
+#   infotainment(windowPtr , 'lalala')
 endfor
 
 
-try
-  CedrusResponseBox('CloseAll');
-  fprintf('closeall')
-end
+# try
+#   CedrusResponseBox('CloseAll');
+#   fprintf('closeall')
+# end
 Screen('closeall')

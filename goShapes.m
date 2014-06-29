@@ -158,9 +158,9 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
 
 #  Windowed
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
-#   [windowPtr,rect] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-  [windowPtr,rect] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
+  [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
 
 
   HideCursor(screenID)
@@ -457,7 +457,16 @@ endswitch
 
     Screen( 'DrawTexture' , windowPtr , def(WHATBL).instructionInfo.texture , [] , def(WHATBL).finRectInstructions{});
     Screen('Flip', windowPtr);
-    KbPressWait;
+    
+    instruTime= GetSecs+3600; # eine stunde
+    switch buttonBoxON
+      case false #tastatur
+        getRating (instruTime);
+      case true #buttonbox
+        getRatingCedrus (handle , instruTime);
+      otherwise
+        error ('critical error - this should not happen');
+    endswitch
 
     m = length(def(WHATBL).RstimImgInfo);
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
@@ -518,16 +527,13 @@ endswitch
       % reaktionszeit abgreifen
       switch buttonBoxON
         case false #tastatur
-
           [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRating (nextFlip);
-          
         case true #buttonbox
-
           [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRatingCedrus (handle , nextFlip);
-          
-        otherwise
-          % critical error - this should not happen
+        otherwise #wtf
+          error ('critical error - this should not happen');
       endswitch
+      
         out.reactionTime = pressedButtonTime - lastFlip;
         out.flipRatingOFF = lastFlip - pressedButtonTime;
         Screen('Flip', windowPtr);
