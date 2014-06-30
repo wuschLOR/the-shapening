@@ -159,7 +159,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 #  Windowed
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
+%     [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
 
 
@@ -511,6 +511,7 @@ endswitch
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
         [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
+        stimOFF = lastFlip;
         nextFlip = lastFlip + def(WHATBL).zeitAfterpause - flipSlack;
         out.flipAfter = lastFlip - out.flipBetween;
 
@@ -534,7 +535,7 @@ endswitch
           error ('critical error - this should not happen');
       endswitch
       
-        out.reactionTime = pressedButtonTime - lastFlip;
+        out.reactionTime = pressedButtonTime - stimOFF;
         out.flipRatingOFF = lastFlip - pressedButtonTime;
         Screen('Flip', windowPtr);
 
