@@ -9,7 +9,7 @@ endif
 
  if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
  if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
- if isempty(buttonBoxON)   ;  buttonBoxON   = true   ; endif
+ if isempty(buttonBoxON)   ;  buttonBoxON   = false   ; endif
  if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
 
 
@@ -150,7 +150,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 # Auflösungen:
 #  Vanilla
-  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
@@ -160,7 +160,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 #  Windowed
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
 %     [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
+  [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
 
 
   HideCursor(screenID)
@@ -192,14 +192,23 @@ endif
   oldTextColor = Screen('TextColor' , windowPtr , newTextColor);
 
 %  --------------------------------------------------------------------------  %
-%%  settings einlesen
-  rawCell = csv2cell( 'settings.csv' , ';');
+%%  korrekturwerte einlesen
+  rawCorrectCell = csv2cell( 'corrector.csv' , ';');
 
-  head     = rawCell(1     , :); #  zerlegten der Settings in den header
-  body     = rawCell(2:end , :); #  und dem inhaltlichen body
+  correctHead     = rawCorrectCell(1     , :); #  zerlegten der Correct in den correctHead
+  correctBody     = rawCorrectCell(2:end , :); #  und dem inhaltlichen correctBody
+
+  korr = cell2struct (correctBody , correctHead , 2);
+  
+%  --------------------------------------------------------------------------  %
+%%  settings einlesen
+  rawSettingsCell = csv2cell( 'settings.csv' , ';');
+
+  settingsHead     = rawSettingsCell(1     , :); #  zerlegten der Settings in den settingsHeader
+  settingsBody     = rawSettingsCell(2:end , :); #  und dem inhaltlichen settingsBody
 
 %% konvertieren
-  def = cell2struct (body, head ,2); #  konvertieren zum struct
+  def = cell2struct (settingsBody, settingsHead ,2); #  konvertieren zum struct
   def = orderfields(def) #  und sortieren um ihn lesbar zu machen zu machen
 
   BLOCKS = length(def)
@@ -293,7 +302,7 @@ endif
 %               %% ####### %% ####### %% ####### %%
 %        3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               %% ###2L## %% ###2M## %% ###2R## %%
-%               %% ####### %% ####### %% ####### %%   + = fixation cross
+%               %% ####### %% ####### %% ####### %%   + = fixcross cross
 %        3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               %% ###3L## %% ###3M## %% ###3R## %%
 %               %% ####### %% ####### %% ####### %%
@@ -447,6 +456,7 @@ endswitch
     finRectInstructions = putRectInRect (rect.instructions , tempTex);
     def(j).finRectInstructions = {finRectInstructions};
   endfor
+  [empty, empty , startFLIP ] =Screen('Flip', windowPtr);
 
 %  --------------------------------------------------------------------------  %
 # MAINPART: THE MIGHTY EXPERIMENT
@@ -479,51 +489,56 @@ endswitch
       # PAUSE BETWEEN
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr);
-        nextFlip = lastFlip + def(WHATBL).zeitBetweenpause - flipSlack;
-        out.flipBetween = lastFlip;
+        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
+        nextFlip = lastFLIP + def(WHATBL).zeitBetweenpause + korr.betweenpause ;  # next flip
+       
+        timeStamp.flipBetween = lastFLIP;
       
       # FIXCROSS
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L2  );
-      drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+        drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + def(WHATBL).zeitFixcross - flipSlack;
-        out.flipFix = lastFlip - out.flipBetween;
+        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFLIP + def(WHATBL).zeitFixcross + korr.fixcross;
+        
+        timeStamp.flipFix = lastFLIP;
 
 
       # PAUSE PRE
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
       #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + def(WHATBL).zeitPrepause - flipSlack;
-        out.flipPre = lastFlip - out.flipBetween;
+        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFLIP + def(WHATBL).zeitPrepause + korr.prepause;
+        
+        timeStamp.flipPre = lastFLIP;
       
       # STIMULUS
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
       Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL).texture , [] , def(WHATBL).finRect(INBL,1){} );
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + def(WHATBL).zeitStimuli - flipSlack;
-        out.flipStim = lastFlip - out.flipBetween;
+        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFLIP + def(WHATBL).zeitStimuli + korr.stimulus;
+
+        timeStamp.flipStim = lastFLIP;
  
       # PAUSE AFTER
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        stimOFF = lastFlip;
-        nextFlip = lastFlip + def(WHATBL).zeitAfterpause - flipSlack;
-        out.flipAfter = lastFlip - out.flipBetween;
+        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFLIP + def(WHATBL).zeitAfterpause + korr.afterpause;
+
+        timeStamp.flipAfter = lastFLIP;
 
       # RATING
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R3  );
-      Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{});
+        Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{});
 
         #flip
-        [empty, empty , lastFlip ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFlip + def(WHATBL).zeitRating - flipSlack;
-        out.flipRating = lastFlip - out.flipBetween;
-        #flipend
+        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+        nextFlip = lastFLIP + def(WHATBL).zeitRating + korr.rating;
+
+        timeStamp.flipRating = lastFLIP;
+        
 
       % reaktionszeit abgreifen
       switch buttonBoxON
@@ -534,13 +549,40 @@ endswitch
         otherwise #wtf
           error ('critical error - this should not happen');
       endswitch
-      
-        out.reactionTime = pressedButtonTime - stimOFF;
-        out.flipRatingOFF = lastFlip - pressedButtonTime;
-        Screen('Flip', windowPtr);
+      Screen('Flip', windowPtr);
 
+
+
+      # dauer der einzelnen vorgänge berechnen
+      dauer.betweenpause        = timeStamp.flipFix    - timeStamp.flipBetween ;
+      dauer.fixcross            = timeStamp.flipPre    - timeStamp.flipFix     ;
+      dauer.prepause            = timeStamp.flipStim   - timeStamp.flipPre     ;
+      dauer.stimulus            = timeStamp.flipAfter  - timeStamp.flipStim    ;
+      dauer.afterpause          = timeStamp.flipRating - timeStamp.flipAfter   ;
+      dauer.rating              = pressedButtonTime    - timeStamp.flipRating  ;
+      dauer.reactionTimeStimON  = pressedButtonTime    - timeStamp.flipStim    ;
+      dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipAfter   ;
+
+      #  korrekturwerte
+      switch debugEnabled
+        case true
+      #  neuer wert     =   sollwert - ((sollwert + istwert)/2)
+          korr.fixcross     = def(WHATBL).zeitFixcross     - ((def(WHATBL).zeitFixcross     + dauer.fixcross     )/2);
+          korr.prepause     = def(WHATBL).zeitPrepause     - ((def(WHATBL).zeitPrepause     + dauer.prepause     )/2);
+          korr.stimulus     = def(WHATBL).zeitStimuli      - ((def(WHATBL).zeitStimuli      + dauer.stimulus     )/2);
+          korr.afterpause   = def(WHATBL).zeitAfterpause   - ((def(WHATBL).zeitAfterpause   + dauer.afterpause   )/2);
+          if pressedButtonStr == 'FAIL'
+          korr.rating       = def(WHATBL).zeitRating       - ((def(WHATBL).zeitRating       + dauer.rating       )/2); #  will ich das ????
+          endif
+          korr.betweenpause = def(WHATBL).zeitBetweenpause - ((def(WHATBL).zeitBetweenpause + dauer.betweenpause )/2)
+        case false
+        #  keine neuen korrekturwerte
+      endswitch
+
+
+ 
       %    dem outputfile werte zuweisen
-      headings        =      { ...
+      OUThead        =      { ...
         'vpNummer'           , ...
         'BunusString'        , ...
         'Index'              , ...
@@ -549,15 +591,16 @@ endswitch
         'Stimulus'           , ...
         'KeyString'          , ...
         'KeyValue'           , ...
-        'Reaktiosnzeit'      , ...
-        'TTflipFix'          , ...
-        'TTflipPre'          , ...
-        'TTflipStim'         , ...
-        'TTflipAfter'        , ...
-        'TTflipRating'       , ...
-        'TflipRatingOFF'     };
+        'Reaktion Stim ON'   , ...
+        'Reaktion Stim OFF'  , ...
+        'DauerBetween'       , ...
+        'DauerFix'           , ...
+        'DauerPre'           , ...
+        'DauerStim'          , ...
+        'DauerAfter'         , ...
+        'DauerRating'        };
 
-      outputCell(superIndex,:) =             { ...
+      OUTcell(superIndex,:) =             { ...
         vpNummer                             , ...
         outputFileStr                        , ...
         num2str(superIndex)                  , ...
@@ -566,19 +609,20 @@ endswitch
         def(WHATBL).RstimImgInfo(INBL).name  , ...
         pressedButtonStr                     , ...
         pressedButtonValue                   , ...
-        out.reactionTime                     , ...
-        out.flipFix                          , ...
-        out.flipPre                          , ...
-        out.flipStim                         , ...
-        out.flipAfter                        , ...
-        out.flipRating                       , ...
-        out.flipRatingOFF                    };
+        dauer.reactionTimeStimON             , ...
+        dauer.reactionTimeStimOFF            , ...
+        dauer.betweenpause                        , ...
+        dauer.fixcross                       , ...
+        dauer.prepause                       , ...
+        dauer.stimulus                       , ...
+        dauer.afterpause                     , ...
+        dauer.rating                         };
 
-      % attatch names to the outputCell
-      outputCellFin= [headings ; outputCell];
+      % attatch names to the OUTcell
+      OUTcellFin= [OUThead ; OUTcell];
       %  speicherndes output files
-      cell2csv ( fileNameOutput , outputCellFin, ';');
-      
+      cell2csv ( fileNameOutput , OUTcellFin, ';');
+
     endfor
 endfor
 
@@ -593,11 +637,11 @@ endfor
   %  den workspace sichern (zur fehlersuche usw)
   save (fileNameBackupWorkspace)
 
-  % attatch names to the outputCell
-  outputCellFin= [headings ; outputCell]
+  % attatch names to the OUTcell
+  OUTcellFin= [OUThead ; OUTcell]
 
   %  speicherndes output files
-  cell2csv ( fileNameOutput , outputCellFin, ';')
+  cell2csv ( fileNameOutput , OUTcellFin, ';')
 
 
   diary off

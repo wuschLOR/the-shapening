@@ -1,2 +1,2 @@
 blockNumber;blockName;instructionFolder;instructionFile;ratingFolder;ratingFile;stimImgFolder;stimImgType;zeitFixcross;zeitPrepause;zeitStimuli;zeitAfterpause;zeitRating;zeitBetweenpause
-1;rund;instructions;instructions.png;rating;RAT_rund.png;stimulus;png;80;80;160;800;2500;500
+5;rechtslinks;instructions;instructions.png;rating;RAT_rechtslinks.png;stimulus;png;80;80;160;0;3000;500
