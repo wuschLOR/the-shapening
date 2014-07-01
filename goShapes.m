@@ -9,7 +9,7 @@ endif
 
  if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
  if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
- if isempty(buttonBoxON)   ;  buttonBoxON   = false   ; endif
+ if isempty(buttonBoxON)   ;  buttonBoxON   = false  ; endif
  if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
 
 
@@ -175,10 +175,10 @@ endif
 
 %  --------------------------------------------------------------------------  %
 %%  play around with the flip interval
-
-  flipSlack =Screen('GetFlipInterval', windowPtr)
-  %  flipSlack =0
-  flipSlack = flipSlack/2 % das verhindert das das ganze kürzer wird hier noch etwas rumspielen - da es so manchmal zu kurze anzeigezeiten kommen kann
+# 
+#   flipSlack =Screen('GetFlipInterval', windowPtr)
+#   %  flipSlack =0
+#   flipSlack = flipSlack/2 % das verhindert das das ganze kürzer wird hier noch etwas rumspielen - da es so manchmal zu kurze anzeigezeiten kommen kann
 
 %  --------------------------------------------------------------------------  %
 %%  textstyles
@@ -296,6 +296,7 @@ endif
     [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
     def(BQA).randColTex = tempCol(:,1);
     def(BQA).randColPos = tempCol(:,2);
+    
     # neuen stimImgInfo generieren der die "richtige" Reihenfolge hat
     for TTT=1:length(def(BQA).randColTex)
       def(BQA).RstimImgInfo(TTT) = def(BQA).stimImgInfo( def(BQA).randColTex(TTT,:) );
@@ -488,9 +489,9 @@ endswitch
     
     instruTime= GetSecs+3600; # eine stunde
     switch buttonBoxON
-      case false #tastatur
+      case false #  tastatur
         getRating (instruTime);
-      case true #buttonbox
+      case true  #  buttonbox
         getRatingCedrus (handle , instruTime);
       otherwise
         error ('critical error - this should not happen');
@@ -505,7 +506,6 @@ endswitch
       ++superIndex;
       
       # PAUSE BETWEEN
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
         nextFlip = lastFLIP + def(WHATBL).zeitBetweenpause + korr(K).betweenpause ;  # next flip
@@ -513,7 +513,6 @@ endswitch
         timeStamp.flipBetween = lastFLIP;
       
       # FIXCROSS
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L2  );
         drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
@@ -523,7 +522,6 @@ endswitch
 
 
       # PAUSE PRE
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
       #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFLIP + def(WHATBL).zeitPrepause + korr(K).prepause;
@@ -531,7 +529,6 @@ endswitch
         timeStamp.flipPre = lastFLIP;
       
       # STIMULUS
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.R1  );
       Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL).texture , [] , def(WHATBL).finRect(INBL,1){} );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
@@ -540,7 +537,6 @@ endswitch
         timeStamp.flipStim = lastFLIP;
  
       # PAUSE AFTER
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFLIP + def(WHATBL).zeitAfterpause + korr(K).afterpause;
@@ -548,7 +544,6 @@ endswitch
         timeStamp.flipAfter = lastFLIP;
 
       # RATING
-#       Screen('FrameRect', windowPtr , [255 20 147] , rect.R3  );
         Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{});
 
         #flip
@@ -585,7 +580,7 @@ endswitch
       switch calibration
         case true
         
-      #  neuer wert     =   sollwert - ((sollwert + istwert)/2)
+          #  neuer wert     =   sollwert - ((sollwert + istwert)/2)
           korr(K).fixcross     = def(WHATBL).zeitFixcross     - ((def(WHATBL).zeitFixcross     + dauer.fixcross     )/2);
           korr(K).prepause     = def(WHATBL).zeitPrepause     - ((def(WHATBL).zeitPrepause     + dauer.prepause     )/2);
           korr(K).stimulus     = def(WHATBL).zeitStimuli      - ((def(WHATBL).zeitStimuli      + dauer.stimulus     )/2);
@@ -594,7 +589,8 @@ endswitch
             korr(K).rating       = def(WHATBL).zeitRating       - ((def(WHATBL).zeitRating       + dauer.rating       )/2); #  will ich das ????
           endif
           korr(K).betweenpause = def(WHATBL).zeitBetweenpause - ((def(WHATBL).zeitBetweenpause + dauer.betweenpause )/2)
-       #  schreiben des neuen setting files
+          
+          #  schreiben des neuen setting files
           KORRcellNewLine =     { ...
           korr(K).MACAddress    , ...
           korr(K).fixcross      , ...
@@ -656,8 +652,10 @@ endswitch
     endfor
 endfor
 
+%  --------------------------------------------------------------------------  %
+# MAINPART: THE MIGHTY EXPERIMENT IS OVER HOPE YOU DID GREAT
+%  --------------------------------------------------------------------------  %
 
-%  und hier ist es vorbei
 
 %  --------------------------------------------------------------------------  %
 %%  Data saving
