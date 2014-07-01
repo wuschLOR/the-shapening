@@ -199,6 +199,24 @@ endif
   correctBody     = rawCorrectCell(2:end , :); #  und dem inhaltlichen correctBody
 
   korr = cell2struct (correctBody , correctHead , 2);
+
+  # hat der Rechner schon eine Kalibrierung
+  calibration=true;
+  K= [];
+  KORRS = length(korr)
+  sysinfo=Screen('Computer');
+  for i= 1:KORRS
+    if strcmp (korr(i).MACAddress , sysinfo.MACAddress) # wenn ja so ist die MAC adresse gespeichert und 
+      calibration=false;
+      K = i;
+    endif
+  endfor
+  # wenn nicht nimm die default werte aus der ersten Zeile und mach eine neue Zeile dran
+  if calibration==true & isempty(K)
+    korr(KORRS+1) = korr(1);
+    K=(KORRS+1);
+    korr(KORRS+1).MACAddress = sysinfo.MACAddress;
+  endif
   
 %  --------------------------------------------------------------------------  %
 %%  settings einlesen
@@ -490,7 +508,7 @@ endswitch
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L1  );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
-        nextFlip = lastFLIP + def(WHATBL).zeitBetweenpause + korr.betweenpause ;  # next flip
+        nextFlip = lastFLIP + def(WHATBL).zeitBetweenpause + korr(K).betweenpause ;  # next flip
        
         timeStamp.flipBetween = lastFLIP;
       
@@ -499,7 +517,7 @@ endswitch
         drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitFixcross + korr.fixcross;
+        nextFlip = lastFLIP + def(WHATBL).zeitFixcross + korr(K).fixcross;
         
         timeStamp.flipFix = lastFLIP;
 
@@ -508,7 +526,7 @@ endswitch
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.L3  );
       #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitPrepause + korr.prepause;
+        nextFlip = lastFLIP + def(WHATBL).zeitPrepause + korr(K).prepause;
         
         timeStamp.flipPre = lastFLIP;
       
@@ -517,7 +535,7 @@ endswitch
       Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL).texture , [] , def(WHATBL).finRect(INBL,1){} );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitStimuli + korr.stimulus;
+        nextFlip = lastFLIP + def(WHATBL).zeitStimuli + korr(K).stimulus;
 
         timeStamp.flipStim = lastFLIP;
  
@@ -525,7 +543,7 @@ endswitch
 #       Screen('FrameRect', windowPtr , [255 20 147] , rect.R2  );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitAfterpause + korr.afterpause;
+        nextFlip = lastFLIP + def(WHATBL).zeitAfterpause + korr(K).afterpause;
 
         timeStamp.flipAfter = lastFLIP;
 
@@ -535,7 +553,7 @@ endswitch
 
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitRating + korr.rating;
+        nextFlip = lastFLIP + def(WHATBL).zeitRating + korr(K).rating;
 
         timeStamp.flipRating = lastFLIP;
         
@@ -564,25 +582,37 @@ endswitch
       dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipAfter   ;
 
       #  korrekturwerte
-      switch debugEnabled
+      switch calibration
         case true
+        
       #  neuer wert     =   sollwert - ((sollwert + istwert)/2)
-          korr.fixcross     = def(WHATBL).zeitFixcross     - ((def(WHATBL).zeitFixcross     + dauer.fixcross     )/2);
-          korr.prepause     = def(WHATBL).zeitPrepause     - ((def(WHATBL).zeitPrepause     + dauer.prepause     )/2);
-          korr.stimulus     = def(WHATBL).zeitStimuli      - ((def(WHATBL).zeitStimuli      + dauer.stimulus     )/2);
-          korr.afterpause   = def(WHATBL).zeitAfterpause   - ((def(WHATBL).zeitAfterpause   + dauer.afterpause   )/2);
-          if pressedButtonStr == 'FAIL'
-          korr.rating       = def(WHATBL).zeitRating       - ((def(WHATBL).zeitRating       + dauer.rating       )/2); #  will ich das ????
+          korr(K).fixcross     = def(WHATBL).zeitFixcross     - ((def(WHATBL).zeitFixcross     + dauer.fixcross     )/2);
+          korr(K).prepause     = def(WHATBL).zeitPrepause     - ((def(WHATBL).zeitPrepause     + dauer.prepause     )/2);
+          korr(K).stimulus     = def(WHATBL).zeitStimuli      - ((def(WHATBL).zeitStimuli      + dauer.stimulus     )/2);
+          korr(K).afterpause   = def(WHATBL).zeitAfterpause   - ((def(WHATBL).zeitAfterpause   + dauer.afterpause   )/2);
+          if strcmp (pressedButtonStr , 'FAIL') # springt nur an wenn keine Taste gedrückt wurde weil
+            korr(K).rating       = def(WHATBL).zeitRating       - ((def(WHATBL).zeitRating       + dauer.rating       )/2); #  will ich das ????
           endif
-          korr.betweenpause = def(WHATBL).zeitBetweenpause - ((def(WHATBL).zeitBetweenpause + dauer.betweenpause )/2)
+          korr(K).betweenpause = def(WHATBL).zeitBetweenpause - ((def(WHATBL).zeitBetweenpause + dauer.betweenpause )/2)
+       #  schreiben des neuen setting files
+          KORRcellNewLine =     { ...
+          korr(K).MACAddress    , ...
+          korr(K).fixcross      , ...
+          korr(K).prepause      , ...
+          korr(K).stimulus      , ...
+          korr(K).afterpause    , ...
+          korr(K).rating        , ...
+          korr(K).betweenpause  , ...
+                                };
+          KORRcellfin = [rawCorrectCell ; KORRcellNewLine ];
+          cell2csv ( 'corrector.csv' , KORRcellfin, ';');
+
         case false
         #  keine neuen korrekturwerte
       endswitch
 
-
- 
       %    dem outputfile werte zuweisen
-      OUThead        =      { ...
+      OUThead        =       { ...
         'vpNummer'           , ...
         'BunusString'        , ...
         'Index'              , ...
@@ -600,7 +630,7 @@ endswitch
         'DauerAfter'         , ...
         'DauerRating'        };
 
-      OUTcell(superIndex,:) =             { ...
+      OUTcell(superIndex,:) =                { ...
         vpNummer                             , ...
         outputFileStr                        , ...
         num2str(superIndex)                  , ...
@@ -611,7 +641,7 @@ endswitch
         pressedButtonValue                   , ...
         dauer.reactionTimeStimON             , ...
         dauer.reactionTimeStimOFF            , ...
-        dauer.betweenpause                        , ...
+        dauer.betweenpause                   , ...
         dauer.fixcross                       , ...
         dauer.prepause                       , ...
         dauer.stimulus                       , ...
