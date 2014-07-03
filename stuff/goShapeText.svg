@@ -1,0 +1,1412 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   width="1000"
+   height="236"
+   sodipodi:docname="goShapeText.svg">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path3965"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3959"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3959-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-1"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3965-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3959-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-6"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3965-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3959-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-2"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3965-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1588"
+     inkscape:window-height="1031"
+     id="namedview4"
+     showgrid="false"
+     inkscape:zoom="0.45820519"
+     inkscape:cx="-236.24288"
+     inkscape:cy="1639.9324"
+     inkscape:window-x="1676"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <rect
+     style="opacity:0.45416667;fill:#b3b3b3;stroke:none"
+     id="rect2991"
+     width="1680"
+     height="1050"
+     x="-3029.9744"
+     y="-1384.9877"
+     inkscape:export-filename="D:\OCoctave\text\INSeckig-rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+     x="33.950619"
+     y="23.037037"
+     id="text2987"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan2989"
+       x="33.950619"
+       y="23.037037" /></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+     x="9.2592564"
+     y="214.39505"
+     id="text2995"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan2997"
+       x="9.2592564"
+       y="214.39505"><tspan
+   style="font-weight:bold;-inkscape-font-specification:Liberation Mono Bold"
+   id="tspan2991">gefällt</tspan> gar nicht</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+     x="708"
+     y="218.28177"
+     id="text2999"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3001"
+       x="708"
+       y="218.28177"><tspan
+   style="font-weight:bold;-inkscape-font-specification:Liberation Mono Bold"
+   id="tspan2994">gefällt</tspan> sehr</tspan></text>
+  <rect
+     style="opacity:0.45416666999999999;fill:none;stroke:none"
+     id="rect2991-1"
+     width="1680"
+     height="350"
+     x="-1254.6614"
+     y="-1891.4691"
+     inkscape:export-filename="D:\OCoctave\text\RATeckig-rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="1989.3575"
+     y="550.81482"
+     id="text3011"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3013"
+       x="1989.3575"
+       y="550.81482"
+       style="font-size:48px;text-align:center;text-anchor:middle">Du wirst nun einige Bilder sehen.</tspan><tspan
+       sodipodi:role="line"
+       x="1989.3575"
+       y="610.81482"
+       id="tspan3015"
+       style="font-size:48px;text-align:center;text-anchor:middle">Deine Aufgabe ist es, zu beurteilen, wie sehr Dir das Dargestellte gefällt.</tspan><tspan
+       sodipodi:role="line"
+       x="1989.3575"
+       y="670.81482"
+       id="tspan3017"
+       style="font-size:48px;text-align:center;text-anchor:middle">                    Benutze dafür die Taste 1 (gefällt mir gar nicht) bis 7 (gefällt mir sehr).</tspan><tspan
+       sodipodi:role="line"
+       x="1996.0138"
+       y="730.81482"
+       id="tspan3019"
+       style="font-size:48px;text-align:center;text-anchor:middle">         </tspan><tspan
+       sodipodi:role="line"
+       x="1989.3575"
+       y="790.81482"
+       id="tspan3021"
+       style="font-size:48px;text-align:center;text-anchor:middle">                    (gar nicht) 1---2---3---4---5---6---7 (sehr)</tspan><tspan
+       sodipodi:role="line"
+       x="1989.3575"
+       y="850.81482"
+       id="tspan3023"
+       style="font-size:48px;text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1989.3575"
+       y="910.81482"
+       id="tspan3025"
+       style="font-size:48px"><tspan
+   style="font-size:48px;text-align:center;text-anchor:middle"
+   id="tspan3027">                    Du hast dafür so viel Zeit wie Du brauchst</tspan>, beachte aber, dass Du dennoch nicht zu lange verweilst..</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="1340.6733"
+     y="-918.32092"
+     id="text3029"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-918.32092"
+       id="tspan3035"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-868.32092"
+       id="tspan3055"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-818.32092"
+       id="tspan3057"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-768.32092"
+       id="tspan3059"
+       style="text-align:center;text-anchor:middle">eckig 1---2---3---4---5---6---7 rund</tspan><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-718.32092"
+       id="tspan3061"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-668.32092"
+       id="tspan3063"
+       style="text-align:center;text-anchor:middle">Bitte Präge dier die Skala gut ein da sie im weiteren Experiemnt nicht mehr angezeigt wird!</tspan><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-618.32092"
+       id="tspan3065"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1346.2202"
+       y="-568.32092"
+       id="tspan3067"
+       style="text-align:center;text-anchor:middle">Um den Experimentblock zu starten bitte eine Taste Drücken </tspan><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-518.32092"
+       id="tspan3069"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-468.32092"
+       id="tspan3071"
+       style="text-align:center;text-anchor:middle">Nach dem Experiment Block wird die nächste Instruktion angezeigt;</tspan><tspan
+       sodipodi:role="line"
+       x="1340.6733"
+       y="-418.32092"
+       style="text-align:center;text-anchor:middle"
+       id="tspan3077"> hier hast du wieder Zeit eine Pause einzulegen.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-2189.7888"
+     y="-606.59259"
+     id="text3145"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\INSeckig-rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3147"
+       x="-2189.7888"
+       y="-606.59259"
+       style="text-align:center;text-anchor:middle">Bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3173">präge</tspan> dir die Skala gut ein, da sie im weiteren Experiment nicht mehr angezeigt wird!</tspan><tspan
+       sodipodi:role="line"
+       x="-2189.7888"
+       y="-556.59259"
+       id="tspan3149"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-2184.2419"
+       y="-506.59259"
+       style="text-align:center;text-anchor:middle"
+       id="tspan4932">Um den Experimentblock zu starten bitte eine <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3178">Taste drücken! </tspan></tspan><tspan
+       sodipodi:role="line"
+       x="-2189.7888"
+       y="-456.59259"
+       id="tspan3153"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-2189.7888"
+       y="-406.59259"
+       id="tspan3155"
+       style="text-align:center;text-anchor:middle">Nach dem Experimentblock wird die nächste Instruktion angezeigt;</tspan><tspan
+       sodipodi:role="line"
+       x="-2189.7888"
+       y="-356.59259"
+       id="tspan3157"
+       style="text-align:center;text-anchor:middle"> hier hast du wieder Zeit eine Pause einzulegen.</tspan></text>
+  <g
+     id="g4920"
+     transform="translate(-1285.5959,225.73174)"
+     inkscape:export-filename="D:\OCoctave\text\INSeckig-rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3137"
+       y="-1563.87"
+       x="-904.5152"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="text-align:center;text-anchor:middle"
+         y="-1563.87"
+         x="-904.5152"
+         id="tspan3139"
+         sodipodi:role="line">Im folgenden wird es um diese drei Formen gehen:</tspan><tspan
+         id="tspan4809"
+         style="text-align:center;text-anchor:middle"
+         y="-1513.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="text-align:center;text-anchor:middle"
+         id="tspan3141"
+         y="-1463.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold"
+         y="-1413.87"
+         x="-904.5152"
+         sodipodi:role="line"
+         id="tspan4945">Ablauf:</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="matrix(0.18913016,0,0,0.18913016,-812.19482,-848.59056)"
+       id="g4802">
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(1.0221239,0,0,1.1268293,-1228.0723,-3796.6838)" />
+      <path
+         id="path3782"
+         d="m -652.40854,-3297.2286 330,0 -165.00001,-285.7883 -164.99999,285.7883 z"
+         style="fill:#808080"
+         inkscape:label="Triangle"
+         inkscape:connector-curvature="0" />
+      <rect
+         style="fill:#808080;fill-opacity:1"
+         id="rect3844"
+         width="330"
+         height="330"
+         x="-272.40854"
+         y="-3605.123" />
+    </g>
+  </g>
+  <path
+     id="path3782-5"
+     d="m -226.45303,-2516.9786 62.41295,0 -31.20648,-54.0512 -31.20647,54.0512 z"
+     style="fill:#808080"
+     inkscape:label="Triangle"
+     inkscape:connector-curvature="0" />
+  <rect
+     style="fill:#808080;fill-opacity:1"
+     id="rect3844-5"
+     width="62.412952"
+     height="62.412952"
+     x="15.645846"
+     y="-2555.5688" />
+  <g
+     id="g4893"
+     transform="translate(-1144.533,826.9874)"
+     inkscape:export-filename="D:\OCoctave\text\INSeckig-rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3114"
+       y="-1902.3409"
+       x="-1528.7421"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="-1902.3409"
+         x="-1528.7421"
+         id="tspan3116"
+         sodipodi:role="line">1. es wird ein <tspan
+   id="tspan3159"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Kreuz</tspan> in der Mitte des Bildschirms angezeigt.</tspan><tspan
+         id="tspan3118"
+         y="-1852.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Bitte dieses Kreuz <tspan
+   id="tspan3161"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">fixieren</tspan>.</tspan><tspan
+         id="tspan3120"
+         y="-1802.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3122"
+         y="-1752.3409"
+         x="-1528.7421"
+         sodipodi:role="line">2. eine der Formen wird angezeigt</tspan><tspan
+         id="tspan3124"
+         y="-1702.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3126"
+         y="-1652.3409"
+         x="-1528.7421"
+         sodipodi:role="line">3. nach dem Verschwinden der Form ist es deine Aufgabe zu <tspan
+   id="tspan3163"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">beurteilen</tspan>, </tspan><tspan
+         y="-1602.3409"
+         x="-1528.7421"
+         sodipodi:role="line"
+         id="tspan4937">wie <tspan
+   id="tspan3169"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">eckig/rund </tspan>dir das Dargestellte erscheint.</tspan><tspan
+         id="tspan3130"
+         y="-1552.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Benutze dafür die Taste 1 (<tspan
+   id="tspan3165"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">eckig</tspan>) bis 7 (<tspan
+   id="tspan3167"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">rund</tspan>) der Buttonbox.</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="translate(-233.87797,-914.43747)"
+       id="g4875">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="m -1581.7901,-992.39506 3.0864,381.17284"
+         id="path3182"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend)"
+         d="m -1578.7037,-591.16049 c -54.0774,148.05988 -47.2455,-723.95731 -1.5432,-413.58021"
+         id="path4396"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="translate(-196.41854,-952.38165)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       id="g4885">
+      <text
+         xml:space="preserve"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono Bold"
+         x="-1577.1733"
+         y="-668.79871"
+         id="text2991"
+         sodipodi:linespacing="125%"
+         inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"><tspan
+           sodipodi:role="line"
+           id="tspan2993"
+           x="-1577.1733"
+           y="-668.79871"
+           style="font-size:16px">eckig 1-2-3-4-5-6-7 rund</tspan></text>
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-4"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(0.19331446,0,0,0.21311741,-1530.4131,-893.51043)" />
+      <g
+         id="g4863"
+         transform="matrix(0.23992468,0,0,0.23992468,-1492.5615,-550.27782)"
+         style="stroke-width:20.83987427;stroke-miterlimit:4;stroke-dasharray:none">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843"
+           d="m 126.54321,-1794.8642 0,253.0864"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-1"
+           d="M 8.5185185e-6,-1668.321 253.08641,-1668.321"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+  </g>
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4950"
+     style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+       id="flowRegion4952"><rect
+         id="rect4954"
+         width="384.10739"
+         height="56.743137"
+         x="-2383.2117"
+         y="-1413.9158" /></flowRegion><flowPara
+       id="flowPara4956" /></flowRoot>  <rect
+     style="opacity:0.45416666999999999;fill:#b3b3b3;stroke:none"
+     id="rect2991-2"
+     width="1680"
+     height="1050"
+     x="-3035.5229"
+     y="-2580.5498"
+     inkscape:export-filename="D:\OCoctave\text\INSlinks-rechts.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-2195.3374"
+     y="-1802.1547"
+     id="text3145-7"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\INSlinks-rechts.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3147-6"
+       x="-2195.3374"
+       y="-1802.1547"
+       style="text-align:center;text-anchor:middle">Bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3173-1">präge</tspan> dir die Skala gut ein, da sie im weiteren Experiment nicht mehr angezeigt wird!</tspan><tspan
+       sodipodi:role="line"
+       x="-2195.3374"
+       y="-1752.1547"
+       id="tspan3149-4"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-2189.7905"
+       y="-1702.1547"
+       style="text-align:center;text-anchor:middle"
+       id="tspan4932-2">Um den Experimentblock zu starten bitte eine <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3178-3">Taste drücken! </tspan></tspan><tspan
+       sodipodi:role="line"
+       x="-2195.3374"
+       y="-1652.1547"
+       id="tspan3153-2"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-2195.3374"
+       y="-1602.1547"
+       id="tspan3155-2"
+       style="text-align:center;text-anchor:middle">Nach dem Experimentblock wird die nächste Instruktion angezeigt;</tspan><tspan
+       sodipodi:role="line"
+       x="-2195.3374"
+       y="-1552.1548"
+       id="tspan3157-1"
+       style="text-align:center;text-anchor:middle"> hier hast du wieder Zeit eine Pause einzulegen.</tspan></text>
+  <g
+     id="g4920-6"
+     transform="translate(-1291.1445,-969.83035)"
+     inkscape:export-filename="D:\OCoctave\text\INSlinks-rechts.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3137-8"
+       y="-1563.87"
+       x="-904.5152"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="text-align:center;text-anchor:middle"
+         y="-1563.87"
+         x="-904.5152"
+         id="tspan3139-5"
+         sodipodi:role="line">Im folgenden wird es um diese drei Formen gehen:</tspan><tspan
+         id="tspan4809-7"
+         style="text-align:center;text-anchor:middle"
+         y="-1513.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="text-align:center;text-anchor:middle"
+         id="tspan3141-6"
+         y="-1463.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold"
+         y="-1413.87"
+         x="-904.5152"
+         sodipodi:role="line"
+         id="tspan4945-1">Ablauf:</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="matrix(0.18913016,0,0,0.18913016,-812.19482,-848.59056)"
+       id="g4802-8">
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-9"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(1.0221239,0,0,1.1268293,-1228.0723,-3796.6838)" />
+      <path
+         id="path3782-2"
+         d="m -652.40854,-3297.2286 330,0 -165.00001,-285.7883 -164.99999,285.7883 z"
+         style="fill:#808080"
+         inkscape:label="Triangle"
+         inkscape:connector-curvature="0" />
+      <rect
+         style="fill:#808080;fill-opacity:1"
+         id="rect3844-7"
+         width="330"
+         height="330"
+         x="-272.40854"
+         y="-3605.123" />
+    </g>
+  </g>
+  <g
+     id="g4893-9"
+     transform="translate(-1150.0816,-368.57465)"
+     inkscape:export-filename="D:\OCoctave\text\INSlinks-rechts.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3114-5"
+       y="-1902.3409"
+       x="-1528.7421"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="-1902.3409"
+         x="-1528.7421"
+         id="tspan3116-4"
+         sodipodi:role="line">1. es wird ein <tspan
+   id="tspan3159-3"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Kreuz</tspan> in der Mitte des Bildschirms angezeigt.</tspan><tspan
+         id="tspan3118-1"
+         y="-1852.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Bitte dieses Kreuz <tspan
+   id="tspan3161-2"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">fixieren</tspan>.</tspan><tspan
+         id="tspan3120-3"
+         y="-1802.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3122-3"
+         y="-1752.3409"
+         x="-1528.7421"
+         sodipodi:role="line">2. eine der Formen wird angezeigt</tspan><tspan
+         id="tspan3124-4"
+         y="-1702.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3126-1"
+         y="-1652.3409"
+         x="-1528.7421"
+         sodipodi:role="line">3. nach dem Verschwinden der Form ist es deine Aufgabe zu <tspan
+   id="tspan3163-1"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">beurteilen</tspan>, </tspan><tspan
+         y="-1602.3409"
+         x="-1528.7421"
+         sodipodi:role="line"
+         id="tspan4937-3">ob die gezeigte Form eher nach <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan5125">links</tspan> oder nach <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan5123">rechts</tspan> zeigt.</tspan><tspan
+         id="tspan3130-7"
+         y="-1552.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Benutze dafür die Taste 1 (<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan5127">links</tspan>) bis 7 (<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan5129">rechts</tspan>) der Buttonbox.</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="translate(-233.87797,-914.43747)"
+       id="g4875-7">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="m -1581.7901,-992.39506 3.0864,381.17284"
+         id="path3182-7"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend)"
+         d="m -1578.7037,-591.16049 c -54.0774,148.05988 -47.2455,-723.95731 -1.5432,-413.58021"
+         id="path4396-9"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="translate(-196.41854,-952.38165)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       id="g4885-3">
+      <text
+         xml:space="preserve"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono Bold"
+         x="-1577.1733"
+         y="-668.79871"
+         id="text2991-1"
+         sodipodi:linespacing="125%"
+         inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"><tspan
+           sodipodi:role="line"
+           id="tspan2993-9"
+           x="-1577.1733"
+           y="-668.79871"
+           style="font-size:16px">links 1-2-3-4-5-6-7 rechts</tspan></text>
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-4-8"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(0.19331446,0,0,0.21311741,-1530.4131,-893.51043)" />
+      <g
+         id="g4863-6"
+         transform="matrix(0.23992468,0,0,0.23992468,-1492.5615,-550.27782)"
+         style="stroke-width:20.83987427;stroke-miterlimit:4;stroke-dasharray:none">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-5"
+           d="m 126.54321,-1794.8642 0,253.0864"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-1-0"
+           d="M 8.5185185e-6,-1668.321 253.08641,-1668.321"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+  </g>
+  <rect
+     style="opacity:0.45416667;fill:#b3b3b3;stroke:none"
+     id="rect2991-24"
+     width="1680"
+     height="1050"
+     x="-679.50616"
+     y="-4054.4321"
+     inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="160.67937"
+     y="-3276.0371"
+     id="text3145-8"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3147-65"
+       x="160.67937"
+       y="-3276.0371"
+       style="text-align:center;text-anchor:middle">Bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3173-0">präge</tspan> dir die Skala gut ein, da sie im weiteren Experiment nicht mehr angezeigt wird!</tspan><tspan
+       sodipodi:role="line"
+       x="160.67937"
+       y="-3226.0371"
+       id="tspan3149-9"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="166.22624"
+       y="-3176.0371"
+       style="text-align:center;text-anchor:middle"
+       id="tspan4932-0">Um den Experimentblock zu starten bitte eine <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3178-0">Taste drücken! </tspan></tspan><tspan
+       sodipodi:role="line"
+       x="160.67937"
+       y="-3126.0371"
+       id="tspan3153-6"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="160.67937"
+       y="-3076.0371"
+       id="tspan3155-1"
+       style="text-align:center;text-anchor:middle">Nach dem Experimentblock wird die nächste Instruktion angezeigt;</tspan><tspan
+       sodipodi:role="line"
+       x="160.67937"
+       y="-3026.0371"
+       id="tspan3157-3"
+       style="text-align:center;text-anchor:middle"> hier hast du wieder Zeit eine Pause einzulegen.</tspan></text>
+  <g
+     id="g4920-8"
+     transform="translate(1064.8722,-2443.7127)"
+     inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3137-9"
+       y="-1563.87"
+       x="-904.5152"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="text-align:center;text-anchor:middle"
+         y="-1563.87"
+         x="-904.5152"
+         id="tspan3139-3"
+         sodipodi:role="line">Im folgenden wird es um diese drei Formen gehen:</tspan><tspan
+         id="tspan4809-4"
+         style="text-align:center;text-anchor:middle"
+         y="-1513.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="text-align:center;text-anchor:middle"
+         id="tspan3141-4"
+         y="-1463.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold"
+         y="-1413.87"
+         x="-904.5152"
+         sodipodi:role="line"
+         id="tspan4945-6">Ablauf:</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="matrix(0.18913016,0,0,0.18913016,-812.19482,-848.59056)"
+       id="g4802-0">
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-6"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(1.0221239,0,0,1.1268293,-1228.0723,-3796.6838)" />
+      <path
+         id="path3782-6"
+         d="m -652.40854,-3297.2286 330,0 -165.00001,-285.7883 -164.99999,285.7883 z"
+         style="fill:#808080"
+         inkscape:label="Triangle"
+         inkscape:connector-curvature="0" />
+      <rect
+         style="fill:#808080;fill-opacity:1"
+         id="rect3844-1"
+         width="330"
+         height="330"
+         x="-272.40854"
+         y="-3605.123" />
+    </g>
+  </g>
+  <g
+     id="g4893-8"
+     transform="translate(1205.9351,-1842.457)"
+     inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3114-4"
+       y="-1902.3409"
+       x="-1528.7421"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="-1902.3409"
+         x="-1528.7421"
+         id="tspan3116-9"
+         sodipodi:role="line">1. es wird ein <tspan
+   id="tspan3159-6"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Kreuz</tspan> in der Mitte des Bildschirms angezeigt.</tspan><tspan
+         id="tspan3118-3"
+         y="-1852.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Bitte dieses Kreuz <tspan
+   id="tspan3161-7"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">fixieren</tspan>.</tspan><tspan
+         id="tspan3120-8"
+         y="-1802.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3122-8"
+         y="-1752.3409"
+         x="-1528.7421"
+         sodipodi:role="line">2. eine der Formen wird angezeigt</tspan><tspan
+         id="tspan3124-2"
+         y="-1702.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3126-9"
+         y="-1652.3409"
+         x="-1528.7421"
+         sodipodi:role="line">3. nach dem Verschwinden der Form ist es deine Aufgabe zu <tspan
+   id="tspan3163-13"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">beurteilen</tspan>, </tspan><tspan
+         y="-1602.3409"
+         x="-1528.7421"
+         sodipodi:role="line"
+         id="tspan4937-5">wie <tspan
+   id="tspan3169-9"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">eckig/rund </tspan>dir das Dargestellte erscheint.</tspan><tspan
+         id="tspan3130-8"
+         y="-1552.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Benutze dafür die Taste 1 (<tspan
+   id="tspan3165-4"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">eckig</tspan>) bis 7 (<tspan
+   id="tspan3167-0"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">rund</tspan>) der Buttonbox.</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="translate(-233.87797,-914.43747)"
+       id="g4875-76">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="m -1581.7901,-992.39506 3.0864,381.17284"
+         id="path3182-3"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend)"
+         d="m -1578.7037,-591.16049 c -54.0774,148.05988 -47.2455,-723.95731 -1.5432,-413.58021"
+         id="path4396-6"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="translate(-196.41854,-952.38165)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       id="g4885-1">
+      <text
+         xml:space="preserve"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono Bold"
+         x="-1577.1733"
+         y="-668.79871"
+         id="text2991-5"
+         sodipodi:linespacing="125%"
+         inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"><tspan
+           sodipodi:role="line"
+           id="tspan2993-4"
+           x="-1577.1733"
+           y="-668.79871"
+           style="font-size:16px">eckig 1-2-3-4-5-6-7 rund</tspan></text>
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-4-2"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(0.19331446,0,0,0.21311741,-1530.4131,-893.51043)" />
+      <g
+         id="g4863-0"
+         transform="matrix(0.23992468,0,0,0.23992468,-1492.5615,-550.27782)"
+         style="stroke-width:20.83987427;stroke-miterlimit:4;stroke-dasharray:none">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-9"
+           d="m 126.54321,-1794.8642 0,253.0864"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-1-7"
+           d="M 8.5185185e-6,-1668.321 253.08641,-1668.321"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+  </g>
+  <rect
+     style="opacity:0.45416667;fill:#b3b3b3;stroke:none"
+     id="rect2991-0"
+     width="1680"
+     height="1050"
+     x="-3043.7036"
+     y="-91.469139"
+     inkscape:export-filename="D:\OCoctave\text\INSrund-eckig.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-2203.5181"
+     y="686.92596"
+     id="text3145-1"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\INSrund-eckig.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3147-657"
+       x="-2203.5181"
+       y="686.92596"
+       style="text-align:center;text-anchor:middle">Bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3173-5">präge</tspan> dir die Skala gut ein, da sie im weiteren Experiment nicht mehr angezeigt wird!</tspan><tspan
+       sodipodi:role="line"
+       x="-2203.5181"
+       y="736.92596"
+       id="tspan3149-41"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-2197.9712"
+       y="786.92596"
+       style="text-align:center;text-anchor:middle"
+       id="tspan4932-20">Um den Experimentblock zu starten bitte eine <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3178-01">Taste drücken! </tspan></tspan><tspan
+       sodipodi:role="line"
+       x="-2203.5181"
+       y="836.92596"
+       id="tspan3153-4"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-2203.5181"
+       y="886.92596"
+       id="tspan3155-6"
+       style="text-align:center;text-anchor:middle">Nach dem Experimentblock wird die nächste Instruktion angezeigt;</tspan><tspan
+       sodipodi:role="line"
+       x="-2203.5181"
+       y="936.92596"
+       id="tspan3157-0"
+       style="text-align:center;text-anchor:middle"> hier hast du wieder Zeit eine Pause einzulegen.</tspan></text>
+  <g
+     id="g4920-7"
+     transform="translate(-1299.3253,1519.2503)"
+     inkscape:export-filename="D:\OCoctave\text\INSrund-eckig.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3137-1"
+       y="-1563.87"
+       x="-904.5152"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="text-align:center;text-anchor:middle"
+         y="-1563.87"
+         x="-904.5152"
+         id="tspan3139-7"
+         sodipodi:role="line">Im folgenden wird es um diese drei Formen gehen:</tspan><tspan
+         id="tspan4809-77"
+         style="text-align:center;text-anchor:middle"
+         y="-1513.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="text-align:center;text-anchor:middle"
+         id="tspan3141-7"
+         y="-1463.87"
+         x="-904.5152"
+         sodipodi:role="line" /><tspan
+         style="font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold"
+         y="-1413.87"
+         x="-904.5152"
+         sodipodi:role="line"
+         id="tspan4945-3">Ablauf:</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="matrix(0.18913016,0,0,0.18913016,-812.19482,-848.59056)"
+       id="g4802-3">
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-5"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(1.0221239,0,0,1.1268293,-1228.0723,-3796.6838)" />
+      <path
+         id="path3782-9"
+         d="m -652.40854,-3297.2286 330,0 -165.00001,-285.7883 -164.99999,285.7883 z"
+         style="fill:#808080"
+         inkscape:label="Triangle"
+         inkscape:connector-curvature="0" />
+      <rect
+         style="fill:#808080;fill-opacity:1"
+         id="rect3844-9"
+         width="330"
+         height="330"
+         x="-272.40854"
+         y="-3605.123" />
+    </g>
+  </g>
+  <g
+     id="g4893-81"
+     transform="translate(-1158.2624,2120.506)"
+     inkscape:export-filename="D:\OCoctave\text\INSrund-eckig.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       sodipodi:linespacing="125%"
+       id="text3114-8"
+       y="-1902.3409"
+       x="-1528.7421"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="-1902.3409"
+         x="-1528.7421"
+         id="tspan3116-2"
+         sodipodi:role="line">1. es wird ein <tspan
+   id="tspan3159-66"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Kreuz</tspan> in der Mitte des Bildschirms angezeigt.</tspan><tspan
+         id="tspan3118-0"
+         y="-1852.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Bitte dieses Kreuz <tspan
+   id="tspan3161-3"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">fixieren</tspan>.</tspan><tspan
+         id="tspan3120-80"
+         y="-1802.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3122-1"
+         y="-1752.3409"
+         x="-1528.7421"
+         sodipodi:role="line">2. eine der Formen wird angezeigt</tspan><tspan
+         id="tspan3124-25"
+         y="-1702.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3126-0"
+         y="-1652.3409"
+         x="-1528.7421"
+         sodipodi:role="line">3. nach dem Verschwinden der Form ist es deine Aufgabe zu <tspan
+   id="tspan3163-9"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">beurteilen</tspan>, </tspan><tspan
+         y="-1602.3409"
+         x="-1528.7421"
+         sodipodi:role="line"
+         id="tspan4937-4">wie <tspan
+   id="tspan3169-7"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">rund/eckig </tspan>dir das Dargestellte erscheint.</tspan><tspan
+         id="tspan3130-83"
+         y="-1552.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Benutze dafür die Taste 1 (<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan5403">rund</tspan>) bis 7 (<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan5401">eckig</tspan>) der Buttonbox.</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       transform="translate(-233.87797,-914.43747)"
+       id="g4875-2">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="m -1581.7901,-992.39506 3.0864,381.17284"
+         id="path3182-0"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend)"
+         d="m -1578.7037,-591.16049 c -54.0774,148.05988 -47.2455,-723.95731 -1.5432,-413.58021"
+         id="path4396-1"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="translate(-196.41854,-952.38165)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="D:\OCoctave\text\instructionE-R.png"
+       id="g4885-6">
+      <text
+         xml:space="preserve"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono Bold"
+         x="-1577.1733"
+         y="-668.79871"
+         id="text2991-4"
+         sodipodi:linespacing="125%"
+         inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"><tspan
+           sodipodi:role="line"
+           id="tspan2993-0"
+           x="-1577.1733"
+           y="-668.79871"
+           style="font-size:16px">rund 1-2-3-4-5-6-7 eckig</tspan></text>
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-4-6"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(0.19331446,0,0,0.21311741,-1530.4131,-893.51043)" />
+      <g
+         id="g4863-1"
+         transform="matrix(0.23992468,0,0,0.23992468,-1492.5615,-550.27782)"
+         style="stroke-width:20.83987427;stroke-miterlimit:4;stroke-dasharray:none">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-8"
+           d="m 126.54321,-1794.8642 0,253.0864"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-1-9"
+           d="M 8.5185185e-6,-1668.321 253.08641,-1668.321"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-988.19263"
+     y="-1581.4542"
+     id="text5405"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\RATeckig-rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan5407"
+       x="-988.19263"
+       y="-1581.4542"
+       style="font-size:64px;fill:#000000"><tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold;fill:#000000"
+   id="tspan5409">eckig</tspan>   1 -- 2 -- 3 -- 4 -- 5 -- 6 -- 7    <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold;fill:#000000"
+   id="tspan5411">rund</tspan></tspan></text>
+  <rect
+     style="opacity:0.45416666999999999;fill:none;stroke:none"
+     id="rect2991-1-8"
+     width="1680"
+     height="350"
+     x="-1254.6614"
+     y="-1481.9769"
+     inkscape:export-filename="D:\OCoctave\text\RATrund-eckig.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-989.27075"
+     y="-1171.962"
+     id="text5405-4"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\RATrund-eckig.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan5407-1"
+       x="-989.27075"
+       y="-1171.962"
+       style="font-size:64px;fill:#000000"><tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold;fill:#000000"
+   id="tspan5445">rund </tspan>   1 -- 2 -- 3 -- 4 -- 5 -- 6 -- 7   <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold;fill:#000000"
+   id="tspan5443">eckig</tspan></tspan></text>
+  <rect
+     style="opacity:0.45416666999999999;fill:#cccccc;stroke:none"
+     id="rect2991-1-8-9"
+     width="1680"
+     height="350"
+     x="-1254.6614"
+     y="-1058.5857"
+     inkscape:export-filename="D:\OCoctave\text\RATlinks-rechts.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#cccccc;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-997.14575"
+     y="-748.5708"
+     id="text5405-4-8"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="D:\OCoctave\text\RATlinks-rechts.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan5407-1-8"
+       x="-997.14575"
+       y="-748.5708"
+       style="font-size:64px;fill:#cccccc"><tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold;fill:#cccccc"
+   id="tspan5477">links</tspan>   1 -- 2 -- 3 -- 4 -- 5 -- 6 -- 7   <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold;fill:#cccccc"
+   id="tspan5479">rechts</tspan></tspan></text>
+</svg>
