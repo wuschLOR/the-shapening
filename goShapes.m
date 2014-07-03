@@ -275,6 +275,7 @@ endif
     def(BQA).stimImgInfo       = makeTexFromInfo (windowPtr , def(BQA).stimImgInfo    );
     def(BQA).ratingInfo        = makeTexFromInfo (windowPtr , def(BQA).ratingInfo     );
     def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
+	
 
 %% version a und b generieren
 %initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
@@ -282,8 +283,8 @@ endif
     helpNORMAL  =  zeros (STIMQA , 1)+1;
     helpSCATTER =  zeros (STIMQA , 1)+2;
 
-      schinkenfix = floor(STIMQA/4);
-      schinken = schinkenfix;
+    schinkenfix = floor(STIMQA/4);
+    schinken = schinkenfix;
     do
       helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
       schinken = schinken + schinkenfix;
@@ -301,7 +302,7 @@ endif
     for TTT=1:length(def(BQA).randColTex)
       def(BQA).RstimImgInfo(TTT) = def(BQA).stimImgInfo( def(BQA).randColTex(TTT,:) );
     endfor
-    
+    def(BQA).ratingVanish      = length(def(BQA).stimImgInfo) / 100 * def(BQA).ratingCovering ;
   endfor
 
 
@@ -529,7 +530,7 @@ endswitch
         timeStamp.flipPre = lastFLIP;
       
       # STIMULUS
-      Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL).texture , [] , def(WHATBL).finRect(INBL,1){} );
+        Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL).texture , [] , def(WHATBL).finRect(INBL,1){} );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFLIP + def(WHATBL).zeitStimuli + korr(K).stimulus;
@@ -544,7 +545,10 @@ endswitch
         timeStamp.flipAfter = lastFLIP;
 
       # RATING
+	    if INBL<def(WHATBL).ratingVanish
         Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{});
+		# hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
+		endif
 
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
