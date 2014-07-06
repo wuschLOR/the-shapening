@@ -1,3 +1,4 @@
-blockNumber;blockName;instructionFolder;instructionFile;ratingFolder;ratingFile;ratingCovering;stimImgFolder;stimImgType;zeitFixcross;zeitPrepause;zeitStimuli;zeitAfterpause;zeitRating;zeitBetweenpause
-1;rund_eckig;instructions;INSrund-eckig.png;rating;RATrund-eckig.png;5;stimulus;png;80;80;160;0;3000;500
-2;links_rechts;instructions;INSlinks-rechts.png;rating;RATlinks-rechts.png;5;stimulus;png;80;80;160;0;3000;500
+blockPosFix;blockNumber;blockName;instructionFolder;instructionFile;ratingFolder;ratingFile;ratingCovering;stimImgFolder;stimImgType;zeitFixcross;zeitPrepause;zeitStimuli;zeitAfterpause;zeitRating;zeitBetweenpause
+fix;0;übung;instructions;instructions.png;rating;RATrund-eckig.png;100;stimulus;png;80;80;160;0;3000;500
+rand;1;rund_eckig;instructions;INSrund-eckig.png;rating;RATrund-eckig.png;0;stimulus;png;80;80;160;0;3000;500
+rand;2;links_rechts;instructions;INSlinks-rechts.png;rating;RATlinks-rechts.png;0;stimulus;png;80;80;160;0;3000;500

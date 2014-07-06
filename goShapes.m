@@ -231,11 +231,41 @@ endif
 
   BLOCKS = length(def)
 
-% Blöcke randomisieren
-  rand('state' , nextSeed)
-  newSequence = randperm( length(def) );
+  # die hauteigenschaft fix oder nicht fixer block 
   for i=1:BLOCKS
-      def(:,:) = def(newSequence);
+    if strcmp(def(i).blockPosFix , 'fix')
+      def(i).blockPosFix = true;
+      else
+      def(i).blockPosFix = false;
+    endif
+  endfor
+
+%  --------------------------------------------------------------------------  %
+%%  Blöcke randomisieren.
+  RND=0
+
+  for i=1:BLOCKS
+    if ~def(i).blockPosFix == true
+      ++RND
+    endif #  wie viele nichtfixe blöcke müssen randomisiert werden
+  endfor
+  
+  rand('state' , nextSeed) # random setzen
+  RNDSequence = randperm(RND);
+
+  RND=0
+  for i=1:BLOCKS
+    if def(i).blockPosFix == true
+      newSequence(i) = i
+      ++RNDSequence
+    else
+      ++RND
+      newSequence(i) = RNDSequence(RND)
+    endif
+  endfor
+
+  for i=1:BLOCKS
+    def(:,:) = def(newSequence);
   endfor
 
 # def =
@@ -545,10 +575,10 @@ endswitch
         timeStamp.flipAfter = lastFLIP;
 
       # RATING
-	    if INBL<def(WHATBL).ratingVanish
-        Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{});
-		# hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
-		endif
+        if INBL<def(WHATBL).ratingVanish
+          Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{} ,[], [], [], [255 255 255 0]);
+          # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
+        endif
 
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
