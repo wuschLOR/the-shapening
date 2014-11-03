@@ -50,7 +50,7 @@ endif
 %
 %  ----------------------------------------------------------------------------
 %  History
-%  2014-06-XX mg  written
+%  2014-10-31 mg  written
 %  ----------------------------------------------------------------------------
 
 
@@ -150,7 +150,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 # Auflösungen:
 #  Vanilla
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID );
+  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
@@ -159,8 +159,8 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 #  Windowed
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
-%     [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-  [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
+#  [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
 
 
   HideCursor(screenID)
