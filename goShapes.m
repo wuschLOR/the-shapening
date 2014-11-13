@@ -155,7 +155,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 # Auflösungen:
 #  Vanilla
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID );
+  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
@@ -173,6 +173,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
     case true
       [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
   endswitch
+
 
 
   HideCursor(screenID)
