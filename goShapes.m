@@ -13,26 +13,26 @@ endif
  if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
 
 
-%% [ finalMsg ] = goDummy ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
+%% [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
 %  ----------------------------------------------------------------------------
 %  Input:
 %
 %    vpNummer      = 001 (default)
-%        Number of the participant. IMPRTANT this must be a number, because the
+%        Number of the participant. IMPORTANT this must be a number, because the
 %        random seed is generated with this variable.
 %
 %    outputFileStr = 'xkcd' (default)
-%        String variable that is added to the outputfile name
+%        String variable that is added to the output file name
 %        e.g. [experimentName 001 outputFileStr]
 %
 %    buttonBoxON   = false (default)
 %        false == use the keyboard to get the rating input
-%        true  == use a buttonbox
+%        true  == use a button-box
 %
-%    debugEnabled  = false (default)
+%    debugEnabled  = true (default)
 %        false == all error messages are suppressed
-%        true  == error messages are poping up and the paths for the output is
-%                 changed to hold the timestamp for maximum output ;)
+%        true  == error messages are popping up and the paths for the output is
+%                 changed to hold the time stamp for maximum output ;)
 %
 %  ----------------------------------------------------------------------------
 %  Output:
@@ -50,7 +50,7 @@ endif
 %
 %  ----------------------------------------------------------------------------
 %  History
-%  2014-06-XX mg  written
+%  2014-11-13 mg  written
 %  ----------------------------------------------------------------------------
 
 
@@ -61,7 +61,11 @@ endif
 %  issue an error message if someone tries to execute this script on a computer
 %  without an OpenGL Psychtoolbox
 
-    AssertOpenGL;
+   AssertOpenGL;
+%  --------------------------------------------------------------------------  %   
+%% disable  -- less -- (f)orward, (b)ack, (q)uit 
+% http://octave.1599824.n4.nabble.com/Ending-a-script-without-restarting-Octave-td4661395.html
+  more off
 
 %  --------------------------------------------------------------------------  %
 %% change error levels of the PTB
@@ -114,7 +118,7 @@ endif
   nextSeed = vpNummer % nextSeed wird für für alle random funktionen benutzt
 
 %  --------------------------------------------------------------------------  %
-%%  disable random input tothe console
+%%  disable random input to the console
 
 %    ListenChar(2)
 
@@ -129,11 +133,12 @@ endif
 
 
 %  --------------------------------------------------------------------------  %
-%% Tasten festlegen
+%% Tasten festlegen 
+% glaub das kann raus
 
 KbName('UnifyKeyNames'); %keine ahnung warum oder was das macht aber
 
-keyEscape = KbName('escape');
+keyEscape  = KbName('escape');
 keyConfirm = KbName ('Return');
 
 %  --------------------------------------------------------------------------  %
@@ -159,8 +164,15 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 #  Windowed
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
-%     [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-  [windowPtr,rect.root] = Screen('OpenWindow', screenID , [] , [20 20 600 337]); # 16:9
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
+#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+
+  switch debugEnabled
+    case false
+      [windowPtr,rect.root] = Screen('OpenWindow', screenID );
+    case true
+      [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+  endswitch
 
 
   HideCursor(screenID)
@@ -170,7 +182,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 if buttonBoxON == true
   [handle , BBworking ] = initCedrusUSBLinux
-  buttonBoxON = BBworking % change the state of buttonBoxON to true or false depending on if the init was sucessfull
+  buttonBoxON = BBworking % change the state of buttonBoxON to true or false depending on if the initiation was successful
 endif
 
 %  --------------------------------------------------------------------------  %
@@ -511,6 +523,7 @@ endswitch
 %  --------------------------------------------------------------------------  %
 # MAINPART: THE MIGHTY EXPERIMENT
 %  --------------------------------------------------------------------------  %
+
   superIndex = 0; % index über alle Durchläufe hinweg
   
   for WHATBL=1:BLOCKS  % für alle definierten Blöcke
@@ -518,11 +531,21 @@ endswitch
     Screen( 'DrawTexture' , windowPtr , def(WHATBL).instructionInfo.texture , [] , def(WHATBL).finRectInstructions{});
     Screen('Flip', windowPtr);
     
+    pause(10)
+    
     instruTime= GetSecs+3600; # eine stunde
     switch buttonBoxON
       case false #  tastatur
-        getRating (instruTime);
+        getRatingSpace (instruTime);
+        getRatingSpace (instruTime);
+        getRatingSpace (instruTime);
+        getRatingSpace (instruTime);
+        getRatingSpace (instruTime);
       case true  #  buttonbox
+        getRatingCedrus (handle , instruTime);
+        getRatingCedrus (handle , instruTime);
+        getRatingCedrus (handle , instruTime);
+        getRatingCedrus (handle , instruTime);
         getRatingCedrus (handle , instruTime);
       otherwise
         error ('critical error - this should not happen');
@@ -590,7 +613,7 @@ endswitch
       % reaktionszeit abgreifen
       switch buttonBoxON
         case false #tastatur
-          [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRating (nextFlip);
+          [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRating7 (nextFlip);
         case true #buttonbox
           [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRatingCedrus (handle , nextFlip);
         otherwise #wtf
@@ -716,7 +739,7 @@ endfor
   Screen('closeall')
 
   try
-  CedrusResponseBox('CloseAll');
+    CedrusResponseBox('CloseAll');
   end
 
   finalMsg = 'geschafft'
