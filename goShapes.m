@@ -155,7 +155,7 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 
 # Auflösungen:
 #  Vanilla
-  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
+#  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
@@ -320,7 +320,7 @@ endif
     def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
 	
 
-%% version a und b generieren
+% version a und b generieren
 %initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
     STIMQA= length(def(BQA).stimImgInfo); % wie viele Spalten hat stimImgInfo (so viele wie es stimulus im ordner gibt)
     helpNORMAL  =  zeros (STIMQA , 1)+1;
@@ -354,7 +354,7 @@ endif
 # %%  einlesen der Ordner:
 # 
 #   logoImgInfo   = getFileInfo( 'startup' , 'startupscreen.png' );
-# 
+ 
 
 %  --------------------------------------------------------------------------  %
 %% Positionen für 16 :9 Auflösung (300 px felder für )
@@ -527,43 +527,36 @@ endswitch
 
   superIndex = 0; % index über alle Durchläufe hinweg
   
-  for WHATBL=1:BLOCKS  % für alle definierten Blöcke
-
-    Screen( 'DrawTexture' , windowPtr , def(WHATBL).instructionInfo.texture , [] , def(WHATBL).finRectInstructions{});
-    Screen('Flip', windowPtr);
-    
-    pause(10)
-    
+  for WHATBLOCK=1:BLOCKS  % für alle definierten Blöcke
     instruTime= GetSecs+3600; # eine stunde
-    switch buttonBoxON
-      case false #  tastatur
-        getRatingSpace (instruTime);
-        getRatingSpace (instruTime);
-        getRatingSpace (instruTime);
-        getRatingSpace (instruTime);
-        getRatingSpace (instruTime);
-      case true  #  buttonbox
-        getRatingCedrus (handle , instruTime);
-        getRatingCedrus (handle , instruTime);
-        getRatingCedrus (handle , instruTime);
-        getRatingCedrus (handle , instruTime);
-        getRatingCedrus (handle , instruTime);
-      otherwise
-        error ('critical error - this should not happen');
-    endswitch
-
-    m = length(def(WHATBL).RstimImgInfo);
+    for i=1:2
+      Screen('DrawText'    , windowPtr , int2str(i) , 50 , 50)
+      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).finRectInstructions{});
+      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).finRectRating{}      );
+      Screen('Flip', windowPtr);
+      
+      switch buttonBoxON
+        case false #  tastatur
+            getRatingSpace (instruTime);
+        case true  #  buttonbox
+          getRatingCedrus (handle , instruTime);
+        otherwise
+          error ('critical error - this should not happen');
+      endswitch
+      
+    endfor
+    m = length(def(WHATBLOCK).RstimImgInfo);
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
 
     nextFlip = 0;
 
-    for INBL = 1:m
+    for INBLOCK = 1:m
       ++superIndex;
       
       # PAUSE BETWEEN
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
-        nextFlip = lastFLIP + def(WHATBL).zeitBetweenpause + korr(K).betweenpause ;  # next flip
+        nextFlip = lastFLIP + def(WHATBLOCK).zeitBetweenpause + korr(K).betweenpause ;  # next flip
        
         timeStamp.flipBetween = lastFLIP;
       
@@ -571,7 +564,7 @@ endswitch
         drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitFixcross + korr(K).fixcross;
+        nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcross + korr(K).fixcross;
         
         timeStamp.flipFix = lastFLIP;
 
@@ -579,34 +572,34 @@ endswitch
       # PAUSE PRE
       #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitPrepause + korr(K).prepause;
+        nextFlip = lastFLIP + def(WHATBLOCK).zeitPrepause + korr(K).prepause;
         
         timeStamp.flipPre = lastFLIP;
       
       # STIMULUS
-        Screen('DrawTexture', windowPtr, def(WHATBL).RstimImgInfo(INBL).texture , [] , def(WHATBL).finRect(INBL,1){} );
+        Screen('DrawTexture', windowPtr, def(WHATBLOCK).RstimImgInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitStimuli + korr(K).stimulus;
+        nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli + korr(K).stimulus;
 
         timeStamp.flipStim = lastFLIP;
  
       # PAUSE AFTER
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitAfterpause + korr(K).afterpause;
+        nextFlip = lastFLIP + def(WHATBLOCK).zeitAfterpause + korr(K).afterpause;
 
         timeStamp.flipAfter = lastFLIP;
 
       # RATING
-        if INBL<def(WHATBL).ratingVanish
-          Screen( 'DrawTexture' , windowPtr , def(WHATBL).ratingInfo.texture , [] , def(WHATBL).finRectRating{} ,[], [], [], [255 255 255 0]);
+        if INBLOCK< def(WHATBLOCK).ratingVanish
+          Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).finRectRating{} ,[], [], [], [255 255 255 0]);
           # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
         endif
 
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBL).zeitRating + korr(K).rating;
+        nextFlip = lastFLIP + def(WHATBLOCK).zeitRating + korr(K).rating;
 
         timeStamp.flipRating = lastFLIP;
         
@@ -639,14 +632,14 @@ endswitch
         case true
         
           #  neuer wert     =   sollwert - ((sollwert + istwert)/2)
-          korr(K).fixcross     = def(WHATBL).zeitFixcross     - ((def(WHATBL).zeitFixcross     + dauer.fixcross     )/2);
-          korr(K).prepause     = def(WHATBL).zeitPrepause     - ((def(WHATBL).zeitPrepause     + dauer.prepause     )/2);
-          korr(K).stimulus     = def(WHATBL).zeitStimuli      - ((def(WHATBL).zeitStimuli      + dauer.stimulus     )/2);
-          korr(K).afterpause   = def(WHATBL).zeitAfterpause   - ((def(WHATBL).zeitAfterpause   + dauer.afterpause   )/2);
+          korr(K).fixcross     = def(WHATBLOCK).zeitFixcross     - ((def(WHATBLOCK).zeitFixcross     + dauer.fixcross     )/2);
+          korr(K).prepause     = def(WHATBLOCK).zeitPrepause     - ((def(WHATBLOCK).zeitPrepause     + dauer.prepause     )/2);
+          korr(K).stimulus     = def(WHATBLOCK).zeitStimuli      - ((def(WHATBLOCK).zeitStimuli      + dauer.stimulus     )/2);
+          korr(K).afterpause   = def(WHATBLOCK).zeitAfterpause   - ((def(WHATBLOCK).zeitAfterpause   + dauer.afterpause   )/2);
           if strcmp (pressedButtonStr , 'FAIL') # springt nur an wenn keine Taste gedrückt wurde weil
-            korr(K).rating       = def(WHATBL).zeitRating       - ((def(WHATBL).zeitRating       + dauer.rating       )/2); #  will ich das ????
+            korr(K).rating       = def(WHATBLOCK).zeitRating       - ((def(WHATBLOCK).zeitRating       + dauer.rating       )/2); #  will ich das ????
           endif
-          korr(K).betweenpause = def(WHATBL).zeitBetweenpause - ((def(WHATBL).zeitBetweenpause + dauer.betweenpause )/2)
+          korr(K).betweenpause = def(WHATBLOCK).zeitBetweenpause - ((def(WHATBLOCK).zeitBetweenpause + dauer.betweenpause )/2)
           
           #  schreiben des neuen setting files
           KORRcellNewLine =     { ...
@@ -668,47 +661,47 @@ endswitch
       %    dem outputfile werte zuweisen
       OUThead        =       { ...
         'vpNummer'           , ...
-        'BunusString'        , ...
-        'Index'              , ...
-        'BlockIndex'         , ...
-        'BlockBeschreibung'  , ...
-        'Stimulus'           , ...
-        'KeyString'          , ...
-        'KeyValue'           , ...
-        'Reaktion Stim ON'   , ...
-        'Reaktion Stim OFF'  , ...
-        'DauerBetween'       , ...
-        'DauerFix'           , ...
-        'DauerPre'           , ...
-        'DauerStim'          , ...
-        'DauerAfter'         , ...
-        'DauerRating'        };
+        'vpCode'        , ...
+        'index'              , ...
+        'blockIndex'         , ...
+        'blockBeschreibung'  , ...
+        'stimulus'           , ...
+        'keyString'          , ...
+        'keyValue'           , ...
+        'reaktionStimON'   , ...
+        'ReaktionStimOFF'  , ...
+        'dauerBetween'       , ...
+        'dauerFix'           , ...
+        'dauerPre'           , ...
+        'dauerStim'          , ...
+        'dauerAfter'         , ...
+        'dauerRating'        };
 
-      OUTcell(superIndex,:) =                { ...
-        vpNummer                             , ...
-        outputFileStr                        , ...
-        num2str(superIndex)                  , ...
-        num2str(INBL)                        , ...
-        def(WHATBL).blockName                , ...
-        def(WHATBL).RstimImgInfo(INBL).name  , ...
-        pressedButtonStr                     , ...
-        pressedButtonValue                   , ...
-        dauer.reactionTimeStimON             , ...
-        dauer.reactionTimeStimOFF            , ...
-        dauer.betweenpause                   , ...
-        dauer.fixcross                       , ...
-        dauer.prepause                       , ...
-        dauer.stimulus                       , ...
-        dauer.afterpause                     , ...
-        dauer.rating                         };
+      OUTcell(superIndex,:) =                      { ...
+        vpNummer                                   , ...
+        outputFileStr                              , ...
+        num2str(superIndex)                        , ...
+        num2str(INBLOCK)                           , ...
+        def(WHATBLOCK).blockName                   , ...
+        def(WHATBLOCK).RstimImgInfo(INBLOCK).name  , ...
+        pressedButtonStr                           , ...
+        pressedButtonValue                         , ...
+        dauer.reactionTimeStimON                   , ...
+        dauer.reactionTimeStimOFF                  , ...
+        dauer.betweenpause                         , ...
+        dauer.fixcross                             , ...
+        dauer.prepause                             , ...
+        dauer.stimulus                             , ...
+        dauer.afterpause                           , ...
+        dauer.rating                               };
 
       % attatch names to the OUTcell
-      OUTcellFin= [OUThead ; OUTcell];
+      OUTcellFin = [OUThead ; OUTcell];
       %  speicherndes output files
       cell2csv ( fileNameOutput , OUTcellFin, ';');
 
     endfor
-endfor
+  endfor
 
 %  --------------------------------------------------------------------------  %
 # MAINPART: THE MIGHTY EXPERIMENT IS OVER HOPE YOU DID GREAT
