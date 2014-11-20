@@ -531,6 +531,7 @@ endswitch
     instruTime= GetSecs+3600; # eine stunde
       Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).finRectInstructions{});
       Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).finRectRating{}      );
+      Screen('Flip', windowPtr);
       WaitSecs(10)
     for i=1:2
       Screen('DrawText'    , windowPtr , int2str(i) , 50 , 50)
