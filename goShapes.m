@@ -9,8 +9,8 @@ endif
 
  if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
  if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
- if isempty(buttonBoxON)   ;  buttonBoxON   = false  ; endif
- if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
+ if isempty(buttonBoxON)   ;  buttonBoxON   = true   ; endif
+ if isempty(debugEnabled)  ;  debugEnabled  = false  ; endif
 
 
 %% [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
@@ -25,11 +25,11 @@ endif
 %        String variable that is added to the output file name
 %        e.g. [experimentName 001 outputFileStr]
 %
-%    buttonBoxON   = false (default)
+%    buttonBoxON   = true (default)
 %        false == use the keyboard to get the rating input
 %        true  == use a button-box
 %
-%    debugEnabled  = true (default)
+%    debugEnabled  = false (default)
 %        false == all error messages are suppressed
 %        true  == error messages are popping up and the paths for the output is
 %                 changed to hold the time stamp for maximum output ;)
