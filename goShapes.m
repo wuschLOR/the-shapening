@@ -206,7 +206,7 @@ endif
 
 %  --------------------------------------------------------------------------  %
 %%  korrekturwerte einlesen
-  rawCorrectCell = csv2cell( 'corrector.csv' , ';');
+  rawCorrectCell = csv2cell( 'corrector.csv' , ',');
 
   correctHead     = rawCorrectCell(1     , :); #  zerlegten der Correct in den correctHead
   correctBody     = rawCorrectCell(2:end , :); #  und dem inhaltlichen correctBody
@@ -233,7 +233,7 @@ endif
   
 %  --------------------------------------------------------------------------  %
 %%  settings einlesen
-  rawSettingsCell = csv2cell( 'settings.csv' , ';');
+  rawSettingsCell = csv2cell( 'settings.csv' , ',');
 
   settingsHead     = rawSettingsCell(1     , :); #  zerlegten der Settings in den settingsHeader
   settingsBody     = rawSettingsCell(2:end , :); #  und dem inhaltlichen settingsBody
@@ -656,7 +656,7 @@ endswitch
           korr(K).betweenpause  , ...
                                 };
           KORRcellfin = [rawCorrectCell ; KORRcellNewLine ];
-          cell2csv ( 'corrector.csv' , KORRcellfin, ';');
+          cell2csv ( 'corrector.csv' , KORRcellfin, ',');
 
         case false
         #  keine neuen korrekturwerte
@@ -702,7 +702,7 @@ endswitch
       % attatch names to the OUTcell
       OUTcellFin = [OUThead ; OUTcell];
       %  speicherndes output files
-      cell2csv ( fileNameOutput , OUTcellFin, ';');
+      cell2csv ( fileNameOutput , OUTcellFin, ',');
 
     endfor
   endfor
@@ -724,7 +724,7 @@ endswitch
   OUTcellFin= [OUThead ; OUTcell]
 
   %  speicherndes output files
-  cell2csv ( fileNameOutput , OUTcellFin, ';')
+  cell2csv ( fileNameOutput , OUTcellFin, ',')
 
 
   diary off
