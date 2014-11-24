@@ -52,6 +52,10 @@ endif
 %  History
 %  2014-11-13 mg  written
 %  ----------------------------------------------------------------------------
+#  TODO
+#  [ ] add check if awesomeStuff is poperly installed 
+#
+################################################################################
 
 
 %  --------------------------------------------------------------------------  %
@@ -60,13 +64,17 @@ endif
 %  versions of the Psychtoolbox. The Psychtoolbox command AssertPsychOpenGL will
 %  issue an error message if someone tries to execute this script on a computer
 %  without an OpenGL Psychtoolbox
-
    AssertOpenGL;
+   
 %  --------------------------------------------------------------------------  %   
 %% disable  -- less -- (f)orward, (b)ack, (q)uit 
 % http://octave.1599824.n4.nabble.com/Ending-a-script-without-restarting-Octave-td4661395.html
   more off
 
+%  --------------------------------------------------------------------------  %   
+%% long format output 
+  format long
+  
 %  --------------------------------------------------------------------------  %
 %% change error levels of the PTB
 
@@ -136,16 +144,16 @@ endif
 %% Tasten festlegen 
 % glaub das kann raus
 
-KbName('UnifyKeyNames'); %keine ahnung warum oder was das macht aber
+  KbName('UnifyKeyNames'); %keine ahnung warum oder was das macht aber
 
-keyEscape  = KbName('escape');
-keyConfirm = KbName ('Return');
+  keyEscape  = KbName('escape');
+  keyConfirm = KbName ('Return');
 
 %  --------------------------------------------------------------------------  %
 %%  init screen
 
-screenNumbers=Screen('Screens');
-screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
+  screenNumbers=Screen('Screens');
+  screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 %  screenID = 1; %benutzt den Bildschirm 1 bei Bedarf ändern
 
 %  öffnet den Screen
@@ -181,10 +189,10 @@ screenID = max(screenNumbers); % benutzt den Bildschirm mit der höchsten ID
 %  --------------------------------------------------------------------------  %
 %%  init buttonbox
 
-if buttonBoxON == true
-  [handle , BBworking ] = initCedrusUSBLinux
-  buttonBoxON = BBworking % change the state of buttonBoxON to true or false depending on if the initiation was successful
-endif
+  if buttonBoxON == true
+    [handle , BBworking ] = initCedrusUSBLinux
+    buttonBoxON = BBworking % change the state of buttonBoxON to true or false depending on if the initiation was successful
+  endif
 
 %  --------------------------------------------------------------------------  %
 %%  play around with the flip interval
@@ -349,13 +357,6 @@ endif
   endfor
 
 
-# 
-# %  --------------------------------------------------------------------------  %
-# %%  einlesen der Ordner:
-# 
-#   logoImgInfo   = getFileInfo( 'startup' , 'startupscreen.png' );
- 
-
 %  --------------------------------------------------------------------------  %
 %% Positionen für 16 :9 Auflösung (300 px felder für )
 %
@@ -455,39 +456,39 @@ endif
 
 %  --------------------------------------------------------------------------  %
 %% render testscreens
-switch debugEnabled
-  case true
+  switch debugEnabled
+    case true
 
-   infotainment(windowPtr , 'testscreen upcomming')
-      Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
-      Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
+     infotainment(windowPtr , 'testscreen upcomming')
+        Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
+        Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
 
-    Screen('Flip', windowPtr)
-      KbPressWait;
-    Screen('Flip', windowPtr)
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
 
-    infotainment(windowPtr , 'rating testscreen')
-      Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
+      infotainment(windowPtr , 'rating testscreen')
+        Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
 
-    Screen('Flip', windowPtr)
-      KbPressWait;
-    Screen('Flip', windowPtr)
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
 
-    infotainment(windowPtr , 'instructions testscreen')
-      Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
+      infotainment(windowPtr , 'instructions testscreen')
+        Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
 
-    Screen('Flip', windowPtr)
-      KbPressWait;
-    Screen('Flip', windowPtr)
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
 
-endswitch
+  endswitch
 
 
 %  --------------------------------------------------------------------------  %
