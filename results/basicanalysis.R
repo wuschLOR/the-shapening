@@ -1,11 +1,21 @@
 ###############################################################
-##                 Auswertung Shapening 1                    ##
+##           basic analyisys for the shapening               ##
+###############################################################
+#  History
+#  2014-11-25 mg  first commited version
+###############################################################
+#  TODO
+#  [ ] eckig-rund und rund-eckig vereinheitlichen 
+#  [ ] hypothehens integrieren
+#  [ ] Automatisches auswerfen der Plots
+#  [ ] aggregierung als Struktur machen 
+#  [ ] stimulus codierung zerlegen 
 ###############################################################
 
 # Workspace leeren
 rm(list = ls())
 
-# pfad setzen
+# pfad setzen optional wenn das rskript mit doppelkilck ausgeführt wurde 
 setwd("~/git/the-shapening/results/")
 
 ###############################################################
@@ -22,11 +32,11 @@ for (i in 1:length(csvlist)) {
   total= rbind (total , read.csv(csvlist[i]))
 }
 
-#remove the first row ith just NA in it with was created wenn initilizing total
+#remove the first row with just NA in it with was created wenn initilizing total
 total = total[-1,]
 
 ###############################################################
-
+# Missing values
 # missing values durck NA ersetzen 
 # für die Reaktopnszeiten
 total$reactionStimOFF[total$keyValue==9999] <- NA
@@ -38,10 +48,17 @@ total$keyValue[total$keyValue==9999] <- NA
 # hats funtioniert ?
 total$keyValue==9999
 
+################################################################
+# die stimulus codierunng zerlegen
+
+
+################################################################
+# Aggregation über die versuchspersonen 
 # aggVp anlegen für alle daten die über de versuchspersonen aggregiert werden
 aggVpvpNummer = unique(total$vpNummer)
 aggVpvpCode = unique(total$vpCode)
 
+###############################################################
 # aggShapes
 # agg
 
@@ -72,6 +89,9 @@ aggVpvpCode = unique(total$vpCode)
 
 
 
+
+###############################################################
+#plots
 
 plot (total$reactionStimOFF)
 
@@ -113,4 +133,7 @@ plot (total$keyValue [total$blockBeschreibung=='übung'])
 mean (total$dauerBetween)
 mean (total$dauerStim)
 
-
+######################################################################
+#citation
+x <- citation()
+toBibtex(x)

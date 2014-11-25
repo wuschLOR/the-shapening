@@ -50,7 +50,9 @@ endif
 %
 %  ----------------------------------------------------------------------------
 %  History
-%  2014-11-13 mg  written
+%  2014-11-25 mg  changed the workspace saving routine from default ascii to 
+%                 -binary to solve the loading problems with structures
+%  2014-11-23 mg  written
 %  ----------------------------------------------------------------------------
 #  TODO
 #  [ ] add check if awesomeStuff is poperly installed 
@@ -98,6 +100,7 @@ endif
       %  ~4) Be pretty verbose about information and hints to optimize your code and system.
       %  ~5) Levels 5 and higher enable very verbose debugging output, mostly useful for debugging PTB itself, not generally useful for end-users.
       vpNummerStr= num2str(vpNummer);
+      versionptb=Screen('Version') %% das als txt irgendwo ausgeben
 
     case true
 
@@ -177,9 +180,9 @@ endif
 
   switch debugEnabled
     case false
-      [windowPtr,rect.root] = Screen('OpenWindow', screenID );
+      [windowPtr,rect.root] = Screen('OpenWindow', screenID )
     case true
-      [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+      [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]) # 16:9
   endswitch
 
 
@@ -719,7 +722,7 @@ endif
 
 
   %  den workspace sichern (zur fehlersuche usw)
-  save (fileNameBackupWorkspace)
+  save ('-binary',fileNameBackupWorkspace)
 
   % attatch names to the OUTcell
   OUTcellFin= [OUThead ; OUTcell]
