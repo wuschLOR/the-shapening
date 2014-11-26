@@ -53,6 +53,10 @@ total$keyValue==9999
 
 
 ################################################################
+listvpNummer = unique(total$vpNummer)
+listvpCode  = unique(total$vpCode)
+
+################################################################
 # Aggregation über die versuchspersonen 
 # aggVp anlegen für alle daten die über de versuchspersonen aggregiert werden
 aggVpvpNummer = unique(total$vpNummer)
@@ -92,6 +96,16 @@ aggVpvpCode = unique(total$vpCode)
 
 ###############################################################
 #plots
+
+##reaktionszeiten 
+for(i in 1:length(listvpNummer)){
+  plot (  total$reactionStimOFF[total$vpNummer==listvpNummer[i]], col ='white')
+  lines ( total$reactionStimOFF[total$vpNummer==listvpNummer[i]], col ='red')
+}
+
+
+
+###############################################################
 
 plot (total$reactionStimOFF)
 

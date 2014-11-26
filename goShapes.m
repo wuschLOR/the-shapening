@@ -193,7 +193,7 @@ endif
 %%  init buttonbox
 
   if buttonBoxON == true
-    [handle , BBworking ] = initCedrusUSBLinux
+    [handle , BBworking ] = cedrusInitUSBLinux
     buttonBoxON = BBworking % change the state of buttonBoxON to true or false depending on if the initiation was successful
   endif
 
@@ -545,9 +545,9 @@ endif
       
       switch buttonBoxON
         case false #  tastatur
-            getRatingSpace (instruTime);
+          getRatingSpace (instruTime);
         case true  #  buttonbox
-          getRatingCedrus (handle , instruTime);
+          cedrusGetRating (handle , instruTime);
         otherwise
           error ('critical error - this should not happen');
       endswitch
@@ -617,7 +617,7 @@ endif
         case false #tastatur
           [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRating7 (nextFlip);
         case true #buttonbox
-          [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRatingCedrus (handle , nextFlip);
+          [pressedButtonTime , pressedButtonValue , pressedButtonStr] = cedrusGetRating (handle , nextFlip);
         otherwise #wtf
           error ('critical error - this should not happen');
       endswitch
@@ -676,8 +676,8 @@ endif
         'stimulus'           , ...
         'keyString'          , ...
         'keyValue'           , ...
-        'reaktionStimON'     , ...
-        'reaktionStimOFF'    , ...
+        'reactionStimON'     , ...
+        'reactionStimOFF'    , ...
         'dauerBetween'       , ...
         'dauerFix'           , ...
         'dauerPre'           , ...
