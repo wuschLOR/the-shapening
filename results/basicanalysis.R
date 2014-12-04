@@ -47,7 +47,11 @@ total$keyValue[total$keyValue==9999] <- NA
 
 # hats funtioniert ?
 total$keyValue==9999
+#sollte auch mit recode gehn
 
+
+# erster überblick
+summary(total)
 ################################################################
 # die stimulus codierunng zerlegen
 
@@ -151,3 +155,13 @@ mean (total$dauerStim)
 #citation
 x <- citation()
 toBibtex(x)
+
+
+
+
+##########################################################################
+#probestuff
+
+min(total$keyValue)
+max(total$keyValue)
+cut(total$keyValue)
