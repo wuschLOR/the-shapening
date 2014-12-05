@@ -69,6 +69,7 @@ bob_full = bob
 #Übung raus 
 bob = subset(bob, bob$blockBeschreibung != 'übung' )
 
+
 #################################################################
 # STRING stuff
 # http://gastonsanchez.com/blog/resources/how-to/2013/09/22/Handling-and-Processing-Strings-in-R.html
@@ -118,13 +119,21 @@ levels(bob$stimulus_str_splitWINKEL)    <- c( '000' , '045' , '090' , '135' , '1
 
 ################################################################
 # position nach foveal und nonfoveal sortieren
-bob$foveal_nonfoveal <- 
+f.nonfoveal <- function(x){
+  if(x==1){return('foveal')}
+  if(x>1){return('nonfoveal')}
+}
+f.nonfoveal(1)
+f.nonfoveal(2)
 
+bob$foveal_nonfoveal <- sapply(bob$stimPosition, f.nonfoveal)
+bob$foveal_nonfoveal <- as.factor(bob$foveal_nonfoveal)
 
 ################################################################
 #Sets aufteilen (vp rauswerfen :)
-subset 
+bob = subset(bob, bob$vpNummer>4)
 
+summary(bob)
 ################################################################
 listvpNummer = unique(bob$vpNummer)
 listvpCode  = unique(bob$vpCode)
