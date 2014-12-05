@@ -9,62 +9,131 @@
 #  [ ] hypothehens integrieren
 #  [ ] Automatisches auswerfen der Plots
 #  [ ] aggregierung als Struktur machen 
-#  [ ] stimulus codierung zerlegen 
+#  [X] stimulus codierung zerlegen und Factoren draus machen :)
 ###############################################################
 
 # Workspace leeren
 rm(list = ls())
 
 # pfad setzen optional wenn das rskript mit doppelkilck ausgeführt wurde 
-setwd("~/git/the-shapening/results/")
+setwd("~/forgeOC/EXPERIMENTE/003 Shapes1/dataplayground")
+#setwd("~/git/the-shapening/results/")
+
 
 ###############################################################
+# pakete installieren
 
+
+# pakete laden
+
+library(stringr)
+
+
+###############################################################
 # get list of all csv files 
 # http://stackoverflow.com/questions/11433432/importing-multiple-csv-files-into-r
 csvlist = list.files(pattern="*.csv")
 
-# total initieren
-total=NA
+# bob initieren
+bob= rbind (read.csv(csvlist[1]))
 
 # loop alle dateien einlesen und in ein file klatschen 
-for (i in 1:length(csvlist)) {
-  total= rbind (total , read.csv(csvlist[i]))
+howmanycsv=length(csvlist)
+for (i in 2:howmanycsv) {
+  bob= rbind (bob , read.csv(csvlist[i]))
 }
-
-#remove the first row with just NA in it with was created wenn initilizing total
-total = total[-1,]
 
 ###############################################################
 # Missing values
 # missing values durck NA ersetzen 
 # für die Reaktopnszeiten
-total$reactionStimOFF[total$keyValue==9999] <- NA
-total$reactionStimON[total$keyValue==9999] <- NA
+bob$reactionStimOFF[bob$keyValue==9999] <- NA
+bob$reactionStimON[bob$keyValue==9999] <- NA
 
 # und die eigentlichen keys
-total$keyValue[total$keyValue==9999] <- NA
+bob$keyValue[bob$keyValue==9999] <- NA
 
 # hats funtioniert ?
-total$keyValue==9999
+bob$keyValue==9999
 #sollte auch mit recode gehn
 
 
 # erster überblick
-summary(total)
-################################################################
+summary(bob)
+
+#################################################################
+#sicherheitskopie
+bob_full = bob
+
+#################################################################
+#Übung raus 
+bob = subset(bob, bob$blockBeschreibung != 'übung' )
+
+#################################################################
+# STRING stuff
+# http://gastonsanchez.com/blog/resources/how-to/2013/09/22/Handling-and-Processing-Strings-in-R.html
+# erst mal die buchtaben normalisieren
+
+bob$vpCode_lower_str=tolower(bob$vpCode)
+bob$vpCode_lower= as.factor(bob$vpCode_lower_str)
+
+#vpcode zwerlegung
+summary(bob$vpCode_lower_str)
+bob$vpGeburt = str_sub(bob$vpCode_lower_str, 4, 7)
+bob$vpGeburt = as.numeric (bob$vpGeburt)
+
+bob$vpSex    = str_sub(bob$vpCode_lower_str, 8, 8)
+bob$vpSex         <- as.factor(bob$vpSex)
+levels(bob$vpSex) <- c('male' , 'female')
+
+
 # die stimulus codierunng zerlegen
+bob$stimulus_str <- as.character(bob$stimulus)
+# trennt "3_N_B_180.png" bei den '_'
+
+temp.str_split= str_split_fixed(bob$stimulus_str ,'_',4)
+
+# temp in die verschienden variablen auflösen
+bob$stimulus_str_splitGRUNDFORM <- ( temp.strsplit )[,1]
+bob$stimulus_str_splitZWEITFORM <- ( temp.strsplit )[,2]
+bob$stimulus_str_splitFARBE     <- ( temp.strsplit )[,3]
+bob$stimulus_str_splitWINKEL    <- ( temp.strsplit )[,4]
+
+
+# in fakoren umwandeln
+bob$stimulus_str_splitGRUNDFORM  <- as.factor(bob$stimulus_str_splitGRUNDFORM)
+bob$stimulus_str_splitZWEITFORM  <- as.factor(bob$stimulus_str_splitZWEITFORM)
+bob$stimulus_str_splitFARBE      <- as.factor(bob$stimulus_str_splitFARBE)
+bob$stimulus_str_splitWINKEL     <- as.factor(bob$stimulus_str_splitWINKEL)
+
+levels(bob$stimulus_str_splitGRUNDFORM)
+levels(bob$stimulus_str_splitZWEITFORM)
+levels(bob$stimulus_str_splitFARBE)
+levels(bob$stimulus_str_splitWINKEL)
+
+levels(bob$stimulus_str_splitGRUNDFORM) <- c('circle' , 'triangle' , 'square')
+levels(bob$stimulus_str_splitZWEITFORM) <- c('cut' , 'heigth' , 'normal' , 'width' )
+levels(bob$stimulus_str_splitFARBE)     <- c('blue' , 'green' , 'orange' , 'red')
+levels(bob$stimulus_str_splitWINKEL)    <- c( '000' , '045' , '090' , '135' , '180' , '225' , '270' , '315' )
+
+################################################################
+# position nach foveal und nonfoveal sortieren
+bob$foveal_nonfoveal <- 
 
 
 ################################################################
-listvpNummer = unique(total$vpNummer)
-listvpCode  = unique(total$vpCode)
+#Sets aufteilen (vp rauswerfen :)
+subset 
+
+################################################################
+listvpNummer = unique(bob$vpNummer)
+listvpCode  = unique(bob$vpCode)
 
 ################################################################
 # Aggregation über die versuchspersonen 
 # aggVp anlegen für alle daten die über de versuchspersonen aggregiert werden
-aggVpvpNummer = unique(total$vpNummer)
-aggVpvpCode = unique(total$vpCode)
+aggVpvpNummer = unique(bob$vpNummer)
+aggVpvpCode = unique(bob$vpCode)
 
 ###############################################################
 # aggShapes
@@ -103,53 +172,53 @@ aggVpvpCode = unique(total$vpCode)
 
 ##reaktionszeiten 
 for(i in 1:length(listvpNummer)){
-  plot (  total$reactionStimOFF[total$vpNummer==listvpNummer[i]], col ='white')
-  lines ( total$reactionStimOFF[total$vpNummer==listvpNummer[i]], col ='red')
+  plot (  bob$reactionStimOFF[bob$vpNummer==listvpNummer[i]], col ='white')
+  lines ( bob$reactionStimOFF[bob$vpNummer==listvpNummer[i]], col ='red')
 }
 
 
 
 ###############################################################
 
-plot (total$reactionStimOFF)
+plot (bob$reactionStimOFF)
 
 OLDplotpar <- par(col)
 par(OLDplotpar)
 nVP= 4
 
-plot ( total$blockIndex[complete.cases(total$keyValue)]  , total$reactionStimOFF [complete.cases(total$keyValue)&total$vpNummer==1], 'l', col = 'red')
-lines (total$reactionStimOFF [complete.cases(total$keyValue)&total$vpNummer==2], 'l', col=blue)
+plot ( bob$blockIndex[complete.cases(bob$keyValue)]  , bob$reactionStimOFF [complete.cases(bob$keyValue)&bob$vpNummer==1], 'l', col = 'red')
+lines (bob$reactionStimOFF [complete.cases(bob$keyValue)&bob$vpNummer==2], 'l', col=blue)
 
 par(pch=22, col="red") # plotting symbol and color
 par(mfrow=c(2,4)) # all plots on one page 
 opts= c('vp1', 'vp2' ,'vp3' ,'vp4')
 for(i in 1:length(opts)){
   heading = paste(opts[i])
-  plot(total$reactionStimOFF[total$vpNummer==i], 'n', main=heading)
-  lines(total$reactionStimOFF[total$vpNummer==i])
+  plot(bob$reactionStimOFF[bob$vpNummer==i], 'n', main=heading)
+  lines(bob$reactionStimOFF[bob$vpNummer==i])
 }
 
 for(i in 1:4){
-plot (  total$reactionStimOFF[total$vpNummer==i], col ='white')
-lines ( total$reactionStimOFF[total$vpNummer==i], col ='red')
+plot (  bob$reactionStimOFF[bob$vpNummer==i], col ='white')
+lines ( bob$reactionStimOFF[bob$vpNummer==i], col ='red')
 }
 
 
-lines ( total$reactionStimOFF[total$vpNummer==2], col='blue')
-lines ( total$reactionStimOFF[total$vpNummer==3], col='green')
-lines ( total$reactionStimOFF[total$vpNummer==4], col='black')
+lines ( bob$reactionStimOFF[bob$vpNummer==2], col='blue')
+lines ( bob$reactionStimOFF[bob$vpNummer==3], col='green')
+lines ( bob$reactionStimOFF[bob$vpNummer==4], col='black')
 
 # generelle tastenverteilung
-plot (total$keyValue)
+plot (bob$keyValue)
 
 # spezielle tastenverteilung
-plot (total$blockBeschreibung , total$keyValue )
-plot (total$keyValue [total$blockBeschreibung=='links_rechts'] )
-plot (total$keyValue [total$blockBeschreibung=='rund_eckig'])
-plot (total$keyValue [total$blockBeschreibung=='übung'])
+plot (bob$blockBeschreibung , bob$keyValue )
+plot (bob$keyValue [bob$blockBeschreibung=='links_rechts'] )
+plot (bob$keyValue [bob$blockBeschreibung=='rund_eckig'])
+plot (bob$keyValue [bob$blockBeschreibung=='übung'])
 
-mean (total$dauerBetween)
-mean (total$dauerStim)
+mean (bob$dauerBetween)
+mean (bob$dauerStim)
 
 ######################################################################
 #citation
@@ -162,6 +231,6 @@ toBibtex(x)
 ##########################################################################
 #probestuff
 
-min(total$keyValue)
-max(total$keyValue)
-cut(total$keyValue)
+min(bob$keyValue)
+max(bob$keyValue)
+cut(bob$keyValue)
