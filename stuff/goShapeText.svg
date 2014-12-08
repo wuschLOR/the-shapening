@@ -167,6 +167,34 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-29"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3959-73"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-28"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3965-64"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -177,17 +205,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1276"
-     inkscape:window-height="761"
+     inkscape:window-width="1280"
+     inkscape:window-height="800"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="0.22627417"
-     inkscape:cx="-3275.5666"
-     inkscape:cy="-452.19844"
+     inkscape:zoom="0.32"
+     inkscape:cx="-3875.4018"
+     inkscape:cy="-1965.1622"
      inkscape:window-x="0"
-     inkscape:window-y="18"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="g4893-81-1-9" />
   <rect
      style="opacity:0.45416667;fill:#b3b3b3;stroke:none"
      id="rect2991-0-5"
@@ -1685,6 +1713,223 @@
         <path
            inkscape:connector-curvature="0"
            id="path4843-1-9-4"
+           d="M 8.5185185e-6,-1668.321 253.08641,-1668.321"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+  </g>
+  <rect
+     style="opacity:0.45416667;fill:#b3b3b3;stroke:none"
+     id="rect2991-0-0-5"
+     width="1992.5"
+     height="1050"
+     x="-5336.1177"
+     y="1757.1903"
+     inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-4338.8228"
+     y="2544.6426"
+     id="text3145-1-8-6"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3147-657-2-7"
+       x="-4338.8228"
+       y="2544.6426"
+       style="text-align:center;text-anchor:middle">Bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3173-5-4-8">präge</tspan> dir die Skala gut ein, da sie im weiteren Experiment nicht mehr angezeigt wird!</tspan><tspan
+       sodipodi:role="line"
+       x="-4338.8228"
+       y="2594.6426"
+       id="tspan3149-41-5-4"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-4331.8696"
+       y="2644.6426"
+       style="text-align:center;text-anchor:middle"
+       id="tspan4932-20-5-8">Um den Experimentblock zu starten bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3283-3">zwei</tspan> mal<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3285-3"> Taste drücken! </tspan></tspan><tspan
+       sodipodi:role="line"
+       x="-4338.8228"
+       y="2694.6426"
+       id="tspan3153-4-7-3"
+       style="text-align:center;text-anchor:middle" /><tspan
+       sodipodi:role="line"
+       x="-4338.8228"
+       y="2744.6426"
+       id="tspan3155-6-1-6"
+       style="text-align:center;text-anchor:middle">Nach dem Übungsblock wird die nächste Instruktion angezeigt;</tspan><tspan
+       sodipodi:role="line"
+       x="-4338.8228"
+       y="2794.6423"
+       id="tspan3157-0-1-6"
+       style="text-align:center;text-anchor:middle"> hier hast du wieder Zeit eine Pause einzulegen.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+     x="-4341.8306"
+     y="1825.4425"
+     id="text3137-1-2-0"
+     sodipodi:linespacing="125%"
+     inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90"><tspan
+       sodipodi:role="line"
+       id="tspan3139-7-7-2"
+       x="-4341.8306"
+       y="1825.4425"
+       style="font-size:56px;font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold">Übungsblock</tspan><tspan
+       sodipodi:role="line"
+       x="-4335.4634"
+       y="1879.4945"
+       style="font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+       id="tspan3447-5">Dies ist ein Übungblock um dir ein Gefühl zu geben was dich erwartet </tspan><tspan
+       id="tspan4945-3-4-7"
+       sodipodi:role="line"
+       x="-4341.8306"
+       y="1929.4945"
+       style="font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans">und du dich mit der Steuerung vertraut machen kannst</tspan><tspan
+       sodipodi:role="line"
+       x="-4341.8306"
+       y="1979.4945"
+       style="font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+       id="tspan3459-4" /><tspan
+       sodipodi:role="line"
+       x="-4341.8306"
+       y="2029.4945"
+       style="font-size:40px;font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold"
+       id="tspan3443-6">Ablauf:</tspan></text>
+  <g
+     id="g4893-81-1-9"
+     transform="translate(-3386.1843,3990.2224)"
+     inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübung.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+       sodipodi:linespacing="125%"
+       id="text3114-8-6-0"
+       y="-1902.3409"
+       x="-1528.7421"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="-1902.3409"
+         x="-1528.7421"
+         id="tspan3116-2-8-7"
+         sodipodi:role="line">1. es wird ein <tspan
+   id="tspan3159-66-5-9"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Kreuz</tspan> in der Mitte des Bildschirms angezeigt.</tspan><tspan
+         id="tspan3118-0-7-1"
+         y="-1852.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Bitte dieses Kreuz <tspan
+   id="tspan3161-3-6-0"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">fixieren</tspan>.</tspan><tspan
+         id="tspan3120-80-1-1"
+         y="-1802.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3122-1-8-1"
+         y="-1752.3409"
+         x="-1528.7421"
+         sodipodi:role="line">2. eine der Formen wird angezeigt</tspan><tspan
+         id="tspan3124-25-9-7"
+         y="-1702.3409"
+         x="-1528.7421"
+         sodipodi:role="line" /><tspan
+         id="tspan3126-0-2-7"
+         y="-1652.3409"
+         x="-1528.7421"
+         sodipodi:role="line">3. nach dem Verschwinden der Form ist es deine Aufgabe zu <tspan
+   id="tspan3163-9-7-5"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">beurteilen</tspan>, </tspan><tspan
+         y="-1602.3409"
+         x="-1528.7421"
+         sodipodi:role="line"
+         id="tspan4937-4-9-7">wie <tspan
+   id="tspan3169-7-5-5"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">eckig/rund </tspan>dir das Dargestellte erscheint.</tspan><tspan
+         id="tspan3130-83-4-1"
+         y="-1552.3409"
+         x="-1528.7421"
+         sodipodi:role="line">Benutze dafür die Taste 1 (<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3442">eckig</tspan>) bis 7 (<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3444">rund</tspan>) der Buttonbox.</tspan></text>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+       transform="translate(-233.87797,-914.43747)"
+       id="g4875-2-2-0">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+         d="m -1581.7901,-992.39506 3.0864,381.17284"
+         id="path3182-0-3-3"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend)"
+         d="m -1578.7037,-591.16049 c -54.0774,148.05988 -47.2455,-723.95731 -1.5432,-413.58021"
+         id="path4396-1-3-7"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="translate(-196.41854,-952.38165)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+       id="g4885-6-4-8">
+      <text
+         xml:space="preserve"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono Bold"
+         x="-1577.1733"
+         y="-668.79871"
+         id="text2991-4-1-6"
+         sodipodi:linespacing="125%"
+         inkscape:export-filename="/home/wu/OCoctave/text/RAT_gefallen.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"><tspan
+           sodipodi:role="line"
+           id="tspan2993-0-1-0"
+           x="-1577.1733"
+           y="-668.79871"
+           style="font-size:16px">eckig 1-2-3-4-5-6-7 rund</tspan></text>
+      <path
+         sodipodi:type="arc"
+         style="fill:#808080;fill-opacity:1"
+         id="path3032-4-6-3-2"
+         sodipodi:cx="352.85715"
+         sodipodi:cy="316.42856"
+         sodipodi:rx="161.42857"
+         sodipodi:ry="146.42857"
+         d="m 514.28572,316.42856 c 0,80.87027 -72.27403,146.42857 -161.42857,146.42857 -89.15454,0 -161.42858,-65.5583 -161.42858,-146.42857 0,-80.87027 72.27404,-146.42858 161.42858,-146.42858 89.15454,0 161.42857,65.55831 161.42857,146.42858 z"
+         transform="matrix(0.19331446,0,0,0.21311741,-1530.4131,-893.51043)" />
+      <g
+         id="g4863-1-8-4"
+         transform="matrix(0.23992468,0,0,0.23992468,-1492.5615,-550.27782)"
+         style="stroke-width:20.83987427;stroke-miterlimit:4;stroke-dasharray:none">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-8-7-6"
+           d="m 126.54321,-1794.8642 0,253.0864"
+           style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4843-1-9-4-4"
            d="M 8.5185185e-6,-1668.321 253.08641,-1668.321"
            style="fill:none;stroke:#000000;stroke-width:20.83987427;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       </g>
