@@ -6,6 +6,7 @@
 ###############################################################
 #  TODO
 #  [ ] eckig-rund und rund-eckig vereinheitlichen 
+#  [ ] rauswerfen von schlechten Werten 
 #  [ ] hypothehens integrieren
 #  [ ] Automatisches auswerfen der Plots
 #  [ ] aggregierung als Struktur machen 
@@ -27,7 +28,6 @@ setwd("~/forgeOC/EXPERIMENTE/003 Shapes1/dataplayground")
 # pakete laden
 
 library(stringr)
-
 
 ###############################################################
 # get list of all csv files 
@@ -82,6 +82,7 @@ bob$vpCode_lower= as.factor(bob$vpCode_lower_str)
 summary(bob$vpCode_lower_str)
 bob$vpGeburt = str_sub(bob$vpCode_lower_str, 4, 7)
 bob$vpGeburt = as.numeric (bob$vpGeburt)
+bob$vpGeburt_alter = 2014-bob$vpGeburt
 
 bob$vpSex    = str_sub(bob$vpCode_lower_str, 8, 8)
 bob$vpSex         <- as.factor(bob$vpSex)
@@ -95,10 +96,10 @@ bob$stimulus_str <- as.character(bob$stimulus)
 temp.str_split= str_split_fixed(bob$stimulus_str ,'_',4)
 
 # temp in die verschienden variablen auflösen
-bob$stimulus_str_splitGRUNDFORM <- ( temp.strsplit )[,1]
-bob$stimulus_str_splitZWEITFORM <- ( temp.strsplit )[,2]
-bob$stimulus_str_splitFARBE     <- ( temp.strsplit )[,3]
-bob$stimulus_str_splitWINKEL    <- ( temp.strsplit )[,4]
+bob$stimulus_str_splitGRUNDFORM <- ( temp.str_split )[,1]
+bob$stimulus_str_splitZWEITFORM <- ( temp.str_split )[,2]
+bob$stimulus_str_splitFARBE     <- ( temp.str_split )[,3]
+bob$stimulus_str_splitWINKEL    <- ( temp.str_split )[,4]
 
 
 # in fakoren umwandeln
@@ -112,6 +113,7 @@ levels(bob$stimulus_str_splitZWEITFORM)
 levels(bob$stimulus_str_splitFARBE)
 levels(bob$stimulus_str_splitWINKEL)
 
+# levels neu setzen
 levels(bob$stimulus_str_splitGRUNDFORM) <- c('circle' , 'triangle' , 'square')
 levels(bob$stimulus_str_splitZWEITFORM) <- c('cut' , 'heigth' , 'normal' , 'width' )
 levels(bob$stimulus_str_splitFARBE)     <- c('blue' , 'green' , 'orange' , 'red')
@@ -126,23 +128,42 @@ f.nonfoveal <- function(x){
 f.nonfoveal(1)
 f.nonfoveal(2)
 
+# f. anwenden
 bob$foveal_nonfoveal <- sapply(bob$stimPosition, f.nonfoveal)
+# in factor umwandeln
 bob$foveal_nonfoveal <- as.factor(bob$foveal_nonfoveal)
 
-################################################################
-#Sets aufteilen (vp rauswerfen :)
-bob = subset(bob, bob$vpNummer>4)
-
 summary(bob)
+
 ################################################################
-listvpNummer = unique(bob$vpNummer)
-listvpCode  = unique(bob$vpCode)
+#vp rauswerfen :) die komische sachen machen
+#bob_time = data frame dass für berechnungen mit der reaktionszeit verwendet werden kann
+#bob_rating = daza frame dass für berechnungen mit dem rating genutzt werden kann
+
+# check if VP has more than ??? missing values
+
+sum(is.na(bob$keyValue))
+
+# bob_time
+# die ersten vier vp fliegen aus alles sachen mit der reaktionszeit raus da hier die buttonbox quatsch aufgezeihnet hat
+bob_time = subset(bob, bob$vpNummer>4)
+
+#http://forums.psy.ed.ac.uk/R/P01582/essential-10/
+summary(bob_time, bob_time$vpNummer==12)
+
+bob=bob_time[ bob_time$vpNummer==12]
+
+summary(bob_time)
+
+# bob_rating 
+bob_rating = subset(bob,)
+summary(bob_rating)
+
 
 ################################################################
 # Aggregation über die versuchspersonen 
 # aggVp anlegen für alle daten die über de versuchspersonen aggregiert werden
-aggVpvpNummer = unique(bob$vpNummer)
-aggVpvpCode = unique(bob$vpCode)
+
 
 ###############################################################
 # aggShapes
@@ -151,6 +172,19 @@ aggVpvpCode = unique(bob$vpCode)
 ###############################################################
 # Hypothese 2 (Reaktionszeit foveal = nonfoveal)
 # Wahrnehmung von objekten kann entweder foveal oder nonfoveal geschehen. Da sich hier die Verarbeitungszeiten unterscheiden sollte die auch in diesem Experiment nachweisbar sein. Dementsprechen werden die Reaktionszeiten Reaktionszeiten unterscheiden sich zwischen der fovealen und den nonfovealen Bedingung
+
+bob_time_foveal    = subset (bob_time, bob$foveal_nonfoveal=='foveal')
+bob_time_nonfoveal = subset (bob_time, bob$foveal_nonfoveal=='nonfoveal')
+summary(bob_time_foveal$reactionStimOFF)
+summary(bob_time_nonfoveal$reactionStimOFF)
+
+tapply(bob$reactionStimOFF , bob$vpCode_lower , mean, na.exclude=TRUE)
+
+plot(bob_time_nonfoveal$reactionStimOFF, bob_time_nonfoveal$stimulus_str_splitGRUNDFORM)
+plot(bob_time_foveal$reactionStimOFF   , bob_time_foveal$stimulus_str_splitGRUNDFORM   )
+
+t.test(bob_time_foveal$reactionStimOFF,bob_time_nonfoveal$reactionStimOFF)
+wilcox.test(bob_time_foveal$reactionStimOFF,bob_time_nonfoveal$reactionStimOFF)
 
 ###############################################################
 # Hypothese 3 (Reaktionszeit Dreieck < Viereck & Kreis)
@@ -179,6 +213,9 @@ aggVpvpCode = unique(bob$vpCode)
 ###############################################################
 #plots
 
+################################################################
+listvpNummer = unique(bob$vpNummer)
+listvpCode  = unique(bob$vpCode)
 ##reaktionszeiten 
 for(i in 1:length(listvpNummer)){
   plot (  bob$reactionStimOFF[bob$vpNummer==listvpNummer[i]], col ='white')
