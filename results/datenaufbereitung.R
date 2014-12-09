@@ -6,7 +6,6 @@
 #  2014-11-25 mg  first commited version
 ################################################################################
 #  TODO
-#  [ ] rauswerfen von schlechten Werten 
 #  [ ] Automatisches auswerfen der Plots
 #  [X] stimulus codierung zerlegen und Factoren draus machen :)
 ################################################################################
@@ -93,28 +92,28 @@ bob$stimulus_str <- as.character(bob$stimulus)
 temp.str_split= str_split_fixed(bob$stimulus_str ,'_',4)
 
 # temp in die verschienden variablen auflösen
-bob$stimulus_str_splitGRUNDFORM <- ( temp.str_split )[,1]
-bob$stimulus_str_splitZWEITFORM <- ( temp.str_split )[,2]
-bob$stimulus_str_splitFARBE     <- ( temp.str_split )[,3]
-bob$stimulus_str_splitWINKEL    <- ( temp.str_split )[,4]
+bob$stimulusGRUNDFORM <- ( temp.str_split )[,1]
+bob$stimulusZWEITFORM <- ( temp.str_split )[,2]
+bob$stimulusFARBE     <- ( temp.str_split )[,3]
+bob$stimulusWINKEL    <- ( temp.str_split )[,4]
 
 
 # in fakoren umwandeln
-bob$stimulus_str_splitGRUNDFORM  <- as.factor(bob$stimulus_str_splitGRUNDFORM)
-bob$stimulus_str_splitZWEITFORM  <- as.factor(bob$stimulus_str_splitZWEITFORM)
-bob$stimulus_str_splitFARBE      <- as.factor(bob$stimulus_str_splitFARBE)
-bob$stimulus_str_splitWINKEL     <- as.factor(bob$stimulus_str_splitWINKEL)
+bob$stimulusGRUNDFORM  <- as.factor(bob$stimulusGRUNDFORM)
+bob$stimulusZWEITFORM  <- as.factor(bob$stimulusZWEITFORM)
+bob$stimulusFARBE      <- as.factor(bob$stimulusFARBE)
+bob$stimulusWINKEL     <- as.factor(bob$stimulusWINKEL)
 
-levels(bob$stimulus_str_splitGRUNDFORM)
-levels(bob$stimulus_str_splitZWEITFORM)
-levels(bob$stimulus_str_splitFARBE)
-levels(bob$stimulus_str_splitWINKEL)
+levels(bob$stimulusGRUNDFORM)
+levels(bob$stimulusZWEITFORM)
+levels(bob$stimulusFARBE)
+levels(bob$stimulusWINKEL)
 
 # levels neu setzen
-levels(bob$stimulus_str_splitGRUNDFORM) <- c('circle' , 'triangle' , 'square')
-levels(bob$stimulus_str_splitZWEITFORM) <- c('cut' , 'heigth' , 'normal' , 'width' )
-levels(bob$stimulus_str_splitFARBE)     <- c('blue' , 'green' , 'orange' , 'red')
-levels(bob$stimulus_str_splitWINKEL)    <- c( '000' , '045' , '090' , '135' , '180' , '225' , '270' , '315' )
+levels(bob$stimulusGRUNDFORM) <- c('circle' , 'triangle' , 'square')
+levels(bob$stimulusZWEITFORM) <- c('cut' , 'heigth' , 'normal' , 'width' )
+levels(bob$stimulusFARBE)     <- c('blue' , 'green' , 'orange' , 'red')
+levels(bob$stimulusWINKEL)    <- c( '000' , '045' , '090' , '135' , '180' , '225' , '270' , '315' )
 
 
 # position nach foveal und nonfoveal sortieren #################################
