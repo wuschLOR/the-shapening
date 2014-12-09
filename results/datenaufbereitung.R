@@ -135,5 +135,5 @@ summary(bob)
 
 # speichern als Rdata ##########################################################
 
-save(bob,file="shapes1data.Rda")
-
+save(bob , file="shapes1data.Rda")
+foreign:::write.dta(bob, "shapes1data.dta") # kann spss auch importiern
