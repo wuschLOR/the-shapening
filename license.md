@@ -2,9 +2,9 @@
   
 LICENSE and COPPYRIGHT
   Most of this stuff was written by Michael Groh and is licensed under GPL v.3
-  unless marked otherwise. If we meet some day, and you think this stuff is
-  worth it, you can buy me a beer in return (despite there is no paragraph found
-  within the GLP).
+  unless marked otherwise. 
+  If we meet some day, and you think this stuff is
+  worth it, you can buy me a beer in return.
 
   ----------------------------------------------------------------------------
 
