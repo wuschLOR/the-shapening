@@ -13,10 +13,12 @@ Code to the first experiment of my diploma thesis.
 
 ----------------------------------------------------------------------------
 ## REQUIREMENTS
-  | GNU Octave, version 3.8.X or higher | https://www.gnu.org/software/octave/       |
-  | Psychtoolbox-3                      | https://psychtoolbox-3.github.io/overview/ |
-  | awesomeStuff                        | https://github.com/wuschLOR/awesomeStuff/  |
-  | R version 3.1.2                     | http://cran.r-project.org/                 |
+
+| ----------------------------------- |--------------------------------------------|
+| GNU Octave, version 3.8.X or higher | https://www.gnu.org/software/octave/       |
+| Psychtoolbox-3                      | https://psychtoolbox-3.github.io/overview/ |
+| awesomeStuff                        | https://github.com/wuschLOR/awesomeStuff/  |
+| R version 3.1.2                     | http://cran.r-project.org/                 |
 
 ----------------------------------------------------------------------------
 ## LICENSE and COPPYRIGHT
