@@ -1,11 +1,12 @@
 # the shapening
 
 Code to the first experiment of my diploma thesis.
+
 ## CONTENT
- * octave script
- * stimuli used
- * example output (TODO)
- * .R complete analysis (TODO)
+* octave script
+* stimuli used
+* example output (TODO)
+* .R complete analysis (TODO)
 
 ----------------------------------------------------------------------------
 ## WHAT DOES THIS THING DO ?
@@ -13,14 +14,13 @@ Code to the first experiment of my diploma thesis.
 
 ----------------------------------------------------------------------------
 ## REQUIREMENTS
-| Software                            |                                            |
-| ----------------------------------- |--------------------------------------------|
-| GNU Octave, version 3.8.X or higher | https://www.gnu.org/software/octave/       |
-| Psychtoolbox-3                      | https://psychtoolbox-3.github.io/overview/ |
-| awesomeStuff                        | https://github.com/wuschLOR/awesomeStuff/  |
-| R version 3.1.2                     | http://cran.r-project.org/                 |
+
+* [GNU Octave](https://www.gnu.org/software/octave/), I used version 3.8.2
+* [Psychtoolbox-3] ( https://psychtoolbox-3.github.io/overview/)
+* [awesomeStuff] (https://github.com/wuschLOR/awesomeStuff/) 
+* [R] (http://cran.r-project.org/) ,I used version 3.1.2
 
 ----------------------------------------------------------------------------
 ## LICENSE and COPPYRIGHT
-  see the license.md
+  see the [license text](./license.md)
 ----------------------------------------------------------------------------
