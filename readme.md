@@ -3,14 +3,15 @@
 Code to the first experiment of my diploma thesis.
 
 ## CONTENT
-* octave script
-* stimuli used
-* example output (TODO)
-* .R complete analysis (TODO)
+* octave script 
+* [stimuli used](./stimulus/)
+* [example output](./results/) TODO
+* [R files](./results/) with the complete analysis TODO
 
 ----------------------------------------------------------------------------
 ## WHAT DOES THIS THING DO ?
-  the script is presenting the stimulus (/stimulus) eihter in a central or one of the four corners of the screen. This is to invoke different reaction times because the stimulus is processed either in foveal or onvoveal vision. Also I hope to get some insight to the way persons percieve different cinds of shapes.
+
+ the script is presenting the stimulus (/stimulus) eihter in a central or one of the four corners of the screen. This is to invoke different reaction times because the stimulus is processed either in foveal or onvoveal vision. Also I hope to get some insight to the way persons percieve different cinds of shapes.
 
 ----------------------------------------------------------------------------
 ## REQUIREMENTS
@@ -22,5 +23,6 @@ Code to the first experiment of my diploma thesis.
 
 ----------------------------------------------------------------------------
 ## LICENSE and COPPYRIGHT
-  see the [license text](./license.md)
+
+see the [license text](./license.md)
 ----------------------------------------------------------------------------
