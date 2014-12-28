@@ -13,7 +13,7 @@ Code to the first experiment of my diploma thesis.
 
 ----------------------------------------------------------------------------
 ## REQUIREMENTS
-
+| Software                            |                                            |
 | ----------------------------------- |--------------------------------------------|
 | GNU Octave, version 3.8.X or higher | https://www.gnu.org/software/octave/       |
 | Psychtoolbox-3                      | https://psychtoolbox-3.github.io/overview/ |
