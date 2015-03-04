@@ -1,14 +1,6 @@
-  ----------------------------------------------------------------------------
-  
-LICENSE and COPPYRIGHT
-  Most of this stuff was written by Michael Groh and is licensed under GPL v.3
-  unless marked otherwise. 
-  If we meet some day, and you think this stuff is
-  worth it, you can buy me a beer in return.
-
-  ----------------------------------------------------------------------------
-
-GNU GENERAL PUBLIC LICENSE
+----------------------------------------------------------------------------
+# GNU GENERAL PUBLIC LICENSE
+                       
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>

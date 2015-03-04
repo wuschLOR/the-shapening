@@ -750,15 +750,3 @@ endif
   finalMsg = 'geschafft'
 
 endfunction
-
-
-
-
-
-
-
-
-
-
-
-
