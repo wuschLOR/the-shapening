@@ -37,6 +37,18 @@ Code to the first experiment of my diploma thesis.
 * If we meet some day, and you think this stuff is worth it, you can buy me a beer in return.
 * If you use this for awesome science feel free to cite my (hopefully finished) diploma thesis or the resulting paper (also hopefully). 
 
+----------------------------------------------------------------------------
+## Biblatex
 
+```
+@software{groh_shapening_2014,
+	title = {the shapening},
+	rights = {{GPL}3},
+	url = {https://github.com/wuschLOR/the-shapening},
+	version = {v1.0.0},
+	author = {Groh, Michael},
+	date = {2014}
+}
+```
 
 ----------------------------------------------------------------------------
